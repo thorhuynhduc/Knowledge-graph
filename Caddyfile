@@ -1,0 +1,26 @@
+# ===================================================================
+#  Caddy reverse proxy + HTTPS tự động (Let's Encrypt) cho hvnk.tech
+#  Caddy tự xin & gia hạn SSL miễn phí, miễn là:
+#    - DNS A record của hvnk.tech trỏ đúng IP VPS
+#    - cổng 80 và 443 đang mở
+# ===================================================================
+hvnk.tech, www.hvnk.tech {
+    encode gzip zstd
+
+    # Chuyển hết request vào app Node (service tên 'app' trong docker network, cổng 3000)
+    reverse_proxy app:3000
+
+    # ----------------------------------------------------------------
+    # (TÙY CHỌN) Khóa toàn bộ trang bằng mật khẩu — bỏ comment để bật.
+    # Tạo hash: docker run --rm caddy caddy hash-password --plaintext 'matkhau'
+    # rồi dán hash vào dưới (thay <BCRYPT_HASH>).
+    # ----------------------------------------------------------------
+    # basicauth {
+    #     admin <BCRYPT_HASH>
+    # }
+
+    log {
+        output file /var/log/caddy/access.log
+        format console
+    }
+}

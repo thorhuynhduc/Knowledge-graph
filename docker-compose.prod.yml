@@ -1,0 +1,67 @@
+# ===================================================================
+#  PRODUCTION stack cho VPS Hostinger + domain hvnk.tech
+#  Gồm: MySQL + App Node + Caddy (reverse proxy + HTTPS tự động)
+#
+#    docker compose -f docker-compose.prod.yml up -d --build
+#
+#  Khác bản dev (docker-compose.yml): app KHÔNG mở cổng ra ngoài,
+#  chỉ Caddy mở 80/443; truy cập qua https://hvnk.tech
+# ===================================================================
+services:
+
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Bắt buộc đặt trong .env}
+      MYSQL_DATABASE: ${DB_NAME:-knowledge_graph}
+      MYSQL_USER: ${DB_USER:-kguser}
+      MYSQL_PASSWORD: ${DB_PASS:?Bắt buộc đặt trong .env}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build: .
+    restart: always
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: ${DB_USER:-kguser}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME:-knowledge_graph}
+      PORT: 3000
+      API_TOKEN: ${API_TOKEN:-}
+    volumes:
+      - ./public:/app/public:ro     # sửa frontend xong chỉ cần F5
+    depends_on:
+      mysql:
+        condition: service_healthy
+    # KHÔNG mở cổng ra host — Caddy lo việc public
+
+  caddy:
+    image: caddy:2
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"     # HTTP/3
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+      - caddy_logs:/var/log/caddy
+    depends_on:
+      - app
+
+volumes:
+  mysql_data:
+  caddy_data:
+  caddy_config:
+  caddy_logs:

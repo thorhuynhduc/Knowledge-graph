@@ -1,0 +1,56 @@
+# ===================================================================
+#  Knowledge Graph — full stack (Node app + MySQL) chạy 1 lệnh.
+#
+#    docker compose up -d --build
+#    -> Mở http://localhost:3000  (bảng tự tạo, chỉ cần bấm Load Sample)
+#
+#  Tùy chỉnh mật khẩu / token qua file .env (xem .env.example) hoặc
+#  sửa trực tiếp các giá trị mặc định dưới đây.
+# ===================================================================
+services:
+
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpass}
+      MYSQL_DATABASE: ${DB_NAME:-knowledge_graph}
+      MYSQL_USER: ${DB_USER:-kguser}
+      MYSQL_PASSWORD: ${DB_PASS:-kgpass}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      # Chạy tự động lần đầu (theo thứ tự tên file):
+      #  01 = tạo bảng,  02 = nạp seed từ interview.docx -> mở lên là có dữ liệu sẵn
+      - ./schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${MYSQL_ROOT_PASSWORD:-rootpass}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    # Mở cổng nếu muốn truy cập DB từ máy host (tùy chọn):
+    # ports:
+    #   - "3306:3306"
+
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: ${DB_USER:-kguser}
+      DB_PASS: ${DB_PASS:-kgpass}
+      DB_NAME: ${DB_NAME:-knowledge_graph}
+      PORT: 3000
+      API_TOKEN: ${API_TOKEN:-}
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    volumes:
+      # Mount frontend tĩnh -> sửa public/index.html xong chỉ cần F5, khỏi rebuild image
+      - ./public:/app/public:ro
+    depends_on:
+      mysql:
+        condition: service_healthy   # đợi MySQL sẵn sàng mới khởi động app
+
+volumes:
+  mysql_data:   # dữ liệu MySQL được giữ lại giữa các lần restart
