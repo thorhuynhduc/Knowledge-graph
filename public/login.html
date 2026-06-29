@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Đăng nhập · Knowledge Graph</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+  body {
+    background: #05070d; color: #e2e8f0; min-height: 100vh;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex; align-items: center; justify-content: center; padding: 1rem;
+  }
+  .field {
+    background: #1e293b; border: 1px solid #334155; color: #e2e8f0;
+    border-radius: 0.5rem; padding: 0.6rem 0.75rem; width: 100%;
+    font-size: 0.9rem; outline: none; transition: border-color .15s, box-shadow .15s;
+  }
+  .field:focus { border-color: #38bdf8; box-shadow: 0 0 0 3px rgba(56,189,248,0.15); }
+  .field::placeholder { color: #64748b; }
+  .btn-primary {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    width: 100%; background: #0ea5e9; color: #021018; border-radius: 0.5rem;
+    padding: 0.65rem; font-size: 0.9rem; font-weight: 700; cursor: pointer;
+    border: none; transition: background .15s;
+  }
+  .btn-primary:hover { background: #38bdf8; }
+  .btn-primary:disabled { opacity: .6; cursor: not-allowed; }
+  .card { background: rgba(17,28,48,0.85); border: 1px solid #1f2a3d; border-radius: 1rem; }
+</style>
+</head>
+<body>
+  <form id="loginForm" class="card w-full max-w-sm p-7 flex flex-col gap-4">
+    <div class="text-center">
+      <h1 class="text-xl font-bold flex items-center justify-center gap-2 text-slate-100">
+        <i class="fa-solid fa-brain text-sky-400"></i> Knowledge Graph <span class="text-sky-400">3D</span>
+      </h1>
+      <p class="text-xs text-slate-400 mt-1">Đăng nhập để tiếp tục</p>
+    </div>
+
+    <div class="flex flex-col gap-1.5">
+      <label class="text-xs text-slate-400" for="username">Tài khoản</label>
+      <input id="username" name="username" class="field" autocomplete="username" autofocus required />
+    </div>
+
+    <div class="flex flex-col gap-1.5">
+      <label class="text-xs text-slate-400" for="password">Mật khẩu</label>
+      <input id="password" name="password" type="password" class="field" autocomplete="current-password" required />
+    </div>
+
+    <div id="errBox" class="hidden text-sm text-rose-400 bg-rose-950/50 border border-rose-800 rounded-lg px-3 py-2"></div>
+
+    <button id="submitBtn" type="submit" class="btn-primary">
+      <i class="fa-solid fa-right-to-bracket"></i> Đăng nhập
+    </button>
+  </form>
+
+<script>
+  const form = document.getElementById('loginForm');
+  const errBox = document.getElementById('errBox');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errBox.classList.add('hidden');
+    submitBtn.disabled = true;
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: document.getElementById('username').value,
+          password: document.getElementById('password').value,
+        }),
+      });
+      const data = await res.json().catch(() => ({ ok: false, error: 'Phản hồi không hợp lệ' }));
+      if (data.ok) {
+        location.href = '/';
+        return;
+      }
+      errBox.textContent = '⚠️ ' + (data.error || 'Đăng nhập thất bại');
+      errBox.classList.remove('hidden');
+    } catch (err) {
+      errBox.textContent = '⚠️ Không kết nối được máy chủ';
+      errBox.classList.remove('hidden');
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

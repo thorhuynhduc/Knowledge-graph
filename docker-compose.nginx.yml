@@ -1,11 +1,9 @@
 # ===================================================================
-#  PRODUCTION stack cho VPS Hostinger + domain hvnk.tech
-#  Gồm: MySQL + App Node + Caddy (reverse proxy + HTTPS tự động)
+#  Production stack khi dùng NGINX TRÊN HOST (giống convention dự án Course-online).
+#  Chỉ chạy app + MySQL bằng Docker; app bind 127.0.0.1 -> Nginx host proxy vào.
+#  SSL: Certbot chạy bằng Docker (xem deploy/certbot/), Nginx do host quản lý.
 #
-#    docker compose -f docker-compose.prod.yml up -d --build
-#
-#  Khác bản dev (docker-compose.yml): app KHÔNG mở cổng ra ngoài,
-#  chỉ Caddy mở 80/443; truy cập qua https://hvnk.tech
+#    docker compose -f docker-compose.nginx.yml up -d --build
 # ===================================================================
 services:
 
@@ -34,7 +32,7 @@ services:
       DB_HOST: mysql
       DB_PORT: 3306
       DB_USER: ${DB_USER:-kguser}
-      DB_PASS: ${DB_PASS}
+      DB_PASS: ${DB_PASS:?Bắt buộc đặt trong .env}
       DB_NAME: ${DB_NAME:-knowledge_graph}
       PORT: 3000
       API_TOKEN: ${API_TOKEN:-}
@@ -43,6 +41,9 @@ services:
       SESSION_SECRET: ${SESSION_SECRET:?Bắt buộc đặt trong .env}
       SESSION_TTL_HOURS: ${SESSION_TTL_HOURS:-168}
       COOKIE_SECURE: ${COOKIE_SECURE:-true}
+    # CHỈ localhost -> Nginx host proxy vào (không phơi ra Internet).
+    ports:
+      - "127.0.0.1:${APP_PORT:-3000}:3000"
     volumes:
       - ./public:/app/public:ro     # sửa frontend xong chỉ cần F5
     healthcheck:
@@ -54,25 +55,6 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-    # KHÔNG mở cổng ra host — Caddy lo việc public
-
-  caddy:
-    image: caddy:2
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"     # HTTP/3
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
-      - caddy_logs:/var/log/caddy
-    depends_on:
-      - app
 
 volumes:
   mysql_data:
-  caddy_data:
-  caddy_config:
-  caddy_logs:

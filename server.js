@@ -10,16 +10,123 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 const pool = require('./db');
 const config = require('./config');
 
 const app = express();
+// Sau reverse proxy (Caddy) thì tin hop đầu để req.ip là IP thật của client.
+if (config.COOKIE_SECURE) app.set('trust proxy', 1);
 app.use(express.json({ limit: '5mb' }));               // parse JSON body
-app.use(express.static(path.join(__dirname, 'public'))); // phục vụ index.html
 
 // ---- Helpers trả JSON thống nhất ----
 const ok   = (res, data = {})        => res.json({ ok: true, ...data });
 const fail = (res, msg, code = 400)  => res.status(code).json({ ok: false, error: msg });
+
+// ===================================================================
+//  XÁC THỰC ĐĂNG NHẬP — session cookie ký HMAC (không cần thư viện ngoài).
+//  Username/password đặt trong .env (AUTH_USER / AUTH_PASS).
+// ===================================================================
+const COOKIE = 'kg_session';
+
+// Ký / kiểm tra chuỗi bằng HMAC-SHA256 với SESSION_SECRET.
+function sign(value) {
+  const mac = crypto.createHmac('sha256', config.SESSION_SECRET).update(value).digest('base64url');
+  return `${value}.${mac}`;
+}
+function unsign(signed) {
+  if (typeof signed !== 'string') return null;
+  const i = signed.lastIndexOf('.');
+  if (i < 0) return null;
+  const value = signed.slice(0, i);
+  const a = Buffer.from(signed), b = Buffer.from(sign(value));
+  if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) return null;
+  return value;                         // dạng "user|exp"
+}
+function makeToken(user) {
+  return sign(`${user}|${Date.now() + config.SESSION_TTL_MS}`);
+}
+function tokenUser(signed) {            // -> username nếu token hợp lệ & chưa hết hạn, ngược lại null
+  const value = unsign(signed);
+  if (!value) return null;
+  const [user, exp] = value.split('|');
+  if (!exp || Number(exp) < Date.now()) return null;
+  return user;
+}
+function readCookie(req, name) {
+  for (const part of (req.headers.cookie || '').split(';')) {
+    const i = part.indexOf('=');
+    if (i > -1 && part.slice(0, i).trim() === name) return decodeURIComponent(part.slice(i + 1).trim());
+  }
+  return null;
+}
+function isAuthed(req) { return !!tokenUser(readCookie(req, COOKIE)); }
+function safeEqual(a, b) {              // so sánh chống timing attack
+  const ab = Buffer.from(String(a)), bb = Buffer.from(String(b));
+  return ab.length === bb.length && crypto.timingSafeEqual(ab, bb);
+}
+
+// ---- Trang đăng nhập + login/logout (CÔNG KHAI, đặt trước cổng chặn) ----
+app.get('/login', (req, res) => {
+  if (isAuthed(req)) return res.redirect('/');
+  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
+// ---- Chống brute-force đăng nhập: khóa tạm theo IP sau nhiều lần sai ----
+const MAX_FAILS = 5;                       // số lần sai tối đa trong cửa sổ
+const WINDOW_MS = 10 * 60 * 1000;          // cửa sổ đếm: 10 phút
+const LOCK_MS   = 5  * 60 * 1000;          // thời gian khóa: 5 phút
+const loginFails = new Map();              // ip -> { count, first, lockUntil }
+
+function loginLockLeft(ip) {                // số mili-giây còn bị khóa (0 = không khóa)
+  const e = loginFails.get(ip);
+  if (e && e.lockUntil && e.lockUntil > Date.now()) return e.lockUntil - Date.now();
+  return 0;
+}
+function noteLoginFail(ip) {
+  const now = Date.now();
+  let e = loginFails.get(ip);
+  if (!e || now - e.first > WINDOW_MS) e = { count: 0, first: now, lockUntil: 0 };
+  e.count++;
+  if (e.count >= MAX_FAILS) e.lockUntil = now + LOCK_MS;
+  loginFails.set(ip, e);
+}
+
+app.post('/api/login', (req, res) => {
+  const ip = req.ip || 'unknown';
+  const lockLeft = loginLockLeft(ip);
+  if (lockLeft > 0) {
+    return fail(res, `Đăng nhập sai quá nhiều lần. Thử lại sau ${Math.ceil(lockLeft / 1000)} giây.`, 429);
+  }
+  const { username = '', password = '' } = req.body || {};
+  if (!safeEqual(username, config.AUTH_USER) || !safeEqual(password, config.AUTH_PASS)) {
+    noteLoginFail(ip);
+    return fail(res, 'Sai tài khoản hoặc mật khẩu', 401);
+  }
+  loginFails.delete(ip);                   // đăng nhập đúng -> xóa lịch sử sai
+  res.setHeader('Set-Cookie',
+    `${COOKIE}=${makeToken(username)}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${Math.floor(config.SESSION_TTL_MS / 1000)}` +
+    (config.COOKIE_SECURE ? '; Secure' : ''));
+  return ok(res);
+});
+
+app.post('/api/logout', (req, res) => {
+  res.setHeader('Set-Cookie', `${COOKIE}=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0`);
+  return ok(res);
+});
+
+// Healthcheck cho Docker (công khai, không cần đăng nhập).
+app.get('/healthz', (req, res) => res.json({ ok: true, status: 'up' }));
+
+// ---- CỔNG CHẶN: mọi route phía dưới yêu cầu đã đăng nhập ----
+app.use((req, res, next) => {
+  if (isAuthed(req)) return next();
+  if (req.path.startsWith('/api')) return fail(res, 'Chưa đăng nhập', 401);
+  return res.redirect('/login');
+});
+
+// ---- Phục vụ frontend tĩnh (đã qua cổng chặn) ----
+app.use(express.static(path.join(__dirname, 'public')));
 
 // ---- Middleware kiểm tra token cho thao tác ghi (nếu bật API_TOKEN) ----
 app.use('/api', (req, res, next) => {
@@ -196,5 +303,10 @@ function safeJson(str) {
 app.listen(config.PORT, () => {
   console.log(`\n  🚀 Knowledge Graph chạy tại  http://localhost:${config.PORT}`);
   console.log(`     DB: ${config.DB_USER}@${config.DB_HOST}:${config.DB_PORT}/${config.DB_NAME}`);
+  console.log(`     Đăng nhập: user "${config.AUTH_USER}"`);
+  if (config.AUTH_USER === 'admin' && config.AUTH_PASS === 'admin')
+    console.log('  ⚠️  Đang dùng tài khoản mặc định admin/admin — đặt AUTH_USER/AUTH_PASS trong .env.');
+  if (!config.SESSION_SECRET_SET)
+    console.log('  ⚠️  SESSION_SECRET trống — phiên sẽ mất khi restart. Đặt giá trị cố định trong .env.');
   if (!config.API_TOKEN) console.log('  ⚠️  API_TOKEN trống — nên đặt khi deploy public.\n');
 });

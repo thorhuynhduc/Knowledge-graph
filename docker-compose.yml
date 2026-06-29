@@ -43,11 +43,22 @@ services:
       DB_NAME: ${DB_NAME:-knowledge_graph}
       PORT: 3000
       API_TOKEN: ${API_TOKEN:-}
+      AUTH_USER: ${AUTH_USER:-admin}
+      AUTH_PASS: ${AUTH_PASS:-admin}
+      SESSION_SECRET: ${SESSION_SECRET:-}
+      SESSION_TTL_HOURS: ${SESSION_TTL_HOURS:-168}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
     ports:
       - "${APP_PORT:-3000}:3000"
     volumes:
       # Mount frontend tĩnh -> sửa public/index.html xong chỉ cần F5, khỏi rebuild image
       - ./public:/app/public:ro
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     depends_on:
       mysql:
         condition: service_healthy   # đợi MySQL sẵn sàng mới khởi động app

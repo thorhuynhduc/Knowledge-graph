@@ -10,7 +10,8 @@ Công cụ quản lý đồ thị kiến thức ôn thi Senior Full-Stack. Backe
 | `db.js` | Connection pool MySQL (mysql2) |
 | `config.js` | Cấu hình DB / port / token (đọc từ env, có default) |
 | `schema.sql` | 2 bảng `kg_nodes`, `kg_edges` |
-| `public/index.html` | Giao diện (Cytoscape.js), gọi `/api` |
+| `public/index.html` | Giao diện 3D (**3d-force-graph**), gọi `/api`. Dữ liệu dùng format cytoscape elements |
+| `public/login.html` | Trang đăng nhập (creds đặt trong `.env`: `AUTH_USER`/`AUTH_PASS`) |
 | `.env.example` | Mẫu biến môi trường |
 
 ## 🚀 Cách nhanh nhất — Docker (1 lệnh, kèm luôn MySQL)

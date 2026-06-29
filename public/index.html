@@ -84,23 +84,85 @@
   .graph-tooltip { font-family: inherit !important; }
   .node-tip { background:#0b1220; border:1px solid #334155; border-radius:8px; padding:6px 10px; font-size:12px; color:#e2e8f0; max-width:240px; }
   .node-tip b { font-size:13px; }
+
+  /* Danh sách kết quả tìm kiếm */
+  #searchResults { list-style:none; margin-top:6px; max-height:220px; overflow-y:auto; border:1px solid #1f2a3d; border-radius:8px; }
+  .sr-item { display:flex; align-items:center; gap:8px; padding:6px 9px; cursor:pointer; font-size:12.5px; border-bottom:1px solid #16202f; }
+  .sr-item:last-child { border-bottom:none; }
+  .sr-item:hover, .sr-item.active { background:#1b2840; }
+  .sr-name { flex:1; color:#e2e8f0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .sr-cat { color:#64748b; font-size:10.5px; white-space:nowrap; }
+
+  /* ===== Mobile: mặc định ẩn các phần tử riêng cho mobile ===== */
+  #menuToggle, #sidebarBackdrop, #sidebarClose { display: none; }
+
+  /* ===== Responsive < 768px: sidebar trở thành drawer trượt ra ===== */
+  @media (max-width: 767px) {
+    /* Nút hamburger nổi góc trên-trái để mở menu */
+    #menuToggle {
+      display: inline-flex; align-items: center; justify-content: center;
+      position: fixed; top: 12px; left: 12px; z-index: 30;
+      width: 42px; height: 42px; border-radius: 10px;
+      background: rgba(17,28,48,0.92); border: 1px solid #1f2a3d;
+      color: #e2e8f0; font-size: 18px; cursor: pointer;
+      backdrop-filter: blur(4px); box-shadow: 0 2px 12px rgba(0,0,0,.45);
+    }
+    #sidebarClose { display: inline-flex; }
+
+    /* Sidebar -> drawer phủ lên, trượt từ trái */
+    #sidebar {
+      position: fixed; top: 0; left: 0; bottom: 0;
+      width: 86vw; max-width: 360px;
+      transform: translateX(-100%);
+      transition: transform .25s ease;
+      box-shadow: 2px 0 28px rgba(0,0,0,.55);
+      z-index: 50;
+    }
+    body.sidebar-open #sidebar { transform: translateX(0); }
+
+    /* Lớp phủ tối phía sau drawer */
+    #sidebarBackdrop {
+      display: block; position: fixed; inset: 0; z-index: 45;
+      background: rgba(0,0,0,.55); opacity: 0; pointer-events: none;
+      transition: opacity .25s;
+    }
+    body.sidebar-open #sidebarBackdrop { opacity: 1; pointer-events: auto; }
+
+    /* Trong Focus Mode đã ẩn sidebar -> ẩn luôn nút menu */
+    body.focus-mode #menuToggle { display: none; }
+
+    /* Nút "Quay lại" nhường chỗ cho nút hamburger góc trái */
+    #backBtn { left: 64px; }
+
+    /* Modal chi tiết: bám đáy màn hình cho dễ thao tác 1 tay */
+    #nodeModal { align-items: flex-end !important; padding: 0 !important; }
+    #nodeModal > div { max-width: 100% !important; border-radius: 1rem 1rem 0 0 !important; }
+  }
 </style>
 </head>
 
 <body class="dark">
+<!-- Nút mở menu + lớp phủ (chỉ hiện trên mobile, xem CSS @media) -->
+<button id="menuToggle" aria-label="Mở menu"><i class="fa-solid fa-bars"></i></button>
+<div id="sidebarBackdrop"></div>
+
 <div class="flex h-screen w-screen">
 
   <!-- ===================== SIDEBAR ===================== -->
   <aside id="sidebar" class="w-[380px] shrink-0 h-full overflow-y-auto border-r border-slate-800 bg-slate-900/80 backdrop-blur px-4 py-4 flex flex-col gap-4 z-10">
 
     <div>
-      <h1 class="text-lg font-bold flex items-center gap-2 text-slate-100">
-        <i class="fa-solid fa-brain text-sky-400"></i> Knowledge Graph <span class="text-sky-400">3D</span>
-      </h1>
+      <div class="flex items-start justify-between gap-2">
+        <h1 class="text-lg font-bold flex items-center gap-2 text-slate-100">
+          <i class="fa-solid fa-brain text-sky-400"></i> Knowledge Graph <span class="text-sky-400">3D</span>
+        </h1>
+        <button id="sidebarClose" class="btn btn-ghost btn-sm shrink-0" aria-label="Đóng menu"><i class="fa-solid fa-xmark"></i></button>
+      </div>
       <p class="text-xs text-slate-400 mt-0.5">Senior Full-Stack · Brain Mode · MySQL</p>
       <div class="text-xs mt-1 flex items-center gap-1.5">
         <span id="dbDot" class="dot bg-slate-500"></span>
         <span id="dbStatus" class="text-slate-400">Đang kết nối...</span>
+        <button id="logoutBtn" class="btn btn-ghost btn-sm ml-auto" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</button>
       </div>
     </div>
 
@@ -108,10 +170,11 @@
     <div class="card">
       <div class="section-title"><i class="fa-solid fa-magnifying-glass mr-1"></i>Tìm kiếm</div>
       <div class="relative">
-        <input id="searchInput" class="field pr-8" placeholder="Tìm node theo tên / mô tả..." />
+        <input id="searchInput" class="field pr-8" placeholder="Tìm node theo tên..." />
         <i class="fa-solid fa-xmark absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 cursor-pointer hover:text-slate-300" id="clearSearch"></i>
       </div>
       <div id="searchInfo" class="text-xs text-slate-500 mt-1.5 h-4"></div>
+      <ul id="searchResults" class="hidden"></ul>
     </div>
 
     <!-- Thêm / Sửa Node -->
@@ -196,12 +259,15 @@
     <button id="exitFocusBtn" class="btn btn-primary absolute top-4 left-4 z-20 hidden shadow-lg">
       <i class="fa-solid fa-arrow-left"></i> Thoát Focus Mode
     </button>
+    <button id="backBtn" class="btn btn-ghost absolute top-4 left-4 z-20 hidden shadow-lg" title="Quay lại view trước">
+      <i class="fa-solid fa-rotate-left"></i> Quay lại
+    </button>
     <div id="toast" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 hidden bg-slate-800 border border-slate-600 text-slate-100 px-4 py-2 rounded-lg shadow-xl text-sm"></div>
   </main>
 </div>
 
 <!-- ===================== MODAL ===================== -->
-<div id="nodeModal" class="fixed inset-0 z-40 hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+<div id="nodeModal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4">
   <div class="modal-enter w-full max-w-lg card !p-0 overflow-hidden border-slate-700">
     <div id="modalHeader" class="px-5 py-4 flex items-start justify-between gap-3">
       <div class="flex-1 min-w-0">
@@ -262,6 +328,11 @@ let currentModalNodeId = null;
 let autoRotate = false;
 let particlesOn = true;
 let labelMode = "main";          // main | all | off
+let focusLabels = false;         // true khi "bay tới": chỉ hiện label các node liên quan
+let focusHistory = [];           // ngăn xếp các node đã focus (cho nút Quay lại)
+let currentFocusId = null;       // node đang focus (null = xem tổng quan)
+let searchHits = [];             // kết quả tìm kiếm hiện tại (đã sắp xếp, tối đa 8)
+let searchActive = -1;           // chỉ số kết quả đang chọn bằng bàn phím
 const LABEL_MIN_DEG = 4;         // node có >= 4 liên kết = node chính -> hiện label
 
 /* ===================== API ===================== */
@@ -273,11 +344,26 @@ async function api(action, payload) {
     opts.body = JSON.stringify(payload);
   }
   const res = await fetch(`${API}?action=${action}`, opts);
+  if (res.status === 401) { location.href = "/login"; throw new Error("Phiên đăng nhập đã hết hạn"); }
   let data;
   try { data = await res.json(); } catch (e) { throw new Error("Phản hồi không hợp lệ từ server"); }
   if (!data.ok) throw new Error(data.error || "Lỗi API");
   return data;
 }
+document.getElementById("logoutBtn")?.addEventListener("click", async () => {
+  try { await fetch("/api/logout", { method: "POST" }); } catch {}
+  location.href = "/login";
+});
+
+/* ===================== MENU MOBILE (drawer) ===================== */
+const openSidebar  = () => document.body.classList.add("sidebar-open");
+const closeSidebar = () => document.body.classList.remove("sidebar-open");
+document.getElementById("menuToggle")?.addEventListener("click", openSidebar);
+document.getElementById("sidebarClose")?.addEventListener("click", closeSidebar);
+document.getElementById("sidebarBackdrop")?.addEventListener("click", closeSidebar);
+// ESC để đóng drawer; resize sang desktop thì bỏ trạng thái mở
+window.addEventListener("keydown", e => { if (e.key === "Escape") closeSidebar(); });
+window.addEventListener("resize", () => { if (window.innerWidth >= 768) closeSidebar(); });
 function setDbStatus(state, msg) {
   const dot = document.getElementById("dbDot"), txt = document.getElementById("dbStatus");
   const colors = { ok: "bg-emerald-400", err: "bg-rose-500", load: "bg-amber-400" };
@@ -314,8 +400,28 @@ function computeDegree() {
 }
 
 /* ===================== INIT GRAPH ===================== */
+// Kiểm tra trình duyệt có WebGL không (đồ thị 3D bắt buộc cần).
+function webglOK() {
+  try {
+    const c = document.createElement("canvas");
+    return !!(window.WebGLRenderingContext && (c.getContext("webgl") || c.getContext("experimental-webgl")));
+  } catch { return false; }
+}
+function showWebglError() {
+  const b = document.getElementById("errBox");
+  if (!b) return;
+  b.style.display = "block";
+  b.innerHTML = `<div style="font-weight:700;font-size:15px;margin-bottom:8px">🖥️ Trình duyệt chưa bật tăng tốc đồ họa (WebGL)</div>
+    Đồ thị 3D cần WebGL để hiển thị. Hãy thử:<br>
+    • Bật <b>Hardware acceleration</b> trong cài đặt trình duyệt rồi khởi động lại.<br>
+    • Mở <b>chrome://gpu</b> (hoặc <b>brave://gpu</b>) kiểm tra WebGL có "Hardware accelerated".<br>
+    • Trên Linux: đảm bảo driver GPU đã cài đúng (kiểm tra <code>nvidia-smi</code>).<br><br>
+    <span style="color:#94a3b8">Các chức năng khác (tìm kiếm, thêm/sửa node, export/import) vẫn dùng được.</span>`;
+}
 function initGraph() {
   const el = document.getElementById("cy");
+  if (!webglOK()) { showWebglError(); return; }
+  try {
   Graph = ForceGraph3D({ controlType: "orbit" })(el)
     .backgroundColor("#05070d")
     .showNavInfo(false)
@@ -342,6 +448,10 @@ function initGraph() {
   Graph.d3Force("charge").strength(-120);
 
   window.addEventListener("resize", () => Graph.width(el.clientWidth).height(el.clientHeight));
+  } catch (e) {
+    Graph = null;
+    showWebglError();
+  }
 }
 
 /* ===================== LABELS (sprite text) ===================== */
@@ -362,11 +472,14 @@ function hubTextHeight(n) {
   return 1.6;
 }
 function nodeLabelObject(n) {
-  // 'main' chỉ hiện label cho node chính (Root/Tech/Section); 'all' hiện cả câu hỏi
-  const show = labelMode === "all" || (labelMode === "main" && isHub(n));
+  // Khi "bay tới" (focusLabels): chỉ node liên quan có label, kể cả node lá.
+  // Bình thường: 'main' chỉ node chính (Root/Tech/Section); 'all' hiện cả câu hỏi.
+  const show = focusLabels
+    ? highlightNodes.has(n.id)
+    : (labelMode === "all" || (labelMode === "main" && isHub(n)));
   if (!show) return null;
   let txt = n.name;
-  if (!isHub(n) && labelMode === "all" && txt.length > 40) txt = txt.slice(0, 38) + "…";
+  if (!isHub(n) && (labelMode === "all" || focusLabels) && txt.length > 40) txt = txt.slice(0, 38) + "…";
   const s = new SpriteText(txt);
   s.color = "#eaf2ff";
   s.backgroundColor = "rgba(5,7,13,0.6)";
@@ -375,10 +488,12 @@ function nodeLabelObject(n) {
   s.fontWeight = "600";
   s.textHeight = isHub(n) ? hubTextHeight(n) : 1.6;   // label câu hỏi (con) nhỏ
   s.material.depthWrite = false;        // không bị che, luôn đọc được
-  s.position.y = nodeRadius(n) + s.textHeight * 0.9 + 1;
+  s.material.depthTest = false;         // luôn nổi trên node, không bị mặt cầu che
+  s.renderOrder = 999;
+  s.position.set(0, 0, 0);              // label nằm GIỮA node
   return s;
 }
-function applyLabels() { Graph.nodeThreeObject(nodeLabelObject); }
+function applyLabels() { if (Graph) Graph.nodeThreeObject(nodeLabelObject); }
 function cycleLabels() {
   labelMode = labelMode === "main" ? "all" : labelMode === "all" ? "off" : "main";
   const txt = labelMode === "main" ? "Labels: Chính" : labelMode === "all" ? "Labels: Tất cả" : "Labels: Tắt";
@@ -398,6 +513,7 @@ function linkColorFn(l) {
   return highlightLinks.has(l.id) ? (EDGE_COLORS[l.type] || "#facc15") : "rgba(80,95,120,0.06)";
 }
 function refreshStyles() {
+  if (!Graph) return;
   Graph.nodeColor(nodeColorFn).linkColor(linkColorFn)
        .linkWidth(Graph.linkWidth()).linkDirectionalParticles(Graph.linkDirectionalParticles());
 }
@@ -411,7 +527,7 @@ function applyData(elements, fresh) {
   gdata = elementsToGraph(elements);
   if (!fresh) gdata.nodes.forEach(n => { if (old[n.id]) Object.assign(n, old[n.id]); });
   computeDegree();
-  Graph.graphData(gdata);
+  if (Graph) Graph.graphData(gdata);
   refreshUI();
 }
 function refreshUI() { populateNodeSelects(); updateStats(); }
@@ -484,6 +600,7 @@ async function addEdge() {
 /* ===================== MODAL ===================== */
 function openNodeModal(id) {
   const n = nodeMap()[id]; if (!n) return;
+  closeSidebar();                 // mobile: ẩn drawer để xem chi tiết
   currentModalNodeId = id;
   const color = CATEGORIES[n.category] || "#64748b";
   document.getElementById("modalHeader").style.background = `linear-gradient(135deg, ${color}33, ${color}11)`;
@@ -522,14 +639,36 @@ function closeModal() {
 }
 
 /* ===================== FOCUS / FLY ===================== */
-function flyTo(node) {
-  if (!node) return;
-  const dist = 120;
-  const r = Math.hypot(node.x || 0, node.y || 0, node.z || 0) || 1;
-  const k = 1 + dist / r;
-  Graph.cameraPosition({ x: (node.x || 0) * k, y: (node.y || 0) * k, z: (node.z || 0) * k }, node, 1200);
+// Bay tới node sao cho node biên của cụm (bán kính fitRadius) cách mép
+// trái/phải màn hình ~10px. Tính theo FOV ngang + chiều rộng viewport (px).
+function flyTo(node, fitRadius = 0) {
+  if (!node || !Graph) return;
+  const el = document.getElementById("cy");
+  const W = el.clientWidth || 800;
+  const cam = Graph.camera();
+  const vfov = (cam.fov || 60) * Math.PI / 180;            // FOV dọc (radian)
+  const aspect = cam.aspect || (W / (el.clientHeight || 600)) || 1.6;
+  const hfov = 2 * Math.atan(Math.tan(vfov / 2) * aspect); // FOV ngang
+  const R = Math.max(fitRadius, nodeRadius(node), 1);      // bán kính cụm cần lọt khung
+  const margin = 10;                                       // chừa ~10px mỗi mép trái/phải
+  const fillFrac = Math.max(0.2, 1 - (2 * margin) / W);    // phần bề ngang cụm chiếm
+  // Bán kính R chiếu thành (W/2 - 10)px  =>  R/dist = tan(hfov/2) * fillFrac
+  const dist = Math.max(R / (Math.tan(hfov / 2) * fillFrac), 50);
+  // Hướng đặt camera: tia từ tâm đồ thị ra node (ổn định); node ở gần tâm -> nhìn từ trục z.
+  const r = Math.hypot(node.x || 0, node.y || 0, node.z || 0);
+  const u = r > 1
+    ? { x: node.x / r, y: node.y / r, z: node.z / r }
+    : { x: 0, y: 0, z: 1 };
+  Graph.cameraPosition(
+    { x: (node.x || 0) + u.x * dist, y: (node.y || 0) + u.y * dist, z: (node.z || 0) + u.z * dist },
+    node, 1200
+  );
 }
-function focusNeighborhood(id) {
+function focusNeighborhood(id, fromHistory = false) {
+  // Lưu view hiện tại vào ngăn xếp (null = tổng quan) trước khi chuyển sang node mới.
+  if (!fromHistory && id !== currentFocusId) focusHistory.push(currentFocusId);
+  currentFocusId = id;
+  updateBackBtn();
   const nm = nodeMap();
   highlightNodes = new Set([id]); highlightLinks = new Set();
   raw.filter(el => el.group === "edges").forEach(el => {
@@ -537,8 +676,20 @@ function focusNeighborhood(id) {
     if (d.source === id) { highlightNodes.add(d.target); highlightLinks.add(d.id); }
     if (d.target === id) { highlightNodes.add(d.source); highlightLinks.add(d.id); }
   });
+  focusLabels = true;            // chỉ hiện label các node liên quan
   refreshStyles();
-  flyTo(nm[id]);
+  applyLabels();                 // rebuild label theo chế độ focus
+  // Bán kính cụm = khoảng cách xa nhất từ node tâm tới hàng xóm đang sáng.
+  const center = nm[id];
+  let fit = 0;
+  if (center) highlightNodes.forEach(nid => {
+    const n = nm[nid];
+    if (!n || nid === id) return;
+    const d = Math.hypot((n.x || 0) - (center.x || 0), (n.y || 0) - (center.y || 0), (n.z || 0) - (center.z || 0));
+    const reach = d + nodeRadius(n);   // tới MÉP ngoài của node biên
+    if (reach > fit) fit = reach;
+  });
+  flyTo(center, fit);
 }
 
 /* ===================== SEARCH ===================== */
@@ -546,20 +697,103 @@ function handleSearch() {
   const q = document.getElementById("searchInput").value.trim().toLowerCase();
   const info = document.getElementById("searchInfo");
   highlightNodes = new Set(); highlightLinks = new Set();
-  if (!q) { info.textContent = ""; refreshStyles(); return; }
-  const hits = gdata.nodes.filter(n =>
-    (n.name || "").toLowerCase().includes(q) ||
-    (n.description || "").toLowerCase().includes(q) ||
-    (n.category || "").toLowerCase().includes(q));
+  if (focusLabels) { focusLabels = false; applyLabels(); }   // tìm kiếm -> thoát chế độ label-focus
+  currentFocusId = null; focusHistory = []; updateBackBtn();  // tìm kiếm là ngữ cảnh mới
+  if (!q) { info.textContent = ""; clearSearchResults(); refreshStyles(); return; }
+  // Chỉ tìm theo label (tên node), không tìm trong mô tả / category.
+  const hits = gdata.nodes.filter(n => (n.name || "").toLowerCase().includes(q));
+  // Ưu tiên cha trước con: khớp tên > mô tả; root/tech/section > câu hỏi; rồi node nhiều liên kết.
+  hits.sort((a, b) => searchScore(b, q) - searchScore(a, q) || (degree[b.id] || 0) - (degree[a.id] || 0));
   hits.forEach(n => highlightNodes.add(n.id));
   refreshStyles();
+  renderSearchResults(hits);
   if (hits.length) {
-    info.innerHTML = `<span class="text-yellow-400">${hits.length}</span> node khớp.`;
-    flyTo(hits[0]);
+    info.innerHTML = `<span class="text-yellow-400">${hits.length}</span> node khớp · tới <b>${escapeHtml(hits[0].name)}</b>`;
+    flyTo(hits[0], neighborReach(hits[0].id));   // canh khung gồm cả các node con liên quan
   } else info.innerHTML = `<span class="text-rose-400">Không tìm thấy.</span>`;
+}
+// Hiển thị danh sách kết quả (tối đa 8) để bấm/chọn bằng phím.
+function renderSearchResults(hits) {
+  const box = document.getElementById("searchResults");
+  searchHits = hits.slice(0, 8);
+  searchActive = -1;
+  if (!searchHits.length) { box.innerHTML = ""; box.classList.add("hidden"); return; }
+  box.innerHTML = searchHits.map((n, i) =>
+    `<li class="sr-item" data-i="${i}">
+       <span class="dot" style="background:${CATEGORIES[n.category] || '#94a3b8'}"></span>
+       <span class="sr-name">${escapeHtml(n.name)}</span>
+       <span class="sr-cat">${escapeHtml(n.category || '')}</span>
+     </li>`).join("");
+  box.classList.remove("hidden");
+}
+function clearSearchResults() {
+  searchHits = []; searchActive = -1;
+  const box = document.getElementById("searchResults");
+  box.innerHTML = ""; box.classList.add("hidden");
+}
+// Chọn 1 kết quả -> focus vào node đó (như "Bay tới").
+function selectSearchResult(i) {
+  const n = searchHits[i];
+  if (n) focusNeighborhood(n.id);
+}
+// Di chuyển lựa chọn bằng ArrowUp/Down.
+function moveSearchActive(delta) {
+  if (!searchHits.length) return;
+  searchActive = (searchActive + delta + searchHits.length) % searchHits.length;
+  document.querySelectorAll("#searchResults .sr-item").forEach((li, i) =>
+    li.classList.toggle("active", i === searchActive));
+}
+// Điểm liên quan (chỉ theo label): khớp tên + ưu tiên cấp cha (root > tech > section > câu hỏi).
+function searchScore(n, q) {
+  const name = (n.name || "").toLowerCase();
+  let s = 0;
+  if (name === q) s += 100;
+  else if (name.startsWith(q)) s += 70;
+  else if (name.includes(q)) s += 50;
+  if (n.id === "root") s += 40;
+  else if (/^t_/.test(n.id)) s += 30;        // tech (cha lớn)
+  else if (/^s_/.test(n.id)) s += 15;        // section
+  return s;
+}
+// Bán kính tới mép node hàng xóm xa nhất (để flyTo canh khung có ngữ cảnh).
+function neighborReach(id) {
+  const nm = nodeMap(); const c = nm[id];
+  if (!c) return 0;
+  let fit = 0;
+  raw.forEach(el => {
+    if (el.group !== "edges") return;
+    const d = el.data;
+    const other = d.source === id ? d.target : (d.target === id ? d.source : null);
+    const n = other && nm[other];
+    if (!n) return;
+    const reach = Math.hypot((n.x || 0) - (c.x || 0), (n.y || 0) - (c.y || 0), (n.z || 0) - (c.z || 0)) + nodeRadius(n);
+    if (reach > fit) fit = reach;
+  });
+  return fit;
 }
 function clearHighlight() {
   highlightNodes = new Set(); highlightLinks = new Set(); refreshStyles();
+  if (focusLabels) { focusLabels = false; applyLabels(); }   // trả label về bình thường
+  currentFocusId = null; focusHistory = []; updateBackBtn();  // về tổng quan -> reset lịch sử
+}
+
+// Hiện/ẩn nút "Quay lại" theo lịch sử
+function updateBackBtn() {
+  const b = document.getElementById("backBtn");
+  if (b) b.classList.toggle("hidden", focusHistory.length === 0);
+}
+// Quay lại view trước (node cha hoặc tổng quan)
+function goBack() {
+  if (!focusHistory.length) return;
+  const prev = focusHistory.pop();
+  if (prev == null) {                 // về lại tổng quan
+    currentFocusId = null;
+    clearHighlight();                 // (đã tự reset history + cập nhật nút)
+    Graph.zoomToFit(900, 40);
+  } else {
+    focusNeighborhood(prev, true);    // true = không đẩy lại vào lịch sử
+  }
+  updateBackBtn();
 }
 
 /* ===================== 3D CONTROLS ===================== */
@@ -866,8 +1100,21 @@ function bindEvents() {
   document.getElementById("nodeFormReset").addEventListener("click", resetNodeForm);
   document.getElementById("edgeAddBtn").addEventListener("click", addEdge);
 
-  document.getElementById("searchInput").addEventListener("input", handleSearch);
-  document.getElementById("clearSearch").addEventListener("click", () => { document.getElementById("searchInput").value = ""; handleSearch(); });
+  // Tìm kiếm: debounce 160ms cho mượt khi gõ nhanh.
+  const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
+  const searchInputEl = document.getElementById("searchInput");
+  searchInputEl.addEventListener("input", debounce(handleSearch, 160));
+  searchInputEl.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowDown") { e.preventDefault(); moveSearchActive(1); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); moveSearchActive(-1); }
+    else if (e.key === "Enter") { e.preventDefault(); selectSearchResult(searchActive >= 0 ? searchActive : 0); }
+  });
+  document.getElementById("clearSearch").addEventListener("click", () => { searchInputEl.value = ""; handleSearch(); searchInputEl.focus(); });
+  // Click vào 1 dòng kết quả.
+  document.getElementById("searchResults").addEventListener("click", (e) => {
+    const li = e.target.closest(".sr-item");
+    if (li) selectSearchResult(Number(li.dataset.i));
+  });
 
   document.getElementById("rotateBtn").addEventListener("click", toggleRotate);
   document.getElementById("particlesBtn").addEventListener("click", toggleParticles);
@@ -877,6 +1124,7 @@ function bindEvents() {
   document.getElementById("resetViewBtn").addEventListener("click", () => { clearHighlight(); Graph.zoomToFit(900, 40); });
   document.getElementById("focusBtn").addEventListener("click", () => toggleFocusMode(true));
   document.getElementById("exitFocusBtn").addEventListener("click", () => toggleFocusMode(false));
+  document.getElementById("backBtn").addEventListener("click", goBack);
 
   document.getElementById("setupBtn").addEventListener("click", setupDb);
   document.getElementById("reloadBtn").addEventListener("click", () => loadGraph(true));
@@ -893,9 +1141,17 @@ function bindEvents() {
   document.getElementById("modalFocusBtn").addEventListener("click", () => { const id = currentModalNodeId; closeModal(); focusNeighborhood(id); });
 
   document.addEventListener("keydown", (e) => {
+    const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || "");
+    // '/' -> nhảy vào ô tìm kiếm (khi không đang gõ ở ô khác)
+    if (e.key === "/" && !typing) {
+      e.preventDefault();
+      searchInputEl.focus(); searchInputEl.select();
+      return;
+    }
     if (e.key === "Escape") {
       if (!document.getElementById("nodeModal").classList.contains("hidden")) closeModal();
       else if (document.body.classList.contains("focus-mode")) toggleFocusMode(false);
+      else if (document.activeElement === searchInputEl && searchInputEl.value) { searchInputEl.value = ""; handleSearch(); }
     }
   });
 }
@@ -913,7 +1169,7 @@ async function loadGraph(fresh) {
     applyData(elements || [], fresh !== false);
     setDbStatus("ok", `Kết nối OK · ${gdata.nodes.length} nodes`);
     if ((elements || []).length === 0) toast("ℹ️ DB trống — bấm Load Sample");
-    else setTimeout(() => Graph.zoomToFit(800, 40), 400);
+    else if (Graph) setTimeout(() => Graph.zoomToFit(800, 40), 400);
   } catch (e) {
     setDbStatus("err", e.message);
     toast("❌ " + e.message + " — thử bấm Init DB");

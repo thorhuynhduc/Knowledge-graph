@@ -1,0 +1,8 @@
+node_modules/
+package-lock.json
+.idea/
+*.log
+
+# Bí mật — KHÔNG commit. Dùng .env.example làm mẫu.
+.env
+
