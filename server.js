@@ -151,7 +151,7 @@ app.all('/api', async (req, res) => {
       // ---------- LẤY TOÀN BỘ GRAPH ----------
       case 'graph': {
         const [nodes] = await pool.query(
-          'SELECT id,label,category,description,links,pos_x,pos_y FROM kg_nodes'
+          'SELECT id,label,category,description,description_en,links,pos_x,pos_y FROM kg_nodes'
         );
         const [edges] = await pool.query(
           'SELECT id,source,target,type FROM kg_edges'
@@ -161,6 +161,7 @@ app.all('/api', async (req, res) => {
           const el = { group: 'nodes', data: {
             id: r.id, label: r.label, category: r.category,
             description: r.description || '',
+            description_en: r.description_en || '',
             links: r.links ? safeJson(r.links) : [],
           }};
           if (r.pos_x !== null && r.pos_y !== null) {
@@ -183,14 +184,16 @@ app.all('/api', async (req, res) => {
         if (!id || !label) return fail(res, 'Thiếu id hoặc label');
         const category = body.category || 'Frontend';
         const description = body.description || '';
+        const descriptionEn = body.description_en || '';
         const links = JSON.stringify(Array.isArray(body.links) ? body.links : []);
         await pool.execute(
-          `INSERT INTO kg_nodes (id,label,category,description,links)
-           VALUES (?,?,?,?,?)
+          `INSERT INTO kg_nodes (id,label,category,description,description_en,links)
+           VALUES (?,?,?,?,?,?)
            ON DUPLICATE KEY UPDATE
              label=VALUES(label), category=VALUES(category),
-             description=VALUES(description), links=VALUES(links)`,
-          [id, label, category, description, links]
+             description=VALUES(description), description_en=VALUES(description_en),
+             links=VALUES(links)`,
+          [id, label, category, description, descriptionEn, links]
         );
         return ok(res);
       }
@@ -254,10 +257,10 @@ app.all('/api', async (req, res) => {
             const px = el.position && typeof el.position.x === 'number' ? el.position.x : null;
             const py = el.position && typeof el.position.y === 'number' ? el.position.y : null;
             await conn.execute(
-              `INSERT INTO kg_nodes (id,label,category,description,links,pos_x,pos_y)
-               VALUES (?,?,?,?,?,?,?)`,
+              `INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y)
+               VALUES (?,?,?,?,?,?,?,?)`,
               [d.id, d.label || '', d.category || 'Frontend', d.description || '',
-               JSON.stringify(d.links || []), px, py]
+               d.description_en || '', JSON.stringify(d.links || []), px, py]
             );
           }
           // Sau đó insert edges

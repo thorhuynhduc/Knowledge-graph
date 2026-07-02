@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS kg_nodes (
   label       VARCHAR(255) NOT NULL,
   category    VARCHAR(64)  NOT NULL DEFAULT 'Frontend',
   description TEXT         NULL,
+  description_en TEXT      NULL,                 -- bản dịch tiếng Anh (toggle VI/EN)
   links       TEXT         NULL,                 -- mảng JSON các link học tập
   pos_x       DOUBLE       NULL,                 -- vị trí node trên graph
   pos_y       DOUBLE       NULL,

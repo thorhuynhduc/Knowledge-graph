@@ -187,7 +187,8 @@
         <input type="hidden" id="nodeEditId" />
         <input id="nodeLabel" class="field" placeholder="Tên node (vd: React, PostgreSQL)" />
         <select id="nodeCategory" class="field"></select>
-        <textarea id="nodeDesc" class="field" rows="2" placeholder="Mô tả (tùy chọn)"></textarea>
+        <textarea id="nodeDesc" class="field" rows="2" placeholder="Mô tả tiếng Việt (tùy chọn)"></textarea>
+        <textarea id="nodeDescEn" class="field" rows="2" placeholder="English translation (optional)"></textarea>
         <input id="nodeLinks" class="field" placeholder="Links học tập, phân tách bằng dấu phẩy" />
         <button id="nodeSaveBtn" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Lưu Node</button>
       </div>
@@ -268,7 +269,7 @@
 
 <!-- ===================== MODAL ===================== -->
 <div id="nodeModal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-  <div class="modal-enter w-full max-w-lg card !p-0 overflow-hidden border-slate-700">
+  <div class="modal-enter w-full max-w-2xl card !p-0 overflow-hidden border-slate-700">
     <div id="modalHeader" class="px-5 py-4 flex items-start justify-between gap-3">
       <div class="flex-1 min-w-0">
         <span id="modalCategory" class="badge"></span>
@@ -278,8 +279,14 @@
     </div>
     <div class="px-5 pb-5 pt-1 space-y-4 bg-slate-900 max-h-[72vh] overflow-y-auto">
       <div>
-        <div class="section-title">Câu trả lời</div>
-        <p id="modalDesc" class="text-sm text-slate-200 leading-relaxed whitespace-pre-wrap">—</p>
+        <div class="flex items-center justify-between mb-1">
+          <div class="section-title !mb-0">Câu trả lời</div>
+          <button id="langToggle" type="button" title="Bật/tắt bản dịch tiếng Anh"
+            class="flex items-center gap-1.5 text-[11px] font-semibold px-2 py-1 rounded-full border border-slate-600 text-slate-300 hover:border-sky-500 hover:text-sky-300 transition">
+            <i class="fa-solid fa-language"></i><span id="langToggleLabel">VI</span>
+          </button>
+        </div>
+        <p id="modalDesc" class="text-[12.5px] text-slate-200 leading-relaxed font-mono whitespace-pre overflow-x-auto">—</p>
       </div>
       <div id="modalLinksWrap" class="hidden">
         <div class="section-title">Tài liệu học tập</div>
@@ -325,6 +332,7 @@ let degree = {};
 let highlightNodes = new Set();
 let highlightLinks = new Set();
 let currentModalNodeId = null;
+let descLang = localStorage.getItem("kg_descLang") || "vi";  // "vi" | "en"
 let autoRotate = false;
 let particlesOn = true;
 let labelMode = "main";          // main | all | off
@@ -381,7 +389,7 @@ function elementsToGraph(elements) {
   for (const el of elements) {
     if (el.group === "nodes") {
       const d = el.data;
-      nodes.push({ id: d.id, name: d.label, category: d.category, description: d.description || "", links: d.links || [] });
+      nodes.push({ id: d.id, name: d.label, category: d.category, description: d.description || "", description_en: d.description_en || "", links: d.links || [] });
     } else if (el.group === "edges") {
       const d = el.data;
       links.push({ id: d.id, source: d.source, target: d.target, type: d.type });
@@ -538,16 +546,17 @@ async function saveNode() {
   const label = document.getElementById("nodeLabel").value.trim();
   const category = document.getElementById("nodeCategory").value;
   const desc = document.getElementById("nodeDesc").value.trim();
+  const descEn = document.getElementById("nodeDescEn").value.trim();
   const linksRaw = document.getElementById("nodeLinks").value.trim();
   if (!label) { toast("⚠️ Vui lòng nhập tên node"); return; }
   const links = linksRaw ? linksRaw.split(",").map(s => s.trim()).filter(Boolean) : [];
   const id = editId || ("n_" + Date.now() + "_" + Math.floor(Math.random() * 1000));
 
-  try { await api("saveNode", { id, label, category, description: desc, links }); }
+  try { await api("saveNode", { id, label, category, description: desc, description_en: descEn, links }); }
   catch (e) { toast("❌ " + e.message); return; }
 
   const idx = raw.findIndex(el => el.group === "nodes" && el.data.id === id);
-  const data = { id, label, category, description: desc, links };
+  const data = { id, label, category, description: desc, description_en: descEn, links };
   if (idx >= 0) raw[idx].data = data; else raw.push({ group: "nodes", data });
   applyData(raw, false);
   toast(editId ? "✅ Đã cập nhật node" : "✅ Đã thêm node: " + label);
@@ -560,6 +569,7 @@ function editNode(id) {
   document.getElementById("nodeLabel").value = n.name || "";
   document.getElementById("nodeCategory").value = n.category || "Frontend";
   document.getElementById("nodeDesc").value = n.description || "";
+  document.getElementById("nodeDescEn").value = n.description_en || "";
   document.getElementById("nodeLinks").value = (n.links || []).join(", ");
   document.getElementById("nodeFormTitle").innerHTML = '<i class="fa-solid fa-pen mr-1"></i>Sửa Node';
   document.getElementById("nodeFormReset").classList.remove("hidden");
@@ -567,7 +577,7 @@ function editNode(id) {
   document.getElementById("sidebar").scrollTo({ top: 120, behavior: "smooth" });
 }
 function resetNodeForm() {
-  ["nodeEditId","nodeLabel","nodeDesc","nodeLinks"].forEach(i => document.getElementById(i).value = "");
+  ["nodeEditId","nodeLabel","nodeDesc","nodeDescEn","nodeLinks"].forEach(i => document.getElementById(i).value = "");
   document.getElementById("nodeFormTitle").innerHTML = '<i class="fa-solid fa-circle-plus mr-1"></i>Thêm Node';
   document.getElementById("nodeFormReset").classList.add("hidden");
 }
@@ -608,7 +618,7 @@ function openNodeModal(id) {
   const catEl = document.getElementById("modalCategory");
   catEl.textContent = n.category; catEl.style.background = color + "22"; catEl.style.color = color;
   document.getElementById("modalTitle").textContent = n.name;
-  document.getElementById("modalDesc").textContent = n.description || "Chưa có mô tả cho node này.";
+  renderModalDesc();
 
   const wrap = document.getElementById("modalLinksWrap"), linksEl = document.getElementById("modalLinks");
   const links = n.links || [];
@@ -631,6 +641,32 @@ function openNodeModal(id) {
 
   document.getElementById("nodeModal").classList.remove("hidden");
   document.getElementById("nodeModal").classList.add("flex");
+}
+// Hiển thị mô tả theo ngôn ngữ đang chọn; nút toggle phản ánh trạng thái
+function renderModalDesc() {
+  const n = currentModalNodeId ? nodeMap()[currentModalNodeId] : null;
+  const descEl = document.getElementById("modalDesc");
+  const btn = document.getElementById("langToggle");
+  const label = document.getElementById("langToggleLabel");
+  if (!n) return;
+  const hasEn = !!(n.description_en && n.description_en.trim());
+  const wantEn = descLang === "en";
+  if (wantEn && hasEn)      descEl.textContent = n.description_en;
+  else if (wantEn && !hasEn) descEl.textContent = n.description || "Chưa có mô tả cho node này.";
+  else                       descEl.textContent = n.description || "Chưa có mô tả cho node này.";
+  // nhãn nút: ngôn ngữ ĐANG hiển thị
+  label.textContent = (wantEn && hasEn) ? "EN" : "VI";
+  const active = wantEn && hasEn;
+  btn.classList.toggle("border-sky-500", active);
+  btn.classList.toggle("text-sky-300", active);
+  // không có bản dịch -> mờ nút để báo hiệu
+  btn.classList.toggle("opacity-40", wantEn && !hasEn);
+  btn.title = hasEn ? "Bật/tắt bản dịch tiếng Anh" : "Node này chưa có bản dịch tiếng Anh";
+}
+function toggleDescLang() {
+  descLang = descLang === "en" ? "vi" : "en";
+  localStorage.setItem("kg_descLang", descLang);
+  renderModalDesc();
 }
 function closeModal() {
   document.getElementById("nodeModal").classList.add("hidden");
@@ -1135,6 +1171,7 @@ function bindEvents() {
   document.getElementById("importFile").addEventListener("change", (e) => { if (e.target.files[0]) importJSON(e.target.files[0]); e.target.value = ""; });
 
   document.getElementById("modalClose").addEventListener("click", closeModal);
+  document.getElementById("langToggle").addEventListener("click", toggleDescLang);
   document.getElementById("nodeModal").addEventListener("click", (e) => { if (e.target.id === "nodeModal") closeModal(); });
   document.getElementById("modalEditBtn").addEventListener("click", () => editNode(currentModalNodeId));
   document.getElementById("modalDeleteBtn").addEventListener("click", () => deleteNode(currentModalNodeId));
