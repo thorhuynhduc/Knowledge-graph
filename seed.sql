@@ -10740,3 +10740,5136 @@ automatic reactivity, less boilerplate. React: larger ecosystem + job
 market, flexible JSX. Choose by team + ecosystem, NOT by performance (the
 two are comparable).'
 WHERE id='n_vue_vs_react';
+
+-- ===== seed_english_pron =====
+-- ===================================================================
+--  TOPIC: Tiếng Anh Mỹ (American English) — song ngữ VI + EN, ví dụ + IPA
+--  Áp: docker compose exec -T mysql \
+--        mysql -uroot -p"$MYSQL_ROOT_PASSWORD" --default-character-set=utf8mb4 \
+--        "$DB_NAME" < seed_english_pron.sql
+--  (utf8mb4 BẮT BUỘC). File này tạo topic + 6 section + node phần Phát âm.
+-- ===================================================================
+
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('t_en','Tiếng Anh Mỹ','English',
+'Tiếng Anh Mỹ (American English) toàn diện cho người Việt: phát âm & lưu ý, chunking, ngữ pháp, 12 thì, quy tắc thêm -s/-es/-ed/-ing, động từ bất quy tắc, và mẹo nói như người bản xứ.',
+'Comprehensive American English for Vietnamese learners: pronunciation and notes, chunking, grammar, the 12 tenses, spelling rules for -s/-es/-ed/-ing, irregular verbs, and tips to sound like a native.',
+'[]',-600,380),
+
+('s_en_pron','Phát âm (Pronunciation)','English',
+'Phát âm giọng Mỹ: IPA, âm /r/ rhotic, flap T, schwa, trọng âm từ & câu, ngữ điệu, nối âm, âm th và các âm khó với người Việt.',
+'American pronunciation: IPA, rhotic /r/, flap T, schwa, word & sentence stress, intonation, linking, the th sounds and sounds hard for Vietnamese speakers.',
+'[]',-720,300),
+('s_en_chunk','Chunking & Connected Speech','English',
+'Nhóm ý khi nói (chunking), nhịp điệu stress-timed và các biến đổi âm khi nói liền (assimilation, elision, catenation).',
+'Grouping ideas (chunking), stress-timed rhythm, and how sounds change in connected speech (assimilation, elision, catenation).',
+'[]',-760,180),
+('s_en_grammar','Ngữ pháp (Grammar)','English',
+'Ngữ pháp cốt lõi: trật tự từ, mạo từ, danh từ, đại từ, tính/trạng từ, giới từ, modal verbs, câu điều kiện, bị động, tường thuật, câu hỏi, gerund/infinitive.',
+'Core grammar: word order, articles, nouns, pronouns, adjectives/adverbs, prepositions, modal verbs, conditionals, passive, reported speech, questions, gerund/infinitive.',
+'[]',-560,180),
+('s_en_tenses','Các thì (12 Tenses)','English',
+'12 thì tiếng Anh: bản đồ tổng quan và 4 nhóm hiện tại / quá khứ / tương lai kèm cách dùng và dấu hiệu nhận biết.',
+'The 12 English tenses: an overview map and the four present / past / future groups with uses and signal words.',
+'[]',-400,260),
+('s_en_verbs','Động từ & Quy tắc chính tả','English',
+'Quy tắc chính tả & phát âm: thêm -s/-es, -ed, -ing; động từ bất quy tắc và danh từ số nhiều bất quy tắc hay dùng.',
+'Spelling & pronunciation rules: adding -s/-es, -ed, -ing; common irregular verbs and irregular plural nouns.',
+'[]',-380,120),
+('s_en_native','Nói như người bản xứ','English',
+'Contractions/reductions, phrasal verbs, idioms, slang, fillers, small talk, collocations, khác biệt Anh-Mỹ vs Anh-Anh, và mức độ trang trọng (register).',
+'Contractions/reductions, phrasal verbs, idioms, slang, fillers, small talk, collocations, American vs British differences, and register.',
+'[]',-560,40),
+
+-- ------------------------- PHÁT ÂM (leaf nodes) --------------------
+('n_en_ipa','Bảng âm & IPA (giọng Mỹ)','English',
+'Tiếng Anh Mỹ (General American) có ~24 phụ âm + ~15 nguyên âm, ghi bằng
+ký hiệu IPA. Chính tả KHÔNG khớp âm -> học theo ÂM, đừng đọc theo mặt chữ.
+
+NGUYÊN ÂM hay gặp (kèm ví dụ):
+  /iː/ see   /ɪ/ sit   /eɪ/ say   /ɛ/ bed   /æ/ cat
+  /ɑː/ father /ʌ/ cup  /ə/ about (schwa)   /ɔː/ thought
+  /oʊ/ go    /ʊ/ book  /uː/ too   /aɪ/ my   /aʊ/ now   /ɔɪ/ boy
+
+PHỤ ÂM khó với người Việt:
+  /θ/ think, /ð/ this, /r/ (cong lưỡi), /v/ (khác /w/),
+  /z/ zoo, /ʒ/ vision; cụm cuối /st/ /kt/ /ld/ (hay bị nuốt).
+
+MẸO TRA CỨU: từ điển tốt (Merriam-Webster, Cambridge) đều ghi IPA +
+phát âm Mỹ, bấm loa nghe được. Hãy NGHE và NHẠI (shadowing) thay vì đoán
+theo chữ viết.
+
+VÌ SAO QUAN TRỌNG: một chữ đọc nhiều kiểu (a trong cat / car / care /
+about), nhiều chữ đọc một âm. Nắm IPA giúp tự học phát âm chính xác bất
+kỳ từ nào.',
+'General American has about 24 consonants + 15 vowels, written in IPA.
+Spelling does NOT match sound -> learn by SOUND, not by letters.
+
+COMMON VOWELS (with examples):
+  /iː/ see   /ɪ/ sit   /eɪ/ say   /ɛ/ bed   /æ/ cat
+  /ɑː/ father /ʌ/ cup  /ə/ about (schwa)   /ɔː/ thought
+  /oʊ/ go    /ʊ/ book  /uː/ too   /aɪ/ my   /aʊ/ now   /ɔɪ/ boy
+
+CONSONANTS hard for Vietnamese speakers:
+  /θ/ think, /ð/ this, /r/ (curled tongue), /v/ (unlike /w/),
+  /z/ zoo, /ʒ/ vision; final clusters /st/ /kt/ /ld/ (often dropped).
+
+LOOKUP TIP: good dictionaries (Merriam-Webster, Cambridge) show IPA + US
+audio. LISTEN and IMITATE (shadowing) instead of guessing from spelling.
+
+WHY IT MATTERS: one letter has many sounds (a in cat / car / care /
+about), many letters map to one sound. Knowing IPA lets you self-learn
+the exact pronunciation of any word.',
+'[]',-820,340),
+
+('n_en_r','Âm /r/ & rhotic (rất Mỹ)','English',
+'Đặc trưng LỚN NHẤT của giọng Mỹ: RHOTIC — luôn phát âm /r/ ở MỌI vị trí,
+kể cả cuối từ và trước phụ âm (giọng Anh-Anh thường bỏ /r/).
+
+  car  /kɑːr/ (Mỹ đọc rõ r; Anh: /kɑː/)
+  hard /hɑːrd/   four /fɔːr/   teacher /ˈtiːtʃər/
+
+CÁCH TẠO ÂM /r/ MỸ: cong đầu lưỡi lên (retroflex) hoặc gồng gốc lưỡi,
+môi hơi tròn; đầu lưỡi KHÔNG chạm vòm miệng. Không rung như "r" tiếng Việt.
+
+R-CONTROLLED VOWELS (nguyên âm + r, đặc trưng Mỹ):
+  /ɑːr/ car   /ɔːr/ more   /ɜːr/ bird, her, work (âm "ơ-r" đặc trưng)
+  /ɪr/ here   /ɛr/ air     /ʊr/ tour
+
+MẸO: âm /ɜːr/ (bird, work, her, first) là "ơ" kéo dài + cong lưỡi suốt
+âm — luyện riêng vì cực hay gặp.
+
+LƯU Ý người Việt: đừng bỏ /r/ cuối (car không phải "ca"), và đừng rung
+đầu lưỡi.',
+'The BIGGEST feature of American accent: RHOTIC - /r/ is always pronounced
+in EVERY position, including word-final and before consonants (British
+usually drops /r/).
+
+  car  /kɑːr/ (US pronounces r clearly; UK: /kɑː/)
+  hard /hɑːrd/   four /fɔːr/   teacher /ˈtiːtʃər/
+
+MAKING THE US /r/: curl the tongue tip up (retroflex) or bunch the tongue
+back, lips slightly rounded; the tip does NOT touch the roof. It does not
+trill like a Vietnamese "r".
+
+R-CONTROLLED VOWELS (vowel + r, very American):
+  /ɑːr/ car   /ɔːr/ more   /ɜːr/ bird, her, work (the signature sound)
+  /ɪr/ here   /ɛr/ air     /ʊr/ tour
+
+TIP: /ɜːr/ (bird, work, her, first) is a long "er" with the tongue curled
+throughout - drill it separately, it is extremely common.
+
+NOTE for Vietnamese: do not drop final /r/ (car is not "ca"), and do not
+trill the tongue tip.',
+'[]',-860,260),
+
+('n_en_t','Flap T & các biến thể của T','English',
+'Trong giọng Mỹ, chữ T giữa hai nguyên âm biến thành FLAP /ɾ/ — nghe gần
+như /d/ búng nhanh. Đây là lý do nghe người Mỹ nói lạ so với chữ viết.
+
+  water  -> "wah-der"    better -> "bedder"
+  city, letter, butter, party, later, matter, thirty
+  cụm: "get it" -> "geddit",  "a lot of" -> "a lodda"
+
+BỐN BIẾN THỂ CỦA T:
+  1. Flap T (nguyên âm _T_ nguyên âm): water, later -> /ɾ/ (như d nhanh)
+  2. Glottal stop T (trước /n/ hoặc cuối âm tiết): button, kitten,
+     mountain -> nín hơi ở cổ họng, không bật /t/ rõ
+  3. T bị nuốt sau N: "interview" -> "innerview", "twenty" -> "twenny"
+  4. T rõ ràng: đầu từ hoặc trong âm nhấn (top, time, reTURN, aTTEND)
+
+MẸO: người Anh-Anh vẫn bật /t/ rõ (water /ˈwɔːtə/). Luyện flap T giúp
+giọng Mỹ tự nhiên hơn hẳn, và nghe hiểu nhanh hơn.',
+'In American English, T between two vowels becomes a FLAP /ɾ/ - it sounds
+almost like a quick /d/. This is why American speech sounds unlike its
+spelling.
+
+  water  -> "wah-der"    better -> "bedder"
+  city, letter, butter, party, later, matter, thirty
+  phrases: "get it" -> "geddit",  "a lot of" -> "a lodda"
+
+FOUR VARIANTS OF T:
+  1. Flap T (vowel _T_ vowel): water, later -> /ɾ/ (like a fast d)
+  2. Glottal stop T (before /n/ or at syllable end): button, kitten,
+     mountain -> a catch in the throat, no clear /t/ burst
+  3. T dropped after N: "interview" -> "innerview", "twenty" -> "twenny"
+  4. Clear T: word-initial or in a stressed syllable (top, time, reTURN)
+
+TIP: British keeps a clear /t/ (water /ˈwɔːtə/). Practicing the flap T
+makes an American accent far more natural and speeds up listening.',
+'[]',-900,200),
+
+('n_en_schwa','Schwa /ə/ & giảm âm','English',
+'Schwa /ə/ là nguyên âm PHỔ BIẾN NHẤT tiếng Anh — âm "ơ" ngắn, yếu, nằm ở
+âm tiết KHÔNG nhấn. Đây là chìa khóa của nhịp điệu tiếng Anh.
+
+  about /əˈbaʊt/    banana /bəˈnænə/ (hai chữ a thành schwa)
+  problem, sofa, support, the, a, to, of, from
+
+VOWEL REDUCTION — âm tiết không nhấn bị giảm về schwa:
+  photograph  /ˈfoʊtəɡræf/     (o thứ hai -> ə)
+  photographer /fəˈtɑːɡrəfər/  (trọng âm dời -> nguyên âm đổi hẳn)
+
+FUNCTION WORDS thường đọc DẠNG YẾU (weak form) với schwa:
+  to -> /tə/, for -> /fər/, and -> /ən/, of -> /əv/, can -> /kən/
+  "a cup of tea" -> "a cuppa tea"
+
+MẸO người Việt: đừng đọc RÕ mọi nguyên âm như tiếng Việt. Nhấn mạnh âm
+tiết chính, NUỐT nhẹ phần còn lại về schwa -> nghe Mỹ và tự nhiên hơn.
+Đọc "TO-DAY" đều nhau nghe rất cứng; đúng là "tə-DAY".',
+'The schwa /ə/ is the MOST COMMON vowel in English - a short, weak "uh"
+in UNSTRESSED syllables. It is the key to English rhythm.
+
+  about /əˈbaʊt/    banana /bəˈnænə/ (both a letters become schwa)
+  problem, sofa, support, the, a, to, of, from
+
+VOWEL REDUCTION - unstressed syllables reduce to schwa:
+  photograph  /ˈfoʊtəɡræf/     (second o -> ə)
+  photographer /fəˈtɑːɡrəfər/  (stress shifts -> the vowel changes entirely)
+
+FUNCTION WORDS often take a WEAK FORM with schwa:
+  to -> /tə/, for -> /fər/, and -> /ən/, of -> /əv/, can -> /kən/
+  "a cup of tea" -> "a cuppa tea"
+
+TIP for Vietnamese: do not pronounce every vowel fully like in Vietnamese.
+Stress the main syllable and SWALLOW the rest into schwa -> more American
+and natural. Saying "TO-DAY" evenly sounds stiff; it should be "tə-DAY".',
+'[]',-820,140),
+
+('n_en_wordstress','Trọng âm từ (Word Stress)','English',
+'Mỗi từ nhiều âm tiết có MỘT âm tiết nhấn: đọc TO hơn, DÀI hơn, RÕ hơn.
+Nhấn sai chỗ -> người Mỹ khó hiểu dù bạn phát âm đúng từng âm.
+
+  ˈTA-ble   com-ˈPU-ter   ˈbeau-ti-ful   un-der-ˈSTAND
+
+QUY TẮC HAY DÙNG (không tuyệt đối):
+  • Danh/tính từ 2 âm tiết -> thường nhấn ĐẦU: TA-ble, HAP-py
+  • Động từ 2 âm tiết -> thường nhấn SAU: re-LAX, de-CIDE
+  • Cặp danh/động cùng chữ: ˈRE-cord (n) / re-ˈCORD (v),
+    ˈPRE-sent (n) / pre-ˈSENT (v)
+  • Đuôi -tion/-sion/-ic/-ical -> nhấn âm NGAY TRƯỚC đuôi:
+    in-for-MA-tion, de-CI-sion, e-co-NO-mic
+  • Đuôi -ty/-cy/-phy/-gy -> nhấn âm thứ 3 từ cuối:
+    pho-TO-gra-phy, de-MO-cra-cy, a-BI-li-ty
+
+MẸO: học từ mới là học LUÔN trọng âm (dấu ˈ đứng trước âm nhấn trong từ
+điển). Âm không nhấn giảm về schwa.',
+'Every multi-syllable word has ONE stressed syllable: LOUDER, LONGER,
+CLEARER. Wrong stress -> Americans struggle to understand even if each
+sound is correct.
+
+  ˈTA-ble   com-ˈPU-ter   ˈbeau-ti-ful   un-der-ˈSTAND
+
+USEFUL RULES (not absolute):
+  • 2-syllable nouns/adjectives -> usually stress the FIRST: TA-ble, HAP-py
+  • 2-syllable verbs -> usually stress the SECOND: re-LAX, de-CIDE
+  • Noun/verb pairs spelled the same: ˈRE-cord (n) / re-ˈCORD (v),
+    ˈPRE-sent (n) / pre-ˈSENT (v)
+  • Endings -tion/-sion/-ic/-ical -> stress the syllable JUST BEFORE:
+    in-for-MA-tion, de-CI-sion, e-co-NO-mic
+  • Endings -ty/-cy/-phy/-gy -> stress the 3rd syllable from the end:
+    pho-TO-gra-phy, de-MO-cra-cy, a-BI-li-ty
+
+TIP: learning a new word means learning its stress too (the ˈ mark
+precedes the stressed syllable in dictionaries). Unstressed syllables
+reduce to schwa.',
+'[]',-760,90),
+
+('n_en_sentencestress','Trọng âm câu & nhịp điệu','English',
+'Tiếng Anh là ngôn ngữ STRESS-TIMED: nhấn CONTENT WORDS (từ mang nghĩa),
+lướt nhanh FUNCTION WORDS (từ ngữ pháp). Khoảng cách giữa các từ nhấn
+gần như ĐỀU nhau về thời gian.
+
+  CONTENT (nhấn): danh từ, động từ chính, tính từ, trạng từ, từ WH
+  FUNCTION (lướt): a/the, to/of/in, and/but, đại từ, trợ động từ, be
+
+  "I want to GO to the STORE to BUY some MILK."
+   -> nhấn GO, STORE, BUY, MILK; phần còn lại lướt nhanh + schwa.
+
+CONTRASTIVE STRESS — đổi chỗ nhấn đổi hàm ý:
+  "I didn''t say he stole it."
+   nhấn I  = không phải tôi nói;  nhấn STOLE = anh ta không TRỘM mà...
+
+MẸO người Việt: tiếng Việt đọc mọi tiếng gần đều nhau; tiếng Anh KHÔNG.
+Kéo dài từ nhấn, nuốt từ nối -> tạo nhịp điệu Mỹ. Đây là yếu tố SỐ 1 để
+nghe tự nhiên, quan trọng hơn cả phát âm từng âm.',
+'English is STRESS-TIMED: stress CONTENT WORDS (meaning), rush through
+FUNCTION WORDS (grammar). The gaps between stressed words are roughly
+EQUAL in time.
+
+  CONTENT (stressed): nouns, main verbs, adjectives, adverbs, WH-words
+  FUNCTION (rushed): a/the, to/of/in, and/but, pronouns, auxiliaries, be
+
+  "I want to GO to the STORE to BUY some MILK."
+   -> stress GO, STORE, BUY, MILK; the rest is fast + schwa.
+
+CONTRASTIVE STRESS - moving the stress changes the implication:
+  "I didn''t say he stole it."
+   stress I  = it was not me who said it;  stress STOLE = he did not STEAL
+   it (but did something else)...
+
+TIP for Vietnamese: Vietnamese gives every syllable near-equal weight;
+English does NOT. Lengthen stressed words, swallow linkers -> American
+rhythm. This is the NUMBER 1 factor for sounding natural, more than
+individual sounds.',
+'[]',-680,60),
+
+('n_en_intonation','Ngữ điệu (Intonation)','English',
+'Ngữ điệu = lên/xuống cao độ giọng, truyền cảm xúc và báo kiểu câu. Sai
+ngữ điệu nghe máy móc hoặc bị hiểu nhầm thái độ.
+
+MẪU CƠ BẢN:
+  • Xuống cuối câu: câu kể, câu hỏi WH (hỏi thông tin)
+      "I live in Boston."      "Where do you live?"
+  • Lên cuối câu: câu hỏi Yes/No, ý chưa xong, xác nhận
+      "Are you coming?"        "So... (còn tiếp)"
+  • Lên rồi xuống khi liệt kê:
+      "I bought apples, oranges, and pears."  (lên ở giữa, xuống ở cuối)
+
+UPTALK: lên giọng cuối câu KỂ nghe thiếu tự tin / như hỏi lại -> tránh
+khi muốn tỏ ra chắc chắn.
+
+CHỨC NĂNG CẢM XÚC: cùng chữ "Really?" — lên cao = ngạc nhiên; xuống thấp
+= chán/nghi ngờ. "Fine." xuống gắt = KHÔNG ổn thật.
+
+MẸO: nghe và NHẠI nguyên câu (shadowing) cả giai điệu, không chỉ từ. Ghi
+âm rồi so sánh. Ngữ điệu + trọng âm câu quyết định độ tự nhiên.',
+'Intonation = the rising/falling pitch of the voice; it carries emotion
+and signals the sentence type. Wrong intonation sounds robotic or is
+misread as an attitude.
+
+BASIC PATTERNS:
+  • Falling at the end: statements, WH-questions (asking for info)
+      "I live in Boston."      "Where do you live?"
+  • Rising at the end: Yes/No questions, unfinished thoughts, checking
+      "Are you coming?"        "So... (to be continued)"
+  • Rise then fall when listing:
+      "I bought apples, oranges, and pears."  (rise mid, fall at end)
+
+UPTALK: rising at the end of a STATEMENT sounds unsure / like a question
+-> avoid it when you want to sound certain.
+
+EMOTIONAL FUNCTION: the same "Really?" - high rise = surprise; low fall =
+bored/doubtful. A sharp falling "Fine." means it is NOT fine.
+
+TIP: listen and IMITATE whole sentences (shadowing), the melody too, not
+just words. Record and compare. Intonation + sentence stress determine how
+natural you sound.',
+'[]',-620,120),
+
+('n_en_linking','Nối âm (Linking)','English',
+'Người Mỹ NỐI các từ khi nói, không tách rời từng chữ -> nghe thành chuỗi
+liền. Đây là lý do "đọc thì hiểu mà nghe không kịp".
+
+CÁC KIỂU NỐI:
+  1. Phụ âm + nguyên âm: "an apple" -> "a-napple", "turn it on" -> "tur-ni-ton"
+  2. Nguyên âm + nguyên âm (chèn /w/ hoặc /j/):
+     "go on" -> "gow-on",  "I am" -> "I-yam"
+  3. Hai phụ âm giống nhau -> giữ một: "this Saturday" -> "thi-Saturday"
+  4. /t/,/d/ + /y/ -> hòa âm: "want you" -> "wanchu", "did you" -> "dijou"
+
+VÍ DỤ chuỗi:
+  "What are you doing?" -> "Wha-da-ya-doin?"
+  "Give it up"          -> "Gi-vi-dup"
+
+MẸO NGHE: luyện nghe theo CỤM (chunk), đừng cố tách từng từ. MẸO NÓI:
+tập nối để miệng quen -> nói trôi hơn và nghe tốt hơn vì hiểu cách âm
+biến đổi. Gắn chặt với connected speech.',
+'Americans LINK words when speaking, not word by word -> it becomes one
+stream. This is why "I can read it but cannot catch it when spoken".
+
+TYPES OF LINKING:
+  1. Consonant + vowel: "an apple" -> "a-napple", "turn it on" -> "tur-ni-ton"
+  2. Vowel + vowel (insert /w/ or /j/):
+     "go on" -> "gow-on",  "I am" -> "I-yam"
+  3. Two identical consonants -> keep one: "this Saturday" -> "thi-Saturday"
+  4. /t/,/d/ + /y/ -> blend: "want you" -> "wanchu", "did you" -> "dijou"
+
+STREAM EXAMPLES:
+  "What are you doing?" -> "Wha-da-ya-doin?"
+  "Give it up"          -> "Gi-vi-dup"
+
+LISTENING TIP: train on CHUNKS, do not force word-by-word. SPEAKING TIP:
+practice linking so your mouth gets used to it -> smoother speech and
+better listening because you understand how sounds change. Tightly tied
+to connected speech.',
+'[]',-680,170),
+
+('n_en_th','Âm th /θ/ /ð/ & âm khó','English',
+'Âm /θ/ và /ð/ (chữ "th") KHÔNG có trong tiếng Việt -> người Việt hay đọc
+nhầm thành /t/, /d/, /s/, /z/. Cần luyện riêng.
+
+  /θ/ (vô thanh): think, thank, three, month, bath, both
+  /ð/ (hữu thanh): this, that, the, they, mother, breathe
+
+CÁCH TẠO ÂM: đặt ĐẦU LƯỠI chạm nhẹ giữa/hoặc sau răng trên, thổi hơi ra.
+/θ/ không rung dây thanh; /ð/ rung.
+  ✗ think -> "sink" hay "tink" (sai, rất hay gặp)
+  ✓ đầu lưỡi ló ra chạm răng rồi mới bật "th"
+
+CÁC ÂM KHÁC NGƯỜI VIỆT HAY NHẦM:
+  • /v/ vs /w/: "vest" (răng chạm môi dưới) ≠ "west" (tròn môi)
+  • cụm phụ âm cuối: "asked" /æskt/, "texts" /teksts/ — đừng nuốt
+  • /z/ cuối phải RUNG: "is, was, cheese" — đừng thành /s/
+  • /l/ cuối (dark L): "feel, milk" — gồng gốc lưỡi
+
+MẸO: soi gương xem lưỡi có ló ra khi nói th không. Luyện cặp tối thiểu
+(minimal pairs): think/sink, they/day, vote/... (v vs w).',
+'The /θ/ and /ð/ ("th") sounds do NOT exist in Vietnamese -> learners often
+swap them for /t/, /d/, /s/, /z/. Drill them separately.
+
+  /θ/ (voiceless): think, thank, three, month, bath, both
+  /ð/ (voiced): this, that, the, they, mother, breathe
+
+HOW TO MAKE THEM: put the TONGUE TIP lightly between/behind the upper
+teeth and push air out. /θ/ has no vocal-cord vibration; /ð/ vibrates.
+  ✗ think -> "sink" or "tink" (a very common error)
+  ✓ let the tip show against the teeth, then release "th"
+
+OTHER SOUNDS VIETNAMESE OFTEN CONFUSE:
+  • /v/ vs /w/: "vest" (teeth on lower lip) is not "west" (rounded lips)
+  • final clusters: "asked" /æskt/, "texts" /teksts/ - do not drop them
+  • final /z/ must VIBRATE: "is, was, cheese" - not /s/
+  • dark L at end: "feel, milk" - bunch the back of the tongue
+
+TIP: use a mirror to check the tongue shows for th. Practice minimal
+pairs: think/sink, they/day, vote vs w-sounds.',
+'[]',-760,230)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_english_chunk_grammar1 =====
+-- ĐĂNG KÝ node: Chunking (3) + Grammar phần 1 (word order, articles, nouns)
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('n_en_chunking','Chunking (nhóm ý)','English',
+'Chunking = chia câu thành các NHÓM Ý nhỏ (thought groups) khi nói/nghe;
+mỗi nhóm là một cụm nghĩa, giữa các nhóm có ngắt nhẹ. Giúp nói rõ ràng
+và nghe kịp.
+
+  Đọc một hơi -> khó hiểu. Chia nhóm:
+  "When I got home / I realized / I had left my keys / at the office."
+      nhóm 1         nhóm 2       nhóm 3                nhóm 4
+
+RANH GIỚI NHÓM thường ở:
+  • sau chủ ngữ dài, trước động từ
+  • trước liên từ (and, but, because, when, that)
+  • quanh cụm giới từ / mệnh đề quan hệ
+  • tại dấu phẩy tự nhiên
+
+TRONG MỖI NHÓM: có MỘT từ nhấn chính (thường là content word cuối), nối
+âm các từ, ngữ điệu lên/xuống trọn nhóm.
+
+MẸO: đừng cố nói cả câu dài một hơi. Nghĩ theo cụm 3-5 từ, ngắt nhẹ giữa
+cụm -> nghe tự nhiên, có thời gian nghĩ, ít vấp. Khi nghe, bắt theo cụm
+thay vì từng từ.',
+'Chunking = splitting a sentence into small THOUGHT GROUPS when speaking or
+listening; each group is one unit of meaning, with a slight pause between
+groups. It makes speech clear and listening manageable.
+
+  Said in one breath -> hard to follow. Grouped:
+  "When I got home / I realized / I had left my keys / at the office."
+      group 1        group 2       group 3               group 4
+
+GROUP BOUNDARIES usually fall:
+  • after a long subject, before the verb
+  • before conjunctions (and, but, because, when, that)
+  • around prepositional phrases / relative clauses
+  • at natural commas
+
+WITHIN EACH GROUP: one main stressed word (often the last content word),
+words link together, intonation rises/falls over the whole group.
+
+TIP: do not force a long sentence in one breath. Think in 3-5 word chunks,
+pause lightly between them -> natural sound, thinking time, fewer stumbles.
+When listening, catch chunks, not single words.',
+'[]',-820,210),
+
+('n_en_connected','Connected Speech','English',
+'Connected speech = âm biến đổi khi các từ nối nhau trong dòng nói tự
+nhiên. Hiểu nó giúp NGHE kịp người bản xứ.
+
+CÁC HIỆN TƯỢNG CHÍNH:
+  1. Linking (nối): "turn off" -> "tur-noff" (phụ âm sang nguyên âm)
+  2. Assimilation (đồng hóa): âm đổi theo âm kế bên
+     "handbag" -> "hambag",  "ten pounds" -> "tem pounds",
+     "did you" -> "dijou",   "won''t you" -> "wonchu"
+  3. Elision (nuốt âm): bỏ bớt âm cho gọn
+     "next day" -> "nex day",  "comfortable" -> "comftable"
+  4. Catenation + flap: "get out" -> "ge-dout"
+  5. Weak forms: and -> /ən/, of -> /əv/, to -> /tə/, can -> /kən/
+
+VÍ DỤ tổng hợp:
+  "I have got to go."  -> "I gotta go."
+  "Do you want to...?" -> "D''ya wanna...?"
+
+MẸO: đây KHÔNG phải nói ẩu — người bản xứ ai cũng vậy. Học để NGHE hiểu
+(kẻo tưởng họ nói từ khác) và nói cho trôi. Luyện bằng cách chép chính tả
+(dictation) các đoạn hội thoại tự nhiên.',
+'Connected speech = how sounds change as words join in a natural stream.
+Understanding it lets you KEEP UP with native speakers.
+
+MAIN PHENOMENA:
+  1. Linking: "turn off" -> "tur-noff" (consonant into vowel)
+  2. Assimilation: a sound shifts toward its neighbor
+     "handbag" -> "hambag",  "ten pounds" -> "tem pounds",
+     "did you" -> "dijou",   "won''t you" -> "wonchu"
+  3. Elision: dropping a sound for ease
+     "next day" -> "nex day",  "comfortable" -> "comftable"
+  4. Catenation + flap: "get out" -> "ge-dout"
+  5. Weak forms: and -> /ən/, of -> /əv/, to -> /tə/, can -> /kən/
+
+COMBINED EXAMPLES:
+  "I have got to go."  -> "I gotta go."
+  "Do you want to...?" -> "D''ya wanna...?"
+
+TIP: this is NOT sloppy speech - every native does it. Learn it to
+UNDERSTAND (so you do not mishear words) and to speak smoothly. Practice
+with dictation of natural dialogues.',
+'[]',-860,150),
+
+('n_en_rhythm','Nhịp điệu (Stress-timed)','English',
+'Nhịp điệu tiếng Anh là STRESS-TIMED: các âm tiết NHẤN cách nhau đều đặn
+về thời gian, các âm không nhấn bị nén lại cho vừa. Tiếng Việt là
+SYLLABLE-TIMED (mỗi tiếng gần như đều thời lượng) -> đây là khác biệt gốc.
+
+  "CATS eat FISH."                 (3 nhấn, thong thả)
+  "The CATS will EAT the FISH."    (vẫn ~3 nhịp nhấn)
+  "The CATS have EAten the FISH."  (~3 nhịp; phần yếu bị nén lại)
+  -> số TỪ tăng nhưng số NHỊP NHẤN gần như giữ nguyên; từ yếu bị nuốt.
+
+HỆ QUẢ: từ chức năng (the, have, will, to) rất ngắn và mờ; đừng cố đọc
+rõ từng cái.
+
+MẸO người Việt: tập vỗ tay vào các từ nhấn khi đọc, giữ nhịp ĐỀU, nén
+phần giữa. Đây là bí quyết bỏ giọng "đều đều từng chữ" đặc trưng của
+người Việt học tiếng Anh, và là gốc của trọng âm câu.',
+'English rhythm is STRESS-TIMED: STRESSED syllables come at roughly equal
+time intervals, and unstressed syllables get squeezed to fit. Vietnamese
+is SYLLABLE-TIMED (each syllable near-equal in length) -> this is the root
+difference.
+
+  "CATS eat FISH."                 (3 stresses, leisurely)
+  "The CATS will EAT the FISH."    (still ~3 stress beats)
+  "The CATS have EAten the FISH."  (~3 beats; weak parts compressed)
+  -> the WORD count grows but the STRESS beats stay about the same; weak
+     words are swallowed.
+
+CONSEQUENCE: function words (the, have, will, to) are very short and faint;
+do not try to pronounce each fully.
+
+TIP for Vietnamese: clap on the stressed words as you read, keep the beat
+EVEN, compress the middle. This is the key to dropping the flat
+syllable-by-syllable accent common to Vietnamese learners, and the basis of
+sentence stress.',
+'[]',-800,120),
+
+('n_en_wordorder','Trật tự từ (Word Order)','English',
+'Tiếng Anh theo trật tự SVO cố định: Chủ ngữ - Động từ - Tân ngữ. Sai
+trật tự -> sai nghĩa hoặc khó hiểu (tiếng Việt linh hoạt hơn nhiều).
+
+  S     V      O
+  She   reads  books.
+  I     love   you.   ("You love I" -> sai)
+
+TRẬT TỰ MỞ RỘNG thường gặp:
+  Subject + Verb + Object + Manner + Place + Time
+  "She    read   the book   quietly   at home   last night."
+
+  • Trạng từ thời gian ở CUỐI hoặc ĐẦU câu, không chen giữa V và O:
+    ✗ "I saw yesterday him."   ✓ "I saw him yesterday."
+  • Tính từ đứng TRƯỚC danh từ: "a red car" (không "a car red").
+
+THỨ TỰ NHIỀU TÍNH TỪ (ý kiến - kích thước - tuổi - hình - màu - nguồn gốc
+- chất liệu): "a nice big old round black Italian leather bag"
+  -> ít khi dùng hết, nhưng "big red" đúng, "red big" nghe sai.
+
+MẸO: khi bí, bám chắc S-V-O trước, rồi gắn thời gian/nơi chốn ra hai đầu
+câu. Đây là khung xương của mọi câu tiếng Anh.',
+'English uses a fixed SVO order: Subject - Verb - Object. Wrong order ->
+wrong meaning or confusion (Vietnamese is far more flexible).
+
+  S     V      O
+  She   reads  books.
+  I     love   you.   ("You love I" -> wrong)
+
+EXTENDED ORDER (common):
+  Subject + Verb + Object + Manner + Place + Time
+  "She    read   the book   quietly   at home   last night."
+
+  • Time adverbs go at the END or START, not between V and O:
+    ✗ "I saw yesterday him."   ✓ "I saw him yesterday."
+  • Adjectives go BEFORE the noun: "a red car" (not "a car red").
+
+MULTIPLE-ADJECTIVE ORDER (opinion - size - age - shape - color - origin -
+material): "a nice big old round black Italian leather bag"
+  -> rarely used in full, but "big red" is right, "red big" sounds wrong.
+
+TIP: when stuck, lock in S-V-O first, then attach time/place to the two
+ends of the sentence. This is the skeleton of every English sentence.',
+'[]',-620,210),
+
+('n_en_articles','Mạo từ a / an / the','English',
+'Mạo từ đứng trước danh từ: a/an (không xác định), the (xác định), hoặc
+KHÔNG mạo từ (zero). Người Việt hay bỏ sót vì tiếng Việt không có mạo từ.
+
+A / AN — danh từ ĐẾM ĐƯỢC, SỐ ÍT, nhắc lần đầu / nói chung:
+  a book, a university (đọc /juː/ -> a), an hour (h câm -> an),
+  an apple, an MBA (đọc /em/ -> an)
+  -> chọn a/an theo ÂM đầu, KHÔNG theo chữ cái.
+
+THE — vật ĐÃ XÁC ĐỊNH (cả người nói lẫn người nghe đều biết):
+  "I bought a car. THE car is red."   (nhắc lần 2 -> the)
+  the sun, the USA, the best, the internet; vật duy nhất / có định ngữ.
+
+ZERO ARTICLE (không mạo từ) — danh từ số nhiều / không đếm nói CHUNG:
+  "I like music."   "Cats are cute."   "She''s at school."
+
+MẸO nhanh: danh từ đếm được số ít gần như LUÔN cần a/an/the/this/my... —
+đừng để nó trơ trọi. Nói chung về cả loài -> số nhiều KHÔNG "the"
+("Dogs are loyal"); thêm "the" sẽ thành nhóm cụ thể ("the dogs" = mấy con
+chó kia).',
+'Articles come before nouns: a/an (indefinite), the (definite), or NO
+article (zero). Vietnamese learners often omit them since Vietnamese has no
+articles.
+
+A / AN - a COUNTABLE, SINGULAR noun, first mention / in general:
+  a book, a university (sounds /juː/ -> a), an hour (silent h -> an),
+  an apple, an MBA (sounds /em/ -> an)
+  -> choose a/an by the SOUND, NOT the letter.
+
+THE - a DEFINITE thing (both speaker and listener know which):
+  "I bought a car. THE car is red."   (second mention -> the)
+  the sun, the USA, the best, the internet; unique things / with a limiter.
+
+ZERO ARTICLE - plural / uncountable nouns spoken IN GENERAL:
+  "I like music."   "Cats are cute."   "She''s at school."
+
+QUICK TIP: a singular countable noun almost ALWAYS needs a/an/the/this/my
+- do not leave it bare. Speaking about a whole class -> plural with NO
+"the" ("Dogs are loyal"); adding "the" makes it a specific group ("the
+dogs" = those particular dogs).',
+'[]',-560,240),
+
+('n_en_nouns','Danh từ đếm được / không đếm','English',
+'Danh từ chia COUNTABLE (đếm được) và UNCOUNTABLE (không đếm được) — quyết
+định mạo từ, số nhiều và từ chỉ lượng.
+
+COUNTABLE: có số ít/số nhiều, đếm bằng số.
+  a dog / two dogs,  a problem / problems
+UNCOUNTABLE: không số nhiều, không đi trực tiếp với a/an.
+  water, rice, money, information, advice, furniture, news, homework
+  ✗ "an information", "advices"   ✓ "some information", "a piece of advice"
+
+LƯỢNG TỪ:
+  • many / few   + đếm được số nhiều: many books, few people
+  • much / little + không đếm được:  much time, little water
+  • some / any / a lot of + cả hai
+
+BẪY HAY GẶP (không đếm được, dù tiếng Việt tưởng đếm được):
+  information, advice, knowledge, equipment, luggage, furniture,
+  money, work, research  -> KHÔNG thêm s, KHÔNG "an".
+  "news" nhìn như số nhiều nhưng là số ÍT: "The news is good."
+
+MẸO: với danh từ trừu tượng / chất liệu, mặc định coi là uncountable
+(some / a piece of / an amount of) cho tới khi chắc chắn nó đếm được.',
+'Nouns split into COUNTABLE and UNCOUNTABLE - this decides articles,
+plurals, and quantifiers.
+
+COUNTABLE: has singular/plural, counted by number.
+  a dog / two dogs,  a problem / problems
+UNCOUNTABLE: no plural, no direct a/an.
+  water, rice, money, information, advice, furniture, news, homework
+  ✗ "an information", "advices"   ✓ "some information", "a piece of advice"
+
+QUANTIFIERS:
+  • many / few    + countable plural: many books, few people
+  • much / little + uncountable:      much time, little water
+  • some / any / a lot of + both
+
+COMMON TRAPS (uncountable even though Vietnamese treats them as countable):
+  information, advice, knowledge, equipment, luggage, furniture,
+  money, work, research  -> NO s, NO "an".
+  "news" looks plural but is SINGULAR: "The news is good."
+
+TIP: for abstract / material nouns, default to uncountable
+(some / a piece of / an amount of) until you are sure it is countable.',
+'[]',-500,210)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_english_grammar2 =====
+-- ĐĂNG KÝ node: Grammar phần 2 (pronouns, adj/adv, prepositions, modals, conditionals)
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('n_en_pronouns','Đại từ (Pronouns)','English',
+'Đại từ thay cho danh từ, chia theo VAI TRÒ trong câu. Nắm bảng này để
+tránh lỗi cơ bản.
+
+  Chủ ngữ  Tân ngữ  Sở hữu(adj)  Sở hữu(n)  Phản thân
+  I        me       my           mine       myself
+  you      you      your         yours      yourself
+  he       him      his          his        himself
+  she      her      her          hers       herself
+  it       it       its          -          itself
+  we       us       our          ours       ourselves
+  they     them     their        theirs     themselves
+
+LỖI HAY GẶP:
+  ✗ "Me and him went."    ✓ "He and I went."   (chủ ngữ -> I, he)
+  ✗ "between you and I"   ✓ "between you and me" (sau giới từ -> me)
+  • its (sở hữu) vs it''s (= it is/has)
+  • their (sở hữu) / there (nơi chốn) / they''re (= they are)
+
+MẸO kiểm tra: bỏ bớt người kia -> "Me went" nghe sai -> dùng "I went".
+Sau giới từ (to, for, with, between) LUÔN dùng dạng tân ngữ (me, him, us).',
+'Pronouns replace nouns and change by ROLE in the sentence. Master this
+table to avoid basic errors.
+
+  Subject  Object  Possessive(adj) Possessive(n) Reflexive
+  I        me      my              mine          myself
+  you      you     your            yours         yourself
+  he       him     his             his           himself
+  she      her     her             hers          herself
+  it       it      its             -             itself
+  we       us      our             ours          ourselves
+  they     them    their           theirs        themselves
+
+COMMON ERRORS:
+  ✗ "Me and him went."    ✓ "He and I went."   (subject -> I, he)
+  ✗ "between you and I"   ✓ "between you and me" (after a preposition -> me)
+  • its (possessive) vs it''s (= it is/has)
+  • their (possessive) / there (place) / they''re (= they are)
+
+CHECK TRICK: drop the other person -> "Me went" sounds wrong -> use "I
+went". After a preposition (to, for, with, between) ALWAYS use the object
+form (me, him, us).',
+'[]',-500,150),
+
+('n_en_adj_adv','Tính từ, Trạng từ & So sánh','English',
+'Tính từ (adjective) bổ nghĩa DANH TỪ; trạng từ (adverb) bổ nghĩa ĐỘNG TỪ,
+tính từ hoặc cả câu. Nhiều trạng từ = tính từ + -ly.
+
+  adj: "a quick car"        "She is happy."
+  adv: "He runs quickly."   (quickly bổ nghĩa cho runs)
+  quick->quickly, careful->carefully, easy->easily (y->ily)
+  bất quy tắc: good->well, fast->fast, hard->hard
+
+VỊ TRÍ:
+  • adj đứng trước danh từ, hoặc sau động từ nối (be, seem, look, feel,
+    smell): "The soup smells good." (KHÔNG "smells well")
+  • adv thường sau động từ/tân ngữ, hoặc ở đầu câu.
+
+SO SÁNH:
+  • Ngắn (1 âm tiết): -er / -est   tall -> taller -> the tallest
+  • Dài (>=2 âm tiết): more / most  careful -> more careful -> most careful
+  • Bất quy tắc: good/well->better->best; bad->worse->worst;
+    far->farther/further
+  Cấu trúc: "as tall as", "taller than", "the tallest".
+
+LỖI: "smells well" (sai — well là trạng từ, ở đây cần good); "more taller"
+(thừa — chỉ dùng MỘT cách so sánh).',
+'Adjectives modify NOUNS; adverbs modify VERBS, adjectives, or whole
+sentences. Many adverbs = adjective + -ly.
+
+  adj: "a quick car"        "She is happy."
+  adv: "He runs quickly."   (quickly modifies runs)
+  quick->quickly, careful->carefully, easy->easily (y->ily)
+  irregular: good->well, fast->fast, hard->hard
+
+POSITION:
+  • adjectives go before the noun, or after linking verbs (be, seem, look,
+    feel, smell): "The soup smells good." (NOT "smells well")
+  • adverbs usually follow the verb/object, or start the sentence.
+
+COMPARISON:
+  • Short (1 syllable): -er / -est   tall -> taller -> the tallest
+  • Long (>=2 syllables): more / most  careful -> more careful -> most careful
+  • Irregular: good/well->better->best; bad->worse->worst;
+    far->farther/further
+  Structures: "as tall as", "taller than", "the tallest".
+
+ERRORS: "smells well" (wrong - well is an adverb, here you need good);
+"more taller" (redundant - use only ONE comparison marker).',
+'[]',-440,190),
+
+('n_en_prepositions','Giới từ (Prepositions)','English',
+'Giới từ chỉ quan hệ thời gian / nơi chốn / hướng. Rất hay sai vì KHÔNG
+dịch 1-1 từ tiếng Việt -> học theo CỤM.
+
+THỜI GIAN — in / on / at (rộng -> hẹp):
+  at: giờ, thời điểm   -> at 7pm, at night, at noon
+  on: ngày, thứ        -> on Monday, on July 4th, on the weekend (Mỹ)
+  in: tháng/năm/mùa/buổi -> in May, in 2025, in summer, in the morning
+
+NƠI CHỐN — at / on / in:
+  at: điểm cụ thể -> at the door, at the bus stop, at home
+  on: bề mặt      -> on the table, on the wall, on the 2nd floor
+  in: không gian bao quanh -> in the box, in the room, in New York
+
+HƯỚNG: to (đến), into (vào trong), onto, from, through, across, toward.
+
+CỤM CỐ ĐỊNH (học thuộc, đừng suy luận):
+  interested IN, good AT, depend ON, married TO, listen TO,
+  arrive AT (nơi nhỏ) / IN (thành phố), afraid OF, responsible FOR.
+
+MẸO: giới từ đi với động từ/tính từ là chuyện GHI NHỚ theo cụm, không
+dịch. Học từ mới thì ghi CẢ cụm (vd học "good" là học luôn "good AT").',
+'Prepositions show relations of time / place / direction. Very error-prone
+because they do NOT translate 1-to-1 from Vietnamese -> learn them as CHUNKS.
+
+TIME - in / on / at (broad -> narrow):
+  at: clock time, moment -> at 7pm, at night, at noon
+  on: days, dates        -> on Monday, on July 4th, on the weekend (US)
+  in: month/year/season/part of day -> in May, in 2025, in summer, in the morning
+
+PLACE - at / on / in:
+  at: a specific point -> at the door, at the bus stop, at home
+  on: a surface        -> on the table, on the wall, on the 2nd floor
+  in: an enclosed space -> in the box, in the room, in New York
+
+DIRECTION: to, into, onto, from, through, across, toward.
+
+FIXED CHUNKS (memorize, do not reason):
+  interested IN, good AT, depend ON, married TO, listen TO,
+  arrive AT (small place) / IN (a city), afraid OF, responsible FOR.
+
+TIP: verb/adjective + preposition is a matter of MEMORY as chunks, not
+translation. When learning a new word, record the WHOLE chunk (learning
+"good" means learning "good AT").',
+'[]',-380,150),
+
+('n_en_modals','Modal Verbs','English',
+'Modal verbs (can, could, may, might, will, would, shall, should, must,
+ought to) đứng TRƯỚC động từ nguyên mẫu (không "to", không chia), diễn đạt
+khả năng / cho phép / nghĩa vụ / suy đoán.
+
+  She CAN swim.   You SHOULD rest.   It MIGHT rain.
+  ✗ "She can swims" / "to can"   ✓ "She can swim" (V nguyên mẫu)
+
+Ý NGHĨA CHÍNH:
+  • Khả năng:   can / could      ("I can drive")
+  • Cho phép:   can / may        ("May I come in?" — trang trọng)
+  • Lời khuyên: should / ought to ("You should sleep")
+  • Bắt buộc:   must / have to    ("You must stop")
+  • Cấm:        must not          ("You mustn''t smoke")
+  • Không cần:  don''t have to    ("You don''t have to pay") <- KHÁC mustn''t!
+  • Suy đoán:   must (chắc) / might, may (có thể) / can''t (không thể)
+     "He must be tired." / "It might be true." / "That can''t be right."
+
+QUÁ KHỨ suy đoán: must have + V3, might have + V3, should have + V3
+  "You should have called." (đáng lẽ nên gọi mà đã không gọi)
+
+MẸO: "must not" = CẤM; "don''t have to" = KHÔNG BẮT BUỘC — đừng lẫn hai
+cái này.',
+'Modal verbs (can, could, may, might, will, would, shall, should, must,
+ought to) come BEFORE a bare infinitive (no "to", no conjugation) to
+express possibility / permission / obligation / deduction.
+
+  She CAN swim.   You SHOULD rest.   It MIGHT rain.
+  ✗ "She can swims" / "to can"   ✓ "She can swim" (base verb)
+
+MAIN MEANINGS:
+  • Ability:     can / could      ("I can drive")
+  • Permission:  can / may        ("May I come in?" - formal)
+  • Advice:      should / ought to ("You should sleep")
+  • Obligation:  must / have to    ("You must stop")
+  • Prohibition: must not          ("You mustn''t smoke")
+  • No necessity: don''t have to   ("You don''t have to pay") <- UNLIKE mustn''t!
+  • Deduction:   must (certain) / might, may (possible) / can''t (impossible)
+     "He must be tired." / "It might be true." / "That can''t be right."
+
+PAST deduction: must have + V3, might have + V3, should have + V3
+  "You should have called." (you ought to have called but did not)
+
+TIP: "must not" = PROHIBITED; "don''t have to" = NOT REQUIRED - do not
+confuse the two.',
+'[]',-320,180),
+
+('n_en_conditionals','Câu điều kiện (Conditionals)','English',
+'Câu điều kiện (if) diễn đạt điều kiện -> kết quả. Có 4 loại chính + loại trộn.
+
+TYPE 0 — sự thật hiển nhiên: If + hiện tại, hiện tại.
+  "If you heat ice, it melts."
+
+TYPE 1 — có thật ở tương lai: If + hiện tại đơn, will + V.
+  "If it rains, I will stay home."   (khả năng có thật)
+
+TYPE 2 — không thật ở hiện tại / giả định: If + quá khứ đơn, would + V.
+  "If I were you, I would quit."     (dùng "were" cho MỌI ngôi)
+  "If I had money, I would travel."  (thực tế đang không có tiền)
+
+TYPE 3 — không thật trong quá khứ: If + had + V3, would have + V3.
+  "If I had studied, I would have passed."  (thực tế đã không học)
+
+MIXED — điều kiện quá khứ, kết quả hiện tại:
+  "If I had saved money, I would be rich now."
+
+MẸO: bậc thang LÙI THÌ: thật ở tương lai (T1) -> giả định hiện tại (T2,
+lùi 1 thì) -> giả định quá khứ (T3, lùi 2 thì). Dùng "were" thay "was"
+trong T2 là chuẩn trang trọng ("If I were...").',
+'Conditionals (if) express a condition -> a result. There are 4 main types
+plus a mixed type.
+
+TYPE 0 - general truth: If + present, present.
+  "If you heat ice, it melts."
+
+TYPE 1 - real future: If + present simple, will + V.
+  "If it rains, I will stay home."   (a real possibility)
+
+TYPE 2 - unreal present / hypothetical: If + past simple, would + V.
+  "If I were you, I would quit."     (use "were" for EVERY person)
+  "If I had money, I would travel."  (in reality I have no money)
+
+TYPE 3 - unreal past: If + had + V3, would have + V3.
+  "If I had studied, I would have passed."  (in reality I did not study)
+
+MIXED - past condition, present result:
+  "If I had saved money, I would be rich now."
+
+TIP: the tense-BACKSHIFT ladder: real future (T1) -> unreal present (T2,
+back one tense) -> unreal past (T3, back two tenses). Using "were" instead
+of "was" in T2 is the formal standard ("If I were...").',
+'[]',-260,150)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_english_grammar3 =====
+-- ĐĂNG KÝ node: Grammar phần 3 (passive, reported speech, questions, gerund/infinitive)
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('n_en_passive','Câu bị động (Passive)','English',
+'Câu bị động nhấn vào ĐỐI TƯỢNG bị tác động, không quan trọng ai làm.
+Cấu trúc: be + V3 (past participle).
+
+  Chủ động: "Someone stole my bike."
+  Bị động:  "My bike was stolen (by someone)."
+  -> tân ngữ (my bike) thành chủ ngữ; "by + tác nhân" là tùy chọn.
+
+BE chia theo THÌ:
+  hiện tại:    is/are + V3        "English is spoken here."
+  quá khứ:     was/were + V3      "The house was built in 1990."
+  hiện tại HT: has/have been + V3 "It has been done."
+  tương lai:   will be + V3       "It will be finished tomorrow."
+  modal:       can/should be + V3 "It must be checked."
+
+KHI NÀO DÙNG:
+  • không biết / không cần nói ai làm: "The road was closed."
+  • văn phong khoa học, trang trọng:  "The sample was heated."
+  • muốn nhấn vào kết quả / đối tượng.
+
+MẸO người Việt: tiếng Việt dùng "bị/được"; tiếng Anh BẮT BUỘC be + V3
+(đúng dạng V3, chú ý bất quy tắc!). Đừng lạm dụng bị động khi nói thường —
+câu chủ động rõ và mạnh hơn.',
+'The passive stresses the THING acted upon; who did it does not matter.
+Structure: be + V3 (past participle).
+
+  Active:  "Someone stole my bike."
+  Passive: "My bike was stolen (by someone)."
+  -> the object (my bike) becomes the subject; "by + agent" is optional.
+
+BE changes by TENSE:
+  present:    is/are + V3         "English is spoken here."
+  past:       was/were + V3       "The house was built in 1990."
+  pres. perf: has/have been + V3  "It has been done."
+  future:     will be + V3        "It will be finished tomorrow."
+  modal:      can/should be + V3  "It must be checked."
+
+WHEN TO USE:
+  • the doer is unknown / irrelevant: "The road was closed."
+  • scientific, formal style:         "The sample was heated."
+  • to focus on the result / object.
+
+TIP for Vietnamese: Vietnamese uses "bi/duoc"; English REQUIRES be + V3
+(the correct V3, mind irregulars!). Do not overuse the passive in casual
+speech - the active voice is clearer and stronger.',
+'[]',-240,110),
+
+('n_en_reported','Câu tường thuật (Reported Speech)','English',
+'Câu tường thuật kể lại lời người khác, KHÔNG dùng dấu ngoặc kép. Thường
+phải LÙI THÌ và đổi đại từ / từ chỉ thời gian.
+
+  Trực tiếp:   She said, "I am tired."
+  Tường thuật: She said (that) she WAS tired.   (am->was, I->she)
+
+LÙI THÌ (khi động từ tường thuật ở quá khứ: said/told):
+  hiện tại đơn  -> quá khứ đơn        (am/is -> was; do -> did)
+  hiện tại tiếp -> quá khứ tiếp       (is doing -> was doing)
+  quá khứ đơn   -> quá khứ hoàn thành (did -> had done)
+  will -> would;  can -> could;  must -> had to
+
+ĐỔI TỪ CHỈ THỜI GIAN / NƠI CHỐN:
+  now->then, today->that day, tomorrow->the next day,
+  here->there, this->that, ago->before
+
+CÂU HỎI tường thuật (dùng trật tự KHẲNG ĐỊNH; thêm if/whether cho Yes-No):
+  "Where do you live?" -> She asked where I lived.
+  "Are you ok?"        -> He asked if I was ok.
+LỆNH -> tell somebody TO + V: "He told me to wait."
+
+MẸO: nếu điều kể lại vẫn ĐÚNG ở hiện tại (sự thật), có thể KHÔNG lùi thì:
+"She said she IS a doctor."',
+'Reported speech retells what someone said WITHOUT quotation marks. It
+usually needs a tense BACKSHIFT and changed pronouns / time words.
+
+  Direct:   She said, "I am tired."
+  Reported: She said (that) she WAS tired.   (am->was, I->she)
+
+BACKSHIFT (when the reporting verb is past: said/told):
+  present simple  -> past simple    (am/is -> was; do -> did)
+  present cont.   -> past cont.      (is doing -> was doing)
+  past simple     -> past perfect    (did -> had done)
+  will -> would;  can -> could;  must -> had to
+
+CHANGE TIME / PLACE WORDS:
+  now->then, today->that day, tomorrow->the next day,
+  here->there, this->that, ago->before
+
+REPORTED QUESTIONS (use STATEMENT order; add if/whether for Yes-No):
+  "Where do you live?" -> She asked where I lived.
+  "Are you ok?"        -> He asked if I was ok.
+COMMANDS -> tell somebody TO + V: "He told me to wait."
+
+TIP: if the reported fact is still TRUE now, you may skip the backshift:
+"She said she IS a doctor."',
+'[]',-180,150),
+
+('n_en_questions','Câu hỏi (Questions)','English',
+'Câu hỏi tiếng Anh cần ĐẢO trợ động từ lên trước chủ ngữ (khác tiếng Việt
+chỉ thêm từ hỏi ở cuối).
+
+YES/NO QUESTIONS — đảo trợ động từ / be:
+  "You are ready."  -> "ARE you ready?"
+  "She likes tea."  -> "DOES she like tea?" (mượn do/does/did, V về nguyên mẫu)
+  "They can swim."  -> "CAN they swim?"
+
+WH- QUESTIONS — từ hỏi + trợ động từ + chủ ngữ + V:
+  what, where, when, who, why, which, whose, how (+ much/many/long/often)
+  "Where DO you live?"   "What DID she say?"   "How long HAVE you waited?"
+  • Khi WH- LÀ CHỦ NGỮ -> KHÔNG đảo, không do:
+    "Who called you?"  (không "Who did call you")
+
+TAG QUESTIONS — hỏi đuôi xác nhận (mệnh đề khẳng định + đuôi phủ định,
+và ngược lại):
+  "You''re coming, aren''t you?"   "She can''t swim, can she?"
+  "He works here, doesn''t he?"
+
+MẸO người Việt: lỗi phổ biến là QUÊN do/does/did. "You like coffee?" ->
+chuẩn hơn là "DO you like coffee?". Trong Yes/No và WH- (trừ khi WH là chủ
+ngữ), luôn cần trợ động từ đảo lên trước.',
+'English questions need the auxiliary INVERTED before the subject (unlike
+Vietnamese, which just adds a question word at the end).
+
+YES/NO QUESTIONS - invert the auxiliary / be:
+  "You are ready."  -> "ARE you ready?"
+  "She likes tea."  -> "DOES she like tea?" (borrow do/does/did; base verb)
+  "They can swim."  -> "CAN they swim?"
+
+WH- QUESTIONS - question word + auxiliary + subject + verb:
+  what, where, when, who, why, which, whose, how (+ much/many/long/often)
+  "Where DO you live?"   "What DID she say?"   "How long HAVE you waited?"
+  • When the WH- word IS THE SUBJECT -> NO inversion, no do:
+    "Who called you?"  (not "Who did call you")
+
+TAG QUESTIONS - a confirmation tag (positive clause + negative tag, and
+vice versa):
+  "You''re coming, aren''t you?"   "She can''t swim, can she?"
+  "He works here, doesn''t he?"
+
+TIP for Vietnamese: a common error is FORGETTING do/does/did. "You like
+coffee?" -> better as "DO you like coffee?". In Yes/No and WH- questions
+(unless WH is the subject), you always need the inverted auxiliary.',
+'[]',-120,110),
+
+('n_en_gerund_inf','Gerund vs Infinitive','English',
+'Sau một động từ, động từ thứ hai ở dạng V-ing (gerund) hay to-V
+(infinitive)? Đây là lỗi rất hay gặp — phần lớn phải HỌC THEO động từ đứng trước.
+
+THEO SAU LÀ V-ING (gerund):
+  enjoy, avoid, finish, mind, suggest, keep, practice, consider,
+  admit, deny  + sau GIỚI TỪ (good at swimming, interested in learning)
+  "I enjoy reading."   "He avoided answering."
+
+THEO SAU LÀ TO + V (infinitive):
+  want, need, decide, hope, plan, promise, agree, offer, learn, would like
+  "I want to go."   "She decided to stay."
+
+ĐỔI NGHĨA tùy dạng:
+  • stop doing (bỏ hẳn) vs stop to do (dừng LẠI để làm việc khác):
+    "He stopped smoking." (bỏ thuốc) / "He stopped to smoke." (dừng để hút)
+  • remember doing (nhớ đã làm) vs remember to do (nhớ phải làm):
+    "I remember locking the door." / "Remember to lock the door."
+
+CHỦ NGỮ đầu câu -> dùng V-ing: "Swimming is fun."
+
+MẸO: động từ chỉ Ý ĐỊNH / TƯƠNG LAI (want, plan, hope) -> to V; động từ
+chỉ việc ĐANG/ĐÃ diễn ra hay sở thích (enjoy, avoid, finish) -> V-ing.
+Sau GIỚI TỪ luôn dùng V-ing.',
+'After one verb, is the second verb V-ing (gerund) or to-V (infinitive)?
+This is a very common error - mostly you must LEARN it by the preceding verb.
+
+FOLLOWED BY V-ING (gerund):
+  enjoy, avoid, finish, mind, suggest, keep, practice, consider,
+  admit, deny  + after any PREPOSITION (good at swimming, interested in learning)
+  "I enjoy reading."   "He avoided answering."
+
+FOLLOWED BY TO + V (infinitive):
+  want, need, decide, hope, plan, promise, agree, offer, learn, would like
+  "I want to go."   "She decided to stay."
+
+MEANING CHANGES by form:
+  • stop doing (quit) vs stop to do (pause IN ORDER to do something else):
+    "He stopped smoking." (quit) / "He stopped to smoke." (paused to smoke)
+  • remember doing (recall having done) vs remember to do (not forget to):
+    "I remember locking the door." / "Remember to lock the door."
+
+A SUBJECT at the start -> use V-ing: "Swimming is fun."
+
+TIP: verbs of INTENTION / FUTURE (want, plan, hope) -> to V; verbs of an
+ongoing/past action or preference (enjoy, avoid, finish) -> V-ing. After a
+PREPOSITION, always use V-ing.',
+'[]',-60,150)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_english_tenses =====
+-- ĐĂNG KÝ node: Tenses (map + present group + past group + future group)
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('n_en_tenses_map','Bản đồ 12 thì','English',
+'12 thì = 3 mốc thời gian (Hiện tại / Quá khứ / Tương lai) × 4 dạng
+(Simple / Continuous / Perfect / Perfect Continuous).
+
+BẢNG 12 THÌ (dạng khẳng định, động từ "do"):
+             SIMPLE      CONTINUOUS        PERFECT            PERFECT CONT.
+  PRESENT    do/does     am/is/are doing   have/has done      have/has been doing
+  PAST       did         was/were doing    had done           had been doing
+  FUTURE     will do     will be doing     will have done     will have been doing
+
+Ý NGHĨA MỖI DẠNG:
+  • Simple            : sự thật, thói quen, hành động trọn vẹn.
+  • Continuous        : đang diễn ra tại một thời điểm (tạm thời, chưa xong).
+  • Perfect           : nối 2 mốc — việc XONG TRƯỚC mốc đang nói.
+  • Perfect Continuous: nhấn KHOẢNG kéo dài tới mốc đó.
+
+TRỤC THỜI GIAN:
+  QUÁ KHỨ ────────── HIỆN TẠI ────────── TƯƠNG LAI
+   had done          have done           will have done   (perfect: xong TRƯỚC mốc)
+   was doing         am doing            will be doing    (cont: đang tại mốc)
+
+MẸO: đừng học 12 thì rời rạc. Nhớ 2 câu hỏi: (1) MỐC nào? (2) trọn vẹn /
+đang diễn ra / đã xong trước / kéo dài? Ghép lại ra đúng thì. Chi tiết ở
+các node hiện tại / quá khứ / tương lai.',
+'The 12 tenses = 3 time frames (Present / Past / Future) x 4 aspects
+(Simple / Continuous / Perfect / Perfect Continuous).
+
+TABLE OF 12 TENSES (affirmative, verb "do"):
+             SIMPLE      CONTINUOUS        PERFECT            PERFECT CONT.
+  PRESENT    do/does     am/is/are doing   have/has done      have/has been doing
+  PAST       did         was/were doing    had done           had been doing
+  FUTURE     will do     will be doing     will have done     will have been doing
+
+MEANING OF EACH ASPECT:
+  • Simple            : facts, habits, complete actions.
+  • Continuous        : in progress at a point in time (temporary, unfinished).
+  • Perfect           : links 2 points - DONE BEFORE the point in question.
+  • Perfect Continuous: stresses a DURATION leading up to that point.
+
+TIMELINE:
+  PAST ────────── PRESENT ────────── FUTURE
+   had done       have done          will have done   (perfect: done BEFORE point)
+   was doing      am doing           will be doing    (cont: happening at point)
+
+TIP: do not learn the 12 tenses in isolation. Remember 2 questions: (1)
+which TIME FRAME? (2) complete / in progress / done before / ongoing?
+Combine them to get the right tense. Details in the present / past / future
+nodes.',
+'[]',-400,320),
+
+('n_en_present','Nhóm Hiện tại (4 thì)','English',
+'NHÓM HIỆN TẠI — 4 thì:
+
+1) PRESENT SIMPLE (V / V-s): thói quen, sự thật, lịch trình.
+   dấu hiệu: always, usually, often, every day, sometimes.
+   "I work in Hanoi."  "She goes to the gym."  "Water boils at 100 C."
+   (ngôi thứ 3 số ít thêm -s/-es; phủ định don''t / doesn''t)
+
+2) PRESENT CONTINUOUS (am/is/are + V-ing): đang xảy ra LÚC NÓI, tạm thời,
+   kế hoạch gần.  dấu hiệu: now, right now, at the moment, currently.
+   "I am studying now."  "She is living with her parents (tạm thời)."
+   Lưu ý: động từ TRẠNG THÁI (know, like, want, need) thường KHÔNG dùng -ing.
+
+3) PRESENT PERFECT (have/has + V3): việc đã xong nhưng LIÊN QUAN hiện tại,
+   hoặc kéo dài tới giờ; kinh nghiệm.
+   dấu hiệu: just, already, yet, ever, never, since, for, recently.
+   "I have finished."  "She has lived here for 5 years."  "Have you ever...?"
+   -> KHÁC quá khứ đơn: perfect KHÔNG kèm mốc rõ (không đi với "yesterday").
+
+4) PRESENT PERFECT CONTINUOUS (have/has been + V-ing): kéo dài liên tục
+   tới hiện tại, nhấn quá trình / thời lượng.
+   "I have been working since 9am."  "It has been raining all day."
+
+MẸO người Việt: lỗi lớn nhất là QUÊN -s ngôi 3, và lạm dụng quá khứ đơn
+thay cho present perfect. Có "since/for" + còn liên quan hiện tại ->
+present perfect.',
+'THE PRESENT GROUP - 4 tenses:
+
+1) PRESENT SIMPLE (V / V-s): habits, facts, schedules.
+   signals: always, usually, often, every day, sometimes.
+   "I work in Hanoi."  "She goes to the gym."  "Water boils at 100 C."
+   (3rd person singular adds -s/-es; negatives don''t / doesn''t)
+
+2) PRESENT CONTINUOUS (am/is/are + V-ing): happening NOW, temporary, near
+   plans.  signals: now, right now, at the moment, currently.
+   "I am studying now."  "She is living with her parents (temporarily)."
+   Note: STATE verbs (know, like, want, need) usually take NO -ing.
+
+3) PRESENT PERFECT (have/has + V3): done but RELEVANT to now, or lasting up
+   to now; experience.
+   signals: just, already, yet, ever, never, since, for, recently.
+   "I have finished."  "She has lived here for 5 years."  "Have you ever...?"
+   -> UNLIKE past simple: the perfect takes NO specific time (not "yesterday").
+
+4) PRESENT PERFECT CONTINUOUS (have/has been + V-ing): continuous up to now,
+   stressing the process / duration.
+   "I have been working since 9am."  "It has been raining all day."
+
+TIP for Vietnamese: the biggest errors are FORGETTING 3rd-person -s, and
+overusing past simple instead of present perfect. With "since/for" + still
+relevant now -> present perfect.',
+'[]',-460,360),
+
+('n_en_past','Nhóm Quá khứ (4 thì)','English',
+'NHÓM QUÁ KHỨ — 4 thì:
+
+1) PAST SIMPLE (V2 / V-ed): hành động XONG trong quá khứ, có mốc rõ.
+   dấu hiệu: yesterday, ago, last week, in 2010, when.
+   "I visited Paris in 2019."  "She didn''t call." (phủ định did not + V)
+   -> động từ bất quy tắc: go->went, see->saw, buy->bought (xem bảng riêng).
+
+2) PAST CONTINUOUS (was/were + V-ing): đang diễn ra tại một thời điểm quá
+   khứ, hoặc làm nền cho một hành động chen vào.
+   "At 8pm I was having dinner."
+   "I was cooking WHEN he called." (đang nấu thì bị chen ngang)
+
+3) PAST PERFECT (had + V3): việc xong TRƯỚC một mốc / việc khác trong quá
+   khứ (quá khứ của quá khứ).
+   "When I arrived, the train HAD already LEFT." (tàu đi trước khi tôi tới)
+   dấu hiệu: before, after, already, by the time.
+
+4) PAST PERFECT CONTINUOUS (had been + V-ing): kéo dài liên tục tới một
+   mốc quá khứ.
+   "She was tired because she had been working all night."
+
+MẸO: dùng past perfect để làm RÕ việc nào xảy ra TRƯỚC khi kể hai việc
+quá khứ. Nếu đã có "before/after" chỉ rõ thứ tự thì thường past simple là
+đủ. Trục: had done (xong trước) -> [mốc quá khứ] -> rồi mới...',
+'THE PAST GROUP - 4 tenses:
+
+1) PAST SIMPLE (V2 / V-ed): a COMPLETED past action with a clear time.
+   signals: yesterday, ago, last week, in 2010, when.
+   "I visited Paris in 2019."  "She didn''t call." (negative: did not + V)
+   -> irregular verbs: go->went, see->saw, buy->bought (see the table node).
+
+2) PAST CONTINUOUS (was/were + V-ing): in progress at a past moment, or a
+   background for an interrupting action.
+   "At 8pm I was having dinner."
+   "I was cooking WHEN he called." (cooking, then interrupted)
+
+3) PAST PERFECT (had + V3): done BEFORE another past point / action (the
+   past of the past).
+   "When I arrived, the train HAD already LEFT." (it left before I arrived)
+   signals: before, after, already, by the time.
+
+4) PAST PERFECT CONTINUOUS (had been + V-ing): continuous up to a past point.
+   "She was tired because she had been working all night."
+
+TIP: use the past perfect to make CLEAR which event came FIRST when telling
+two past events. If "before/after" already shows the order, past simple is
+often enough. Timeline: had done (done first) -> [past point] -> then...',
+'[]',-400,380),
+
+('n_en_future','Nhóm Tương lai','English',
+'NHÓM TƯƠNG LAI — các cách diễn đạt:
+
+1) FUTURE SIMPLE (will + V): quyết định TỨC THÌ, dự đoán, lời hứa.
+   "I will help you."  "It will rain tomorrow."  "I won''t be late."
+
+2) BE GOING TO + V: kế hoạch ĐÃ ĐỊNH trước, hoặc dự đoán có bằng chứng.
+   "I am going to start a business." (đã dự tính)
+   "Look at those clouds - it''s going to rain." (có dấu hiệu)
+   -> will = quyết định NGAY lúc nói; going to = đã tính TỪ TRƯỚC.
+
+3) PRESENT CONTINUOUS chỉ tương lai (sắp xếp cố định, đã hẹn):
+   "I am meeting John at 6."
+
+4) PRESENT SIMPLE cho lịch trình cố định:
+   "The train leaves at 9am."
+
+5) FUTURE CONTINUOUS (will be + V-ing): đang diễn ra tại một thời điểm
+   tương lai.  "This time tomorrow I will be flying to Tokyo."
+
+6) FUTURE PERFECT (will have + V3): sẽ XONG trước một mốc tương lai.
+   "By 2030 I will have graduated."
+
+MẸO người Việt: đừng mặc định mọi tương lai đều dùng "will". Kế hoạch có
+sẵn -> "be going to" hoặc hiện tại tiếp diễn; lịch cố định -> hiện tại
+đơn. Chọn đúng nghe tự nhiên hơn hẳn.',
+'THE FUTURE GROUP - ways to express the future:
+
+1) FUTURE SIMPLE (will + V): an INSTANT decision, prediction, promise.
+   "I will help you."  "It will rain tomorrow."  "I won''t be late."
+
+2) BE GOING TO + V: a plan DECIDED beforehand, or a prediction with evidence.
+   "I am going to start a business." (already planned)
+   "Look at those clouds - it''s going to rain." (there is evidence)
+   -> will = decided AT the moment of speaking; going to = planned BEFORE.
+
+3) PRESENT CONTINUOUS for the future (fixed arrangements, appointments):
+   "I am meeting John at 6."
+
+4) PRESENT SIMPLE for fixed timetables:
+   "The train leaves at 9am."
+
+5) FUTURE CONTINUOUS (will be + V-ing): in progress at a future moment.
+   "This time tomorrow I will be flying to Tokyo."
+
+6) FUTURE PERFECT (will have + V3): will be DONE before a future point.
+   "By 2030 I will have graduated."
+
+TIP for Vietnamese: do not default every future to "will". Prearranged
+plans -> "be going to" or present continuous; fixed schedules -> present
+simple. Choosing the right one sounds far more natural.',
+'[]',-340,360)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_english_verbs =====
+-- ĐĂNG KÝ node: Verbs & spelling rules (-s/-es, -ed, -ing, irregular verbs, irregular plurals)
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('n_en_s_es','Quy tắc thêm -s / -es','English',
+'Quy tắc thêm -s/-es dùng cho: động từ ngôi thứ 3 số ít (he/she/it) ở
+hiện tại đơn, VÀ danh từ số nhiều. Cùng quy tắc chính tả + cùng cách đọc.
+
+QUY TẮC CHÍNH TẢ:
+  1. Thường: + s          work->works, book->books, play->plays
+  2. Tận -s,-ss,-sh,-ch,-x,-z: + es
+     watch->watches, box->boxes, kiss->kisses, wash->washes
+  3. Phụ âm + y: đổi y->ies   study->studies, city->cities, try->tries
+     (nguyên âm + y: giữ y + s   play->plays, boy->boys)
+  4. Tận -o (một số): + es    go->goes, do->does, tomato->tomatoes
+     (nhưng photo->photos, piano->pianos)
+
+PHÁT ÂM ĐUÔI -S (3 cách — quan trọng):
+  • /s/  sau âm VÔ THANH /p,t,k,f,θ/ : books, cats, laughs, stops
+  • /z/  sau âm HỮU THANH + nguyên âm: dogs, plays, goes, cars, jobs
+  • /ɪz/ sau âm rít /s,z,ʃ,tʃ,dʒ/    : watches, boxes, buses, changes
+
+MẸO: đặt tay lên cổ họng — âm cuối RUNG -> đọc /z/; KHÔNG rung -> /s/; nếu
+đã là âm rít thì thêm nguyên âm /ɪz/. Người Việt hay NUỐT đuôi s -> luyện
+bật rõ, nhất là /z/ và /ɪz/.',
+'The -s/-es rule applies to: 3rd-person singular verbs (he/she/it) in the
+present simple, AND plural nouns. Same spelling rule + same pronunciation.
+
+SPELLING RULES:
+  1. Usually: + s        work->works, book->books, play->plays
+  2. After -s,-ss,-sh,-ch,-x,-z: + es
+     watch->watches, box->boxes, kiss->kisses, wash->washes
+  3. Consonant + y: change y->ies   study->studies, city->cities, try->tries
+     (vowel + y: keep y + s   play->plays, boy->boys)
+  4. Some words ending -o: + es    go->goes, do->does, tomato->tomatoes
+     (but photo->photos, piano->pianos)
+
+PRONOUNCING THE -S ENDING (3 ways - important):
+  • /s/  after VOICELESS sounds /p,t,k,f,θ/ : books, cats, laughs, stops
+  • /z/  after VOICED sounds + vowels       : dogs, plays, goes, cars, jobs
+  • /ɪz/ after sibilants /s,z,ʃ,tʃ,dʒ/      : watches, boxes, buses, changes
+
+TIP: put a hand on your throat - a VIBRATING final sound -> /z/; NO vibration
+-> /s/; already a sibilant -> add a vowel /ɪz/. Vietnamese learners often
+DROP the -s -> practice releasing it clearly, especially /z/ and /ɪz/.',
+'[]',-440,90),
+
+('n_en_ed','Quy tắc thêm -ed','English',
+'Quy tắc thêm -ed cho động từ CÓ QUY TẮC ở quá khứ đơn (V2) và quá khứ
+phân từ (V3). Gồm quy tắc chính tả + 3 cách phát âm.
+
+QUY TẮC CHÍNH TẢ:
+  1. Thường: + ed          work->worked, play->played
+  2. Tận -e: + d           like->liked, live->lived
+  3. Phụ âm + y: y->ied     study->studied, try->tried  (play->played)
+  4. 1 âm tiết C-V-C (phụ âm-nguyên âm-phụ âm): GẤP ĐÔI phụ âm cuối:
+     stop->stopped, plan->planned, beg->begged
+     (không gấp nếu tận w,x,y: fix->fixed; hoặc 2 nguyên âm: rain->rained)
+  5. 2 âm tiết nhấn âm CUỐI: gấp đôi: preFER->preferred, adMIT->admitted
+     (nhấn âm đầu thì không: OPen->opened)
+
+PHÁT ÂM ĐUÔI -ED (3 cách — cực hay sai):
+  • /ɪd/ sau /t/ hoặc /d/                : wanted, needed, decided (THÊM 1 âm tiết)
+  • /t/  sau âm VÔ THANH /p,k,f,s,ʃ,tʃ/  : stopped, worked, washed, watched
+  • /d/  sau âm HỮU THANH + nguyên âm    : played, loved, cleaned, tried
+
+MẸO: chỉ khi gốc tận /t/ hoặc /d/ thì -ed mới thành âm tiết riêng /ɪd/.
+Các trường hợp khác KHÔNG thêm âm tiết: "worked" = 1 âm tiết /wɜːrkt/, KHÔNG
+đọc "work-ed". Đây là lỗi phát âm rất phổ biến của người Việt.',
+'The -ed rule applies to REGULAR verbs in the past simple (V2) and past
+participle (V3). It covers spelling rules + 3 pronunciations.
+
+SPELLING RULES:
+  1. Usually: + ed         work->worked, play->played
+  2. Ending -e: + d        like->liked, live->lived
+  3. Consonant + y: y->ied  study->studied, try->tried  (play->played)
+  4. 1 syllable C-V-C (consonant-vowel-consonant): DOUBLE the final consonant:
+     stop->stopped, plan->planned, beg->begged
+     (no doubling after w,x,y: fix->fixed; or two vowels: rain->rained)
+  5. 2 syllables stressed on the LAST: double: preFER->preferred, adMIT->admitted
+     (stress on the first -> no doubling: OPen->opened)
+
+PRONOUNCING THE -ED ENDING (3 ways - very error-prone):
+  • /ɪd/ after /t/ or /d/                : wanted, needed, decided (ADDS a syllable)
+  • /t/  after VOICELESS /p,k,f,s,ʃ,tʃ/  : stopped, worked, washed, watched
+  • /d/  after VOICED sounds + vowels    : played, loved, cleaned, tried
+
+TIP: only when the root ends in /t/ or /d/ does -ed become a separate
+syllable /ɪd/. Otherwise it adds NO syllable: "worked" = 1 syllable
+/wɜːrkt/, NOT "work-ed". This is a very common Vietnamese pronunciation error.',
+'[]',-380,70),
+
+('n_en_ing','Quy tắc thêm -ing','English',
+'Quy tắc thêm -ing cho hiện tại phân từ / danh động từ (dùng trong các
+thì tiếp diễn và làm gerund).
+
+QUY TẮC CHÍNH TẢ:
+  1. Thường: + ing          work->working, play->playing, see->seeing
+  2. Tận -e câm: BỎ e + ing  make->making, write->writing, live->living
+     (giữ e nếu -ee/-oe/-ye: see->seeing, dye->dyeing)
+  3. 1 âm tiết C-V-C: GẤP ĐÔI phụ âm cuối:
+     run->running, sit->sitting, stop->stopping, swim->swimming
+     (không gấp nếu tận w,x,y: fix->fixing, snow->snowing)
+  4. 2 âm tiết nhấn âm CUỐI: gấp đôi: beGIN->beginning, preFER->preferring
+     (nhấn âm đầu thì không: LISten->listening, OPen->opening)
+  5. Tận -ie -> đổi thành -ying: die->dying, lie->lying, tie->tying
+
+VÍ DỤ SO SÁNH:
+  hope->hoping (bỏ e)  nhưng  hop->hopping (gấp đôi)
+  write->writing, come->coming, dance->dancing
+
+MẸO: nhớ 2 điểm lớn — (1) BỎ "e" câm trước -ing; (2) GẤP ĐÔI phụ âm khi
+1 âm tiết C-V-C để giữ nguyên âm ngắn (hopping ngắn khác hoping dài). Quy
+tắc gấp đôi GIỐNG HỆT quy tắc -ed.',
+'The -ing rule applies to the present participle / gerund (used in
+continuous tenses and as a gerund).
+
+SPELLING RULES:
+  1. Usually: + ing          work->working, play->playing, see->seeing
+  2. Silent -e: DROP e + ing  make->making, write->writing, live->living
+     (keep e for -ee/-oe/-ye: see->seeing, dye->dyeing)
+  3. 1 syllable C-V-C: DOUBLE the final consonant:
+     run->running, sit->sitting, stop->stopping, swim->swimming
+     (no doubling after w,x,y: fix->fixing, snow->snowing)
+  4. 2 syllables stressed on the LAST: double: beGIN->beginning, preFER->preferring
+     (stress on the first -> no doubling: LISten->listening, OPen->opening)
+  5. Ending -ie -> change to -ying: die->dying, lie->lying, tie->tying
+
+CONTRAST EXAMPLES:
+  hope->hoping (drop e)  but  hop->hopping (double)
+  write->writing, come->coming, dance->dancing
+
+TIP: remember 2 big points - (1) DROP the silent "e" before -ing; (2)
+DOUBLE the consonant for 1-syllable C-V-C to keep the short vowel (hopping
+short vs hoping long). The doubling rule is IDENTICAL to the -ed rule.',
+'[]',-320,90),
+
+('n_en_irregular','Động từ bất quy tắc hay dùng','English',
+'Động từ bất quy tắc KHÔNG thêm -ed; phải HỌC THUỘC 3 cột: V1 (nguyên mẫu)
+- V2 (quá khứ) - V3 (quá khứ phân từ). Đây là các từ dùng nhiều nhất:
+
+  V1       V2        V3         nghĩa
+  be       was/were  been       thì, là
+  have     had       had        có
+  do       did       done       làm
+  go       went      gone       đi
+  get      got       gotten     lấy/trở nên (Mỹ: gotten; Anh: got)
+  make     made      made       làm, tạo
+  say      said      said       nói
+  see      saw       seen       thấy
+  come     came      come       đến
+  take     took      taken      lấy, mang
+  know     knew      known      biết
+  give     gave      given      cho
+  think    thought   thought    nghĩ
+  tell     told      told       kể
+  find     found     found      tìm thấy
+  leave    left      left       rời đi
+  bring    brought   brought    mang đến
+  buy      bought    bought     mua
+  eat      ate       eaten      ăn
+  write    wrote     written    viết
+  speak    spoke     spoken     nói
+  begin    began     begun      bắt đầu
+  run      ran       run        chạy
+
+NHÓM DỄ NHỚ (theo mẫu):
+  • giống cả 3: cut-cut-cut, put-put-put, let-let-let, hit-hit-hit
+  • V2 = V3:    teach-taught-taught, catch-caught-caught, sleep-slept-slept
+  • đổi i-a-u:  sing-sang-sung, ring-rang-rung, swim-swam-swum
+
+MẸO: học theo NHÓM mẫu âm, ưu tiên ~50 từ hay dùng nhất. V3 dùng cho
+present perfect (have + V3) và bị động (be + V3) -> sai V3 là sai cả hai.
+"gotten" là dạng V3 đặc trưng Mỹ (Anh dùng "got").',
+'Irregular verbs do NOT add -ed; you must MEMORIZE 3 columns: V1 (base) -
+V2 (past) - V3 (past participle). These are the most-used ones:
+
+  V1       V2        V3         meaning
+  be       was/were  been       to be
+  have     had       had        to have
+  do       did       done       to do
+  go       went      gone       to go
+  get      got       gotten     get/become (US: gotten; UK: got)
+  make     made      made       to make
+  say      said      said       to say
+  see      saw       seen       to see
+  come     came      come       to come
+  take     took      taken      to take
+  know     knew      known      to know
+  give     gave      given      to give
+  think    thought   thought    to think
+  tell     told      told       to tell
+  find     found     found      to find
+  leave    left      left       to leave
+  bring    brought   brought    to bring
+  buy      bought    bought     to buy
+  eat      ate       eaten      to eat
+  write    wrote     written    to write
+  speak    spoke     spoken     to speak
+  begin    began     begun      to begin
+  run      ran       run        to run
+
+EASY-TO-REMEMBER GROUPS (by pattern):
+  • all three same: cut-cut-cut, put-put-put, let-let-let, hit-hit-hit
+  • V2 = V3:         teach-taught-taught, catch-caught-caught, sleep-slept-slept
+  • i-a-u change:    sing-sang-sung, ring-rang-rung, swim-swam-swum
+
+TIP: learn by SOUND-PATTERN groups, prioritize the ~50 most common. V3 is
+used in the present perfect (have + V3) and the passive (be + V3) -> a wrong
+V3 breaks both. "gotten" is the distinctly American V3 (UK uses "got").',
+'[]',-260,60),
+
+('n_en_plural_irregular','Danh từ số nhiều bất quy tắc','English',
+'Danh từ số nhiều BẤT QUY TẮC không thêm -s. Cần thuộc vì rất hay dùng.
+
+ĐỔI NGUYÊN ÂM:
+  man->men, woman->women, foot->feet, tooth->teeth, goose->geese, mouse->mice
+
+TẬN -f/-fe -> -ves:
+  leaf->leaves, wife->wives, knife->knives, life->lives, half->halves,
+  wolf->wolves   (ngoại lệ: roof->roofs, chief->chiefs)
+
+GIỮ NGUYÊN (số ít = số nhiều):
+  sheep, fish, deer, series, species, aircraft
+  ("fish" có "fishes" khi nói nhiều LOÀI cá)
+
+GỐC LATIN / HY LẠP:
+  child->children, person->people, ox->oxen,
+  analysis->analyses, crisis->crises, phenomenon->phenomena,
+  criterion->criteria, datum->data, cactus->cacti, index->indices/indexes
+
+DANH TỪ LUÔN SỐ NHIỀU (đi với động từ số nhiều):
+  scissors, glasses (kính), trousers/pants, jeans, clothes
+  -> "My glasses ARE..." (không "is")
+
+MẸO: nhóm này ít nên học thẳng. Chú ý "people" là số nhiều thường dùng
+của "person", và "children" — hai từ cực kỳ hay gặp.',
+'IRREGULAR plural nouns do not add -s. Learn them since they are very common.
+
+VOWEL CHANGE:
+  man->men, woman->women, foot->feet, tooth->teeth, goose->geese, mouse->mice
+
+ENDING -f/-fe -> -ves:
+  leaf->leaves, wife->wives, knife->knives, life->lives, half->halves,
+  wolf->wolves   (exceptions: roof->roofs, chief->chiefs)
+
+UNCHANGED (singular = plural):
+  sheep, fish, deer, series, species, aircraft
+  ("fish" has "fishes" when speaking of multiple SPECIES)
+
+LATIN / GREEK ORIGINS:
+  child->children, person->people, ox->oxen,
+  analysis->analyses, crisis->crises, phenomenon->phenomena,
+  criterion->criteria, datum->data, cactus->cacti, index->indices/indexes
+
+ALWAYS-PLURAL NOUNS (take plural verbs):
+  scissors, glasses, trousers/pants, jeans, clothes
+  -> "My glasses ARE..." (not "is")
+
+TIP: this set is small, so learn it directly. Note "people" is the common
+plural of "person", and "children" - two extremely frequent words.',
+'[]',-200,90)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_english_native1 =====
+-- ĐĂNG KÝ node: Native tips 1 (contractions, phrasal verbs, idioms, slang, fillers)
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('n_en_contractions','Contractions & Reductions','English',
+'Contractions (viết tắt) và reductions (giảm âm) là ĐẶC TRƯNG của tiếng
+Anh nói tự nhiên. Không dùng nghe rất cứng, trịnh trọng.
+
+CONTRACTIONS chuẩn (dùng được cả khi viết thân mật):
+  I am->I''m, you are->you''re, it is->it''s, we will->we''ll,
+  I have->I''ve, do not->don''t, cannot->can''t, will not->won''t,
+  did not->didn''t, is not->isn''t, she has->she''s
+
+REDUCTIONS trong văn NÓI (không viết ở văn trang trọng):
+  going to -> gonna    "I''m gonna leave."
+  want to  -> wanna    "I wanna go."
+  got to   -> gotta    "I gotta run."
+  have to  -> hafta    "I hafta work."
+  kind of  -> kinda    "It''s kinda cold."
+  let me   -> lemme    "Lemme see."
+  give me  -> gimme    "Gimme a sec."
+  what do you -> whaddya   "Whaddya think?"
+
+LƯU Ý QUAN TRỌNG:
+  • gonna/wanna/gotta chỉ dùng khi NÓI hoặc chat, KHÔNG viết trong email /
+    bài luận trang trọng.
+  • "gonna" chỉ thay "going to" khi là TƯƠNG LAI; KHÔNG thay khi "going to
+    + nơi chốn": "I''m going to school" (KHÔNG "gonna school").
+
+MẸO: dùng contractions chuẩn (I''m, don''t, it''s) ở mọi văn nói/viết thân
+mật -> nghe tự nhiên ngay. Reductions (gonna, wanna) để nghe hiểu và nói
+casual, đừng lạm dụng khi trang trọng.',
+'Contractions and reductions are HALLMARKS of natural spoken English.
+Skipping them sounds stiff and overly formal.
+
+STANDARD CONTRACTIONS (fine in informal writing too):
+  I am->I''m, you are->you''re, it is->it''s, we will->we''ll,
+  I have->I''ve, do not->don''t, cannot->can''t, will not->won''t,
+  did not->didn''t, is not->isn''t, she has->she''s
+
+REDUCTIONS in SPEECH (not written in formal text):
+  going to -> gonna    "I''m gonna leave."
+  want to  -> wanna    "I wanna go."
+  got to   -> gotta    "I gotta run."
+  have to  -> hafta    "I hafta work."
+  kind of  -> kinda    "It''s kinda cold."
+  let me   -> lemme    "Lemme see."
+  give me  -> gimme    "Gimme a sec."
+  what do you -> whaddya   "Whaddya think?"
+
+IMPORTANT NOTES:
+  • gonna/wanna/gotta are for SPEECH or chat only, NOT for formal emails /
+    essays.
+  • "gonna" replaces "going to" only for the FUTURE; NOT for "going to +
+    place": "I''m going to school" (NOT "gonna school").
+
+TIP: use standard contractions (I''m, don''t, it''s) in all informal
+speech/writing -> instantly more natural. Use reductions (gonna, wanna) for
+listening and casual talk, but not in formal settings.',
+'[]',-620,10),
+
+('n_en_phrasal','Phrasal Verbs','English',
+'Phrasal verb = động từ + tiểu từ (giới từ/trạng từ); nghĩa thường KHÁC
+hẳn nghĩa đen. Người Mỹ dùng cực nhiều trong nói hằng ngày.
+
+  give up  = từ bỏ       "Don''t give up!"
+  find out = phát hiện   "I found out the truth."
+  look for = tìm kiếm    "I''m looking for my keys."
+  turn on/off = bật/tắt  "Turn off the light."
+  put off  = trì hoãn    "Stop putting it off."
+
+TÁCH ĐƯỢC (separable) hay KHÔNG:
+  • Separable: tân ngữ chen giữa được — "turn the light off" hoặc "turn off
+    the light". Nếu tân ngữ là ĐẠI TỪ thì BẮT BUỘC chen giữa:
+    "turn it off" (KHÔNG "turn off it").
+  • Inseparable: không tách — "look for it" (KHÔNG "look it for").
+
+BỘ HAY GẶP (nên thuộc): set up, work out (tập / giải quyết), come up with
+(nghĩ ra), figure out (hiểu ra), get along (hòa hợp), run out of (hết),
+show up (xuất hiện), bring up (nêu ra / nuôi dạy), take off (cất cánh / cởi).
+
+MẸO: người Việt hay dùng từ trang trọng gốc Latin (investigate, cancel);
+người Mỹ đời thường dùng phrasal (look into, call off). Học phrasal giúp
+nghe TỰ NHIÊN và hiểu hội thoại/phim. Học theo CỤM + ví dụ, đừng dịch
+từng chữ.',
+'A phrasal verb = a verb + particle (preposition/adverb); the meaning is
+often FAR from literal. Americans use them heavily in everyday speech.
+
+  give up  = quit        "Don''t give up!"
+  find out = discover    "I found out the truth."
+  look for = search      "I''m looking for my keys."
+  turn on/off = switch on/off  "Turn off the light."
+  put off  = postpone    "Stop putting it off."
+
+SEPARABLE or NOT:
+  • Separable: the object can go in the middle - "turn the light off" or
+    "turn off the light". If the object is a PRONOUN it MUST go in the
+    middle: "turn it off" (NOT "turn off it").
+  • Inseparable: cannot split - "look for it" (NOT "look it for").
+
+COMMON SET (worth memorizing): set up, work out (exercise / resolve), come
+up with (think of), figure out (understand), get along (be friendly), run
+out of (deplete), show up (appear), bring up (raise / raise a child), take
+off (depart / remove).
+
+TIP: Vietnamese learners lean on formal Latin-based words (investigate,
+cancel); everyday Americans use phrasals (look into, call off). Learning
+phrasals makes you sound NATURAL and helps with dialogue/movies. Learn as
+CHUNKS + examples, do not translate word by word.',
+'[]',-680,-30),
+
+('n_en_idioms','Idioms & Expressions','English',
+'Idiom = cụm từ nghĩa BÓNG, không suy ra từ nghĩa đen. Dùng đúng nghe rất
+bản xứ; dịch word-by-word sẽ sai.
+
+THÔNG DỤNG (Mỹ):
+  • piece of cake = quá dễ           "The test was a piece of cake."
+  • hit the sack = đi ngủ
+  • break the ice = phá tan ngại ngùng
+  • under the weather = thấy không khỏe
+  • cost an arm and a leg = đắt cắt cổ
+  • on the same page = hiểu thống nhất
+  • ballpark figure = con số ước lượng
+  • no-brainer = quá hiển nhiên
+  • hang in there = ráng lên, cố lên
+  • cut to the chase = vào thẳng vấn đề
+  • it''s not rocket science = chuyện đâu có khó
+  • touch base = liên hệ, trao đổi (công sở)
+
+MẸO: idiom rất phụ thuộc NGỮ CẢNH và mức trang trọng — dùng đúng chỗ. Khi
+mới học, ưu tiên HIỂU (để nghe phim/hội thoại) hơn là cố nhồi vào lời nói.
+Học vài chục idiom hay gặp trước; idiom cổ/hiếm dùng sai nghe sượng. Idiom
+công sở (touch base, on the same page, ballpark figure) rất hữu ích khi đi
+làm.',
+'An idiom = a phrase with a FIGURATIVE meaning, not derivable from the
+literal words. Used well it sounds very native; translating word-by-word
+fails.
+
+COMMON (American):
+  • piece of cake = very easy         "The test was a piece of cake."
+  • hit the sack = go to bed
+  • break the ice = ease initial awkwardness
+  • under the weather = feeling unwell
+  • cost an arm and a leg = very expensive
+  • on the same page = in agreement
+  • ballpark figure = a rough estimate
+  • no-brainer = an obvious choice
+  • hang in there = keep going, stay strong
+  • cut to the chase = get to the point
+  • it''s not rocket science = it is not that hard
+  • touch base = get in contact (workplace)
+
+TIP: idioms depend heavily on CONTEXT and register - use them in the right
+place. As a beginner, prioritize UNDERSTANDING (for movies/dialogue) over
+forcing them into your speech. Learn a few dozen common ones first; obscure
+or dated idioms sound off if misused. Workplace idioms (touch base, on the
+same page, ballpark figure) are very useful at work.',
+'[]',-620,-70),
+
+('n_en_slang','Slang & Informal','English',
+'Slang = từ lóng, RẤT thân mật, hay đổi theo thời và vùng. Hợp với bạn bè;
+trong công việc / trang trọng thì TRÁNH.
+
+SLANG MỸ phổ biến:
+  • cool / awesome = tuyệt         "That''s awesome!"
+  • guys = các bạn (cả nam lẫn nữ) "Hey guys!"
+  • hang out = đi chơi, tụ tập
+  • chill = thư giãn / bình tĩnh   "Just chill."
+  • grab a bite = đi ăn nhanh
+  • What''s up? / Sup? = chào, dạo này sao
+  • my bad = lỗi của tớ
+  • no worries / no prob = không sao
+  • kinda / sorta = hơi hơi
+  • legit = xịn, thật
+  • bucks = đô la ("ten bucks")
+  • gotcha = hiểu rồi;  y''all = các bạn (miền Nam Mỹ)
+
+MẸO: slang giúp HÒA NHẬP và hiểu người bản xứ, nhưng (1) chỉ hợp bối cảnh
+casual, (2) một số slang lỗi thời hoặc thô -> nghe nhiều rồi hẵng dùng.
+Trong phỏng vấn / email công việc: dùng tiếng Anh chuẩn, tránh slang. Ranh
+giới slang - idiom - informal khá mờ; cứ ưu tiên NGHE HIỂU trước khi dùng.',
+'Slang = very informal vocabulary that shifts by era and region. Fine with
+friends; AVOID it at work / in formal settings.
+
+COMMON AMERICAN SLANG:
+  • cool / awesome = great          "That''s awesome!"
+  • guys = everyone (any gender)    "Hey guys!"
+  • hang out = spend time together
+  • chill = relax / calm down       "Just chill."
+  • grab a bite = get a quick meal
+  • What''s up? / Sup? = hi, how are things
+  • my bad = my mistake
+  • no worries / no prob = it is fine
+  • kinda / sorta = somewhat
+  • legit = genuine, great
+  • bucks = dollars ("ten bucks")
+  • gotcha = I understand;  y''all = you all (Southern US)
+
+TIP: slang helps you FIT IN and understand natives, but (1) only in casual
+contexts, (2) some slang is dated or crude -> hear it a lot before using it.
+In interviews / work emails: use standard English, avoid slang. The
+slang - idiom - informal boundaries are fuzzy; prioritize UNDERSTANDING
+before producing it.',
+'[]',-560,-70),
+
+('n_en_fillers','Fillers & Discourse Markers','English',
+'Filler words & discourse markers = từ đệm giúp câu nói TRÔI, câu giờ suy
+nghĩ, và nối ý tự nhiên. Người bản xứ dùng liên tục.
+
+FILLERS (câu giờ, đừng im bặt):
+  well, um, uh, you know, I mean, like, so, actually, basically
+  "Well, I think... you know... it depends."
+
+DISCOURSE MARKERS (nối và điều hướng hội thoại):
+  • Mở đầu:     "So,..."  "Well,..."  "Okay, so..."
+  • Thêm ý:     "Also,", "Besides,", "On top of that,"
+  • Đối lập:    "But,", "However,", "Actually,", "That said,"
+  • Ví dụ:      "For example,", "Like,", "Say,"
+  • Đổi chủ đề: "Anyway,", "By the way,", "Speaking of which,"
+  • Kết luận:   "So yeah,", "In the end,", "All in all,"
+  • Câu giờ:    "Let me think,", "How should I put it,"
+
+MẸO: (1) filler giúp nghe TỰ NHIÊN và có thời gian nghĩ thay vì đứng hình;
+(2) nhưng LẠM DỤNG "um, like, you know" nghe thiếu tự tin -> dùng vừa phải.
+Thay khoảng lặng bằng "Well," hoặc "Let me think" nghe chủ động hơn là
+"ummm". Đây là bí quyết nói trôi mà nhiều người học bỏ qua.',
+'Filler words & discourse markers = small words that keep speech FLOWING,
+buy thinking time, and connect ideas naturally. Natives use them constantly.
+
+FILLERS (buy time, do not go silent):
+  well, um, uh, you know, I mean, like, so, actually, basically
+  "Well, I think... you know... it depends."
+
+DISCOURSE MARKERS (connect and steer conversation):
+  • Opening:      "So,..."  "Well,..."  "Okay, so..."
+  • Adding:       "Also,", "Besides,", "On top of that,"
+  • Contrasting:  "But,", "However,", "Actually,", "That said,"
+  • Examples:     "For example,", "Like,", "Say,"
+  • Topic shift:  "Anyway,", "By the way,", "Speaking of which,"
+  • Concluding:   "So yeah,", "In the end,", "All in all,"
+  • Buying time:  "Let me think,", "How should I put it,"
+
+TIP: (1) fillers make speech NATURAL and give thinking time instead of
+freezing; (2) but OVERUSING "um, like, you know" sounds unsure -> use them
+in moderation. Replacing a pause with "Well," or "Let me think" sounds more
+in-control than "ummm". This is a fluency trick many learners overlook.',
+'[]',-500,-30)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_english_native2 =====
+-- ĐĂNG KÝ node: Native tips 2 (small talk, collocations, American vs British, register)
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('n_en_smalltalk','Small Talk & Giao tiếp','English',
+'Small talk = trò chuyện xã giao ngắn (thời tiết, cuối tuần, công việc) để
+tạo không khí. Người Mỹ small talk rất nhiều — biết vài mẫu là đủ tự tin.
+
+CHÀO HỎI & ĐÁP:
+  "How are you?" / "How''s it going?" / "How have you been?"
+   -> "Good, thanks. You?" / "Pretty good." / "Not bad."
+  (Lưu ý: "How are you?" thường là XÃ GIAO, không phải hỏi thật -> đáp ngắn)
+
+MỞ CHỦ ĐỀ AN TOÀN:
+  • Thời tiết: "Nice weather today, huh?"
+  • Cuối tuần: "Any plans for the weekend?" / "How was your weekend?"
+  • Công việc: "How''s work going?"
+  • Khen:      "I like your jacket!"
+
+CÂU HỮU ÍCH:
+  • Chưa nghe rõ: "Sorry, could you say that again?" / "Come again?"
+  • Câu giờ:      "That''s a good question..."
+  • Kết thúc:     "Anyway, it was nice talking to you!" / "I''d better get
+    going." / "Let''s catch up soon."
+
+TRÁNH (chủ đề nhạy cảm với người lạ): tuổi, lương, cân nặng, tôn giáo,
+chính trị.
+
+MẸO: small talk KHÔNG cần sâu sắc — cần THÂN THIỆN và trôi. Thuộc vài mẫu
+chào - đáp - mở topic - kết thúc là xử lý 90% tình huống. Mỉm cười + hỏi
+lại ("You?") để giữ hội thoại tiếp diễn.',
+'Small talk = brief social conversation (weather, weekend, work) to build
+rapport. Americans do a lot of it - knowing a few templates is enough to be
+confident.
+
+GREETINGS & REPLIES:
+  "How are you?" / "How''s it going?" / "How have you been?"
+   -> "Good, thanks. You?" / "Pretty good." / "Not bad."
+  (Note: "How are you?" is usually a PLEASANTRY, not a real question -> keep
+   the reply short)
+
+SAFE OPENERS:
+  • Weather: "Nice weather today, huh?"
+  • Weekend: "Any plans for the weekend?" / "How was your weekend?"
+  • Work:    "How''s work going?"
+  • Compliment: "I like your jacket!"
+
+USEFUL LINES:
+  • Did not catch it: "Sorry, could you say that again?" / "Come again?"
+  • Buying time:      "That''s a good question..."
+  • Ending:           "Anyway, it was nice talking to you!" / "I''d better
+    get going." / "Let''s catch up soon."
+
+AVOID (sensitive topics with strangers): age, salary, weight, religion,
+politics.
+
+TIP: small talk need NOT be deep - it needs to be FRIENDLY and flowing.
+Memorize a few greet - reply - opener - closer templates to handle 90% of
+situations. Smile and bounce it back ("You?") to keep it going.',
+'[]',-560,-90),
+
+('n_en_collocations','Collocations','English',
+'Collocation = các từ hay ĐI CÙNG NHAU một cách tự nhiên. Dùng đúng nghe
+bản xứ; ghép sai thì đúng ngữ pháp nhưng nghe lạ.
+
+  ✓ make a decision   ✗ do a decision
+  ✓ do homework       ✗ make homework
+  ✓ heavy rain        ✗ strong rain
+  ✓ fast food         ✗ quick food
+  ✓ take a photo      ✗ make a photo
+
+CẶP DO vs MAKE (hay nhầm):
+  do:   homework, the dishes, research, business, a favor, exercise
+  make: a decision, a mistake, money, progress, a plan, an effort, noise
+
+ĐỘNG TỪ + DANH TỪ hay gặp:
+  take: a break, a shower, a risk, notes, place
+  have: breakfast, a good time, a look, a rest
+  pay:  attention, a visit, a compliment
+  heavy: heavy traffic, heavy rain;  strong: strong coffee, strong accent
+
+MẸO: khi học từ mới, ghi luôn từ hay ĐI KÈM (vd "decision" -> "make a
+decision"). Nghe/đọc nhiều rồi bắt chước NGUYÊN CỤM. Có thể tra từ điển
+collocation. Đây là bước nâng từ "đúng ngữ pháp" lên "nghe tự nhiên như
+bản xứ".',
+'A collocation = words that naturally GO TOGETHER. Correct collocations
+sound native; wrong pairings are grammatical but sound odd.
+
+  ✓ make a decision   ✗ do a decision
+  ✓ do homework       ✗ make homework
+  ✓ heavy rain        ✗ strong rain
+  ✓ fast food         ✗ quick food
+  ✓ take a photo      ✗ make a photo
+
+DO vs MAKE (often confused):
+  do:   homework, the dishes, research, business, a favor, exercise
+  make: a decision, a mistake, money, progress, a plan, an effort, noise
+
+COMMON VERB + NOUN:
+  take: a break, a shower, a risk, notes, place
+  have: breakfast, a good time, a look, a rest
+  pay:  attention, a visit, a compliment
+  heavy: heavy traffic, heavy rain;  strong: strong coffee, strong accent
+
+TIP: when learning a new word, record its usual PARTNERS (e.g. "decision"
+-> "make a decision"). Listen/read a lot then imitate WHOLE chunks. Use a
+collocation dictionary. This is the step from "grammatically correct" to
+"sounds natural like a native".',
+'[]',-500,-110),
+
+('n_en_am_vs_br','Anh-Mỹ vs Anh-Anh','English',
+'Anh-Mỹ (American) và Anh-Anh (British) khác nhau ở chính tả, từ vựng, phát
+âm và đôi chỗ ngữ pháp. Nên chọn MỘT kiểu và nhất quán (ở đây: Mỹ).
+
+CHÍNH TẢ:
+  Mỹ           Anh
+  color        colour      (-or vs -our: favor, honor, labor)
+  center       centre      (-er vs -re: theater, meter)
+  organize     organise    (-ize vs -ise: realize, analyze)
+  traveling    travelling  (Mỹ không gấp đôi l khi nhấn âm đầu)
+  defense      defence;    catalog / catalogue
+
+TỪ VỰNG:
+  Mỹ           Anh
+  apartment    flat        truck / lorry      elevator / lift
+  cookie       biscuit     fall / autumn      gas / petrol
+  vacation     holiday     pants / trousers   soccer / football
+  sidewalk     pavement    candy / sweets     subway / underground
+
+PHÁT ÂM: giọng Mỹ rhotic (đọc /r/ cuối); flap T (water -> "wader");
+"schedule" Mỹ /ˈskedʒuːl/ vs Anh /ˈʃedjuːl/.
+
+NGỮ PHÁP nhỏ: Mỹ "on the weekend" (Anh "at the weekend"); Mỹ hay dùng past
+simple với already/just ("I already ate"), Anh thiên present perfect ("I''ve
+already eaten"); "gotten" (Mỹ) vs "got" (Anh).
+
+MẸO: NHẤT QUÁN một kiểu (đừng lẫn color + centre). Đặt spell-check sang
+"English (US)".',
+'American and British English differ in spelling, vocabulary, pronunciation,
+and some grammar. Pick ONE and stay consistent (here: American).
+
+SPELLING:
+  US           UK
+  color        colour      (-or vs -our: favor, honor, labor)
+  center       centre      (-er vs -re: theater, meter)
+  organize     organise    (-ize vs -ise: realize, analyze)
+  traveling    travelling  (US does not double l when stress is on the 1st)
+  defense      defence;    catalog / catalogue
+
+VOCABULARY:
+  US           UK
+  apartment    flat        truck / lorry      elevator / lift
+  cookie       biscuit     fall / autumn      gas / petrol
+  vacation     holiday     pants / trousers   soccer / football
+  sidewalk     pavement    candy / sweets     subway / underground
+
+PRONUNCIATION: American is rhotic (final /r/ pronounced); flap T (water ->
+"wader"); "schedule" US /ˈskedʒuːl/ vs UK /ˈʃedjuːl/.
+
+MINOR GRAMMAR: US "on the weekend" (UK "at the weekend"); US often uses past
+simple with already/just ("I already ate"), UK leans on present perfect
+("I''ve already eaten"); "gotten" (US) vs "got" (UK).
+
+TIP: stay CONSISTENT in one variety (do not mix color + centre). Set your
+spell-check to "English (US)".',
+'[]',-440,-90),
+
+('n_en_politeness','Lịch sự & Mức trang trọng','English',
+'Register = mức độ trang trọng của ngôn ngữ. Cùng một ý có nhiều cách nói
+tùy đối tượng (bạn bè / đồng nghiệp / khách hàng / sếp). Chọn sai nghe thô
+hoặc khách sáo quá.
+
+THANG TRANG TRỌNG (cùng ý "muốn một ly cà phê"):
+  Suồng sã:   "Gimme a coffee." / "I want a coffee."
+  Trung tính: "Can I get a coffee?"
+  Lịch sự:    "Could I please get a coffee?"
+  Rất trang trọng: "I was wondering if I could get a coffee." /
+                   "Would it be possible to...?"
+
+NGUYÊN TẮC LỊCH SỰ (rất quan trọng với người Việt):
+  • Dùng CÂU HỎI + modal thay mệnh lệnh: "Could you...?" thay "Do this."
+  • Thêm "please", "would you mind...", "sorry to bother you,..."
+  • Softeners: "just", "a bit", "maybe", "I think", "kind of"
+    -> "Could you just wait a bit?" mềm hơn "Wait."
+  • Từ chối gián tiếp: "That sounds great, but..." / "I''m not sure..."
+
+VĂN NÓI vs VIẾT: email công việc trang trọng hơn chat; tránh gonna/wanna,
+slang trong email chính thức.
+
+MẸO người Việt: tiếng Anh nhờ vả/yêu cầu thường GIÁN TIẾP hơn tiếng Việt.
+Mệnh lệnh trực tiếp ("Send me the file.") dễ bị coi là cộc lốc; "Could you
+send me the file, please?" an toàn hơn trong công việc.',
+'Register = the level of formality of language. The same idea has many
+phrasings depending on the audience (friends / colleagues / clients /
+boss). The wrong choice sounds rude or overly stiff.
+
+FORMALITY LADDER (same idea "I want a coffee"):
+  Casual:   "Gimme a coffee." / "I want a coffee."
+  Neutral:  "Can I get a coffee?"
+  Polite:   "Could I please get a coffee?"
+  Very formal: "I was wondering if I could get a coffee." /
+               "Would it be possible to...?"
+
+POLITENESS PRINCIPLES (very important for Vietnamese speakers):
+  • Use a QUESTION + modal instead of a command: "Could you...?" not "Do this."
+  • Add "please", "would you mind...", "sorry to bother you,..."
+  • Softeners: "just", "a bit", "maybe", "I think", "kind of"
+    -> "Could you just wait a bit?" is softer than "Wait."
+  • Decline indirectly: "That sounds great, but..." / "I''m not sure..."
+
+SPEECH vs WRITING: work emails are more formal than chat; avoid
+gonna/wanna and slang in official emails.
+
+TIP for Vietnamese: English requests are usually more INDIRECT than in
+Vietnamese. A direct command ("Send me the file.") can seem curt; "Could
+you send me the file, please?" is safer at work.',
+'[]',-380,-110)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_english_edges =====
+-- ĐĂNG KÝ edges cho topic Tiếng Anh Mỹ (part-of + vài related)
+INSERT INTO kg_edges (id,source,target,type) VALUES
+-- root -> topic
+('e_root_t_en','root','t_en','part-of'),
+-- topic -> sections
+('e_t_en_s_en_pron','t_en','s_en_pron','part-of'),
+('e_t_en_s_en_chunk','t_en','s_en_chunk','part-of'),
+('e_t_en_s_en_grammar','t_en','s_en_grammar','part-of'),
+('e_t_en_s_en_tenses','t_en','s_en_tenses','part-of'),
+('e_t_en_s_en_verbs','t_en','s_en_verbs','part-of'),
+('e_t_en_s_en_native','t_en','s_en_native','part-of'),
+-- section Phát âm -> leaf
+('e_s_en_pron_ipa','s_en_pron','n_en_ipa','part-of'),
+('e_s_en_pron_r','s_en_pron','n_en_r','part-of'),
+('e_s_en_pron_t','s_en_pron','n_en_t','part-of'),
+('e_s_en_pron_schwa','s_en_pron','n_en_schwa','part-of'),
+('e_s_en_pron_wordstress','s_en_pron','n_en_wordstress','part-of'),
+('e_s_en_pron_sentencestress','s_en_pron','n_en_sentencestress','part-of'),
+('e_s_en_pron_intonation','s_en_pron','n_en_intonation','part-of'),
+('e_s_en_pron_linking','s_en_pron','n_en_linking','part-of'),
+('e_s_en_pron_th','s_en_pron','n_en_th','part-of'),
+-- section Chunking -> leaf
+('e_s_en_chunk_chunking','s_en_chunk','n_en_chunking','part-of'),
+('e_s_en_chunk_connected','s_en_chunk','n_en_connected','part-of'),
+('e_s_en_chunk_rhythm','s_en_chunk','n_en_rhythm','part-of'),
+-- section Grammar -> leaf
+('e_s_en_grammar_wordorder','s_en_grammar','n_en_wordorder','part-of'),
+('e_s_en_grammar_articles','s_en_grammar','n_en_articles','part-of'),
+('e_s_en_grammar_nouns','s_en_grammar','n_en_nouns','part-of'),
+('e_s_en_grammar_pronouns','s_en_grammar','n_en_pronouns','part-of'),
+('e_s_en_grammar_adj_adv','s_en_grammar','n_en_adj_adv','part-of'),
+('e_s_en_grammar_prepositions','s_en_grammar','n_en_prepositions','part-of'),
+('e_s_en_grammar_modals','s_en_grammar','n_en_modals','part-of'),
+('e_s_en_grammar_conditionals','s_en_grammar','n_en_conditionals','part-of'),
+('e_s_en_grammar_passive','s_en_grammar','n_en_passive','part-of'),
+('e_s_en_grammar_reported','s_en_grammar','n_en_reported','part-of'),
+('e_s_en_grammar_questions','s_en_grammar','n_en_questions','part-of'),
+('e_s_en_grammar_gerund_inf','s_en_grammar','n_en_gerund_inf','part-of'),
+-- section Tenses -> leaf
+('e_s_en_tenses_map','s_en_tenses','n_en_tenses_map','part-of'),
+('e_s_en_tenses_present','s_en_tenses','n_en_present','part-of'),
+('e_s_en_tenses_past','s_en_tenses','n_en_past','part-of'),
+('e_s_en_tenses_future','s_en_tenses','n_en_future','part-of'),
+-- section Verbs -> leaf
+('e_s_en_verbs_s_es','s_en_verbs','n_en_s_es','part-of'),
+('e_s_en_verbs_ed','s_en_verbs','n_en_ed','part-of'),
+('e_s_en_verbs_ing','s_en_verbs','n_en_ing','part-of'),
+('e_s_en_verbs_irregular','s_en_verbs','n_en_irregular','part-of'),
+('e_s_en_verbs_plural_irregular','s_en_verbs','n_en_plural_irregular','part-of'),
+-- section Native -> leaf
+('e_s_en_native_contractions','s_en_native','n_en_contractions','part-of'),
+('e_s_en_native_phrasal','s_en_native','n_en_phrasal','part-of'),
+('e_s_en_native_idioms','s_en_native','n_en_idioms','part-of'),
+('e_s_en_native_slang','s_en_native','n_en_slang','part-of'),
+('e_s_en_native_fillers','s_en_native','n_en_fillers','part-of'),
+('e_s_en_native_smalltalk','s_en_native','n_en_smalltalk','part-of'),
+('e_s_en_native_collocations','s_en_native','n_en_collocations','part-of'),
+('e_s_en_native_am_vs_br','s_en_native','n_en_am_vs_br','part-of'),
+('e_s_en_native_politeness','s_en_native','n_en_politeness','part-of'),
+-- related (liên kết chéo ý nghĩa)
+('e_en_schwa_wordstress','n_en_schwa','n_en_wordstress','related'),
+('e_en_wordstress_sentencestress','n_en_wordstress','n_en_sentencestress','related'),
+('e_en_sentencestress_rhythm','n_en_sentencestress','n_en_rhythm','related'),
+('e_en_linking_connected','n_en_linking','n_en_connected','related'),
+('e_en_connected_contractions','n_en_connected','n_en_contractions','related'),
+('e_en_s_es_nouns','n_en_s_es','n_en_nouns','related'),
+('e_en_ed_irregular','n_en_ed','n_en_irregular','related'),
+('e_en_ing_gerund_inf','n_en_ing','n_en_gerund_inf','related'),
+('e_en_present_s_es','n_en_present','n_en_s_es','related'),
+('e_en_tenses_irregular','n_en_tenses_map','n_en_irregular','related')
+ON DUPLICATE KEY UPDATE
+  source=VALUES(source), target=VALUES(target), type=VALUES(type);
+
+-- ===== seed_php_1 =====
+-- ===================================================================
+--  TOPIC: PHP (song ngữ VI + EN, ví dụ code). File 1: cấu trúc + Cơ bản + OOP
+--  Áp: docker compose exec -T mysql \
+--        mysql -uroot -p"$MYSQL_ROOT_PASSWORD" --default-character-set=utf8mb4 \
+--        "$DB_NAME" < seed_php_1.sql
+-- ===================================================================
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('t_php','PHP','Backend',
+'Ngôn ngữ kịch bản phía server phổ biến cho web: cú pháp & kiểu dữ liệu,
+mảng, hàm, lập trình hướng đối tượng, Composer/PSR, vòng đời request,
+PDO và bảo mật, cùng PHP hiện đại (8.x) và framework.',
+'A popular server-side scripting language for the web: syntax & types,
+arrays, functions, object-oriented programming, Composer/PSR, the request
+lifecycle, PDO and security, plus modern PHP (8.x) and frameworks.',
+'[]',600,-380),
+
+('s_php_basics','PHP Cơ bản','Backend',
+'Cú pháp, biến & kiểu dữ liệu, mảng, hàm và chuỗi — nền tảng của PHP.',
+'Syntax, variables & types, arrays, functions, and strings - the PHP core.',
+'[]',520,-460),
+('s_php_oop','Lập trình hướng đối tượng','Backend',
+'Class/object, interface/abstract, trait, namespace & autoload bằng Composer.',
+'Classes/objects, interfaces/abstract, traits, namespaces & Composer autoloading.',
+'[]',660,-460),
+('s_php_web','PHP cho Web','Backend',
+'Vòng đời request, superglobals & form, session/cookie, PDO truy vấn DB, và
+các lỗ hổng bảo mật (SQLi/XSS/CSRF).',
+'The request lifecycle, superglobals & forms, sessions/cookies, PDO database
+access, and security holes (SQLi/XSS/CSRF).',
+'[]',520,-300),
+('s_php_modern','PHP hiện đại','Backend',
+'Tính năng PHP 8.x, chuẩn PSR + Composer, framework (Laravel/Symfony) và
+PHP-FPM/OPcache.',
+'PHP 8.x features, PSR standards + Composer, frameworks (Laravel/Symfony),
+and PHP-FPM/OPcache.',
+'[]',680,-300),
+
+-- ------------------------- CƠ BẢN ---------------------------------
+('n_php_syntax','Cú pháp & nền tảng','Backend',
+'PHP là ngôn ngữ kịch bản phía SERVER, có thể nhúng trong HTML, chạy bởi
+trình thông dịch. File .php; mã PHP nằm trong <?php ... ?>.
+
+  <?php
+    echo "Hello";        // in ra màn hình
+    $name = "An";        // biến LUÔN bắt đầu bằng $
+    echo "Hi $name";     // nội suy biến trong nháy KÉP -> Hi An
+    echo ''Hi $name'';   // nháy ĐƠN: KHÔNG nội suy -> Hi $name
+  ?>
+
+ĐẶC ĐIỂM:
+  • Biến bắt đầu bằng $, không khai báo kiểu (dynamically typed).
+  • Kết thúc câu lệnh bằng dấu ;
+  • Comment: // hoặc # (1 dòng), /* ... */ (nhiều dòng).
+  • Nối chuỗi bằng dấu chấm: "a" . "b" -> "ab"
+  • So sánh: == (lỏng, có ép kiểu) vs === (chặt, cùng kiểu + giá trị).
+
+  var_dump(0 == "a");   // PHP 8: false (trước 8 là true - bẫy kinh điển)
+  var_dump("0" == false); // true (lỏng)   "0" === false // false (chặt)
+
+CHẠY: qua web server (Nginx/Apache + PHP-FPM) hoặc CLI: php file.php
+
+MẸO: luôn ưu tiên === để tránh bug ép kiểu ngầm. PHP 8 đã siết lại quy
+tắc so sánh số với chuỗi nên an toàn hơn trước.',
+'PHP is a SERVER-side scripting language, embeddable in HTML, run by an
+interpreter. Files end in .php; PHP code lives inside <?php ... ?>.
+
+  <?php
+    echo "Hello";        // print to output
+    $name = "An";        // variables ALWAYS start with $
+    echo "Hi $name";     // interpolation in DOUBLE quotes -> Hi An
+    echo ''Hi $name'';   // SINGLE quotes: NO interpolation -> Hi $name
+  ?>
+
+CHARACTERISTICS:
+  • Variables start with $, no type declaration (dynamically typed).
+  • Statements end with ;
+  • Comments: // or # (one line), /* ... */ (multi-line).
+  • String concatenation uses a dot: "a" . "b" -> "ab"
+  • Comparison: == (loose, with type juggling) vs === (strict, same type + value).
+
+  var_dump(0 == "a");     // PHP 8: false (before 8 it was true - a classic trap)
+  var_dump("0" == false); // true (loose)   "0" === false // false (strict)
+
+RUN: via a web server (Nginx/Apache + PHP-FPM) or the CLI: php file.php
+
+TIP: always prefer === to avoid implicit type-juggling bugs. PHP 8 tightened
+number-vs-string comparison rules, so it is safer than before.',
+'[]',440,-520),
+
+('n_php_types','Biến & Kiểu dữ liệu','Backend',
+'PHP có kiểu động: biến mang kiểu theo GIÁ TRỊ gán vào, có thể đổi kiểu.
+
+KIỂU VÔ HƯỚNG: int, float, string, bool.
+KIỂU HỢP: array, object, callable, iterable.
+ĐẶC BIỆT: null (không giá trị), resource.
+
+  $n = 42;            // int
+  $pi = 3.14;         // float
+  $s = "hello";       // string
+  $ok = true;         // bool
+  $x = null;          // null
+
+  gettype($n);              // "integer"
+  var_dump(is_int($n));     // bool(true)
+  $n = (string)$n;          // ép kiểu tường minh -> "42"
+
+KHAI BÁO KIỂU (type declaration, khuyên dùng từ PHP 7+):
+  function add(int $a, int $b): int { return $a + $b; }
+  declare(strict_types=1);  // đặt ĐẦU file -> ép kiểu chặt, báo lỗi nếu sai
+
+HẰNG: const MAX = 100;  hoặc  define("MAX", 100);
+
+GIÁ TRỊ "falsy" (coi như false): 0, 0.0, "", "0", [], null, false.
+
+MẸO: bật declare(strict_types=1) + khai báo kiểu tham số/trả về -> bắt lỗi
+sớm, code rõ ràng, IDE gợi ý tốt. Đây là thực hành chuẩn của PHP hiện đại.',
+'PHP is dynamically typed: a variable takes the type of the VALUE assigned,
+and can change type.
+
+SCALAR TYPES: int, float, string, bool.
+COMPOUND TYPES: array, object, callable, iterable.
+SPECIAL: null (no value), resource.
+
+  $n = 42;            // int
+  $pi = 3.14;         // float
+  $s = "hello";       // string
+  $ok = true;         // bool
+  $x = null;          // null
+
+  gettype($n);              // "integer"
+  var_dump(is_int($n));     // bool(true)
+  $n = (string)$n;          // explicit cast -> "42"
+
+TYPE DECLARATIONS (recommended since PHP 7+):
+  function add(int $a, int $b): int { return $a + $b; }
+  declare(strict_types=1);  // put at the FILE TOP -> strict typing, errors on mismatch
+
+CONSTANTS: const MAX = 100;  or  define("MAX", 100);
+
+"FALSY" VALUES (treated as false): 0, 0.0, "", "0", [], null, false.
+
+TIP: enable declare(strict_types=1) + declare parameter/return types -> catch
+bugs early, clearer code, better IDE hints. This is standard modern PHP practice.',
+'[]',420,-460),
+
+('n_php_arrays','Mảng (Arrays)','Backend',
+'Mảng PHP cực kỳ linh hoạt: vừa là danh sách theo chỉ số, vừa là bản đồ
+khóa-giá trị (associative array). Một cấu trúc dùng cho mọi thứ.
+
+  $list = [1, 2, 3];                  // mảng chỉ số (0,1,2)
+  $map  = ["name" => "An", "age" => 30]; // mảng kết hợp (khóa => giá trị)
+  $list[] = 4;                        // thêm vào cuối
+  echo $map["name"];                  // "An"
+
+DUYỆT:
+  foreach ($list as $v) { echo $v; }
+  foreach ($map as $key => $val) { echo "$key=$val"; }
+
+HÀM MẢNG HAY DÙNG:
+  count($a)          // số phần tử
+  array_map(fn($x)=>$x*2, $list)      // biến đổi từng phần tử
+  array_filter($list, fn($x)=>$x>1)   // lọc
+  array_reduce($list, fn($c,$x)=>$c+$x, 0) // gộp
+  in_array(2,$list), array_keys($map), array_values($map)
+  array_merge($a,$b), sort($a), usort($a, $cmp)
+
+SPREAD & DESTRUCTURING:
+  $all = [...$a, ...$b];              // gộp
+  ["name"=>$name] = $map;             // rút khóa ra biến
+
+MẸO: mảng kết hợp là "trái tim" của PHP (config, dữ liệu form, kết quả DB
+đều là mảng). Nắm array_map/filter/reduce giúp code hàm gọn, tránh vòng
+lặp thủ công.',
+'PHP arrays are extremely flexible: both an indexed list and a key-value map
+(associative array). One structure used for everything.
+
+  $list = [1, 2, 3];                  // indexed array (0,1,2)
+  $map  = ["name" => "An", "age" => 30]; // associative array (key => value)
+  $list[] = 4;                        // append to the end
+  echo $map["name"];                  // "An"
+
+ITERATION:
+  foreach ($list as $v) { echo $v; }
+  foreach ($map as $key => $val) { echo "$key=$val"; }
+
+COMMON ARRAY FUNCTIONS:
+  count($a)          // number of elements
+  array_map(fn($x)=>$x*2, $list)      // transform each element
+  array_filter($list, fn($x)=>$x>1)   // filter
+  array_reduce($list, fn($c,$x)=>$c+$x, 0) // fold
+  in_array(2,$list), array_keys($map), array_values($map)
+  array_merge($a,$b), sort($a), usort($a, $cmp)
+
+SPREAD & DESTRUCTURING:
+  $all = [...$a, ...$b];              // merge
+  ["name"=>$name] = $map;             // pull a key into a variable
+
+TIP: the associative array is the heart of PHP (config, form data, DB rows
+are all arrays). Mastering array_map/filter/reduce yields concise functional
+code and avoids manual loops.',
+'[]',480,-440),
+
+('n_php_functions','Hàm (Functions)','Backend',
+'Hàm gom logic tái dùng. PHP hỗ trợ tham số mặc định, kiểu, biến động và
+closure (hàm nặc danh).
+
+  function greet(string $name, string $greeting = "Hi"): string {
+    return "$greeting, $name!";
+  }
+  echo greet("An");            // "Hi, An!"  (dùng mặc định)
+  echo greet("An", "Hello");   // "Hello, An!"
+
+CLOSURE / ARROW FUNCTION:
+  $double = function($x) { return $x * 2; };
+  $triple = fn($x) => $x * 3;         // arrow fn (PHP 7.4+), tự bắt biến ngoài
+
+  $factor = 10;
+  $scale = fn($x) => $x * $factor;    // arrow fn TỰ nhìn thấy $factor
+  $scale2 = function($x) use ($factor) { return $x * $factor; }; // phải use
+
+THAM SỐ NÂNG CAO:
+  function sum(...$nums) { return array_sum($nums); }  // variadic
+  sum(1, 2, 3);                       // 6
+  named args (PHP 8): greet(name: "An", greeting: "Yo");
+
+MẸO: dùng khai báo kiểu tham số + trả về để rõ ràng và an toàn. Arrow fn
+(fn) gọn cho callback (array_map/filter); function...use khi cần logic dài
+hoặc sửa biến ngoài.',
+'Functions group reusable logic. PHP supports default parameters, types,
+variadics, and closures (anonymous functions).
+
+  function greet(string $name, string $greeting = "Hi"): string {
+    return "$greeting, $name!";
+  }
+  echo greet("An");            // "Hi, An!"  (uses the default)
+  echo greet("An", "Hello");   // "Hello, An!"
+
+CLOSURE / ARROW FUNCTION:
+  $double = function($x) { return $x * 2; };
+  $triple = fn($x) => $x * 3;         // arrow fn (PHP 7.4+), auto-captures outer vars
+
+  $factor = 10;
+  $scale = fn($x) => $x * $factor;    // arrow fn SEES $factor automatically
+  $scale2 = function($x) use ($factor) { return $x * $factor; }; // needs use
+
+ADVANCED PARAMETERS:
+  function sum(...$nums) { return array_sum($nums); }  // variadic
+  sum(1, 2, 3);                       // 6
+  named args (PHP 8): greet(name: "An", greeting: "Yo");
+
+TIP: declare parameter + return types for clarity and safety. Arrow fns (fn)
+are concise for callbacks (array_map/filter); use function...use when you
+need longer logic or to modify outer variables.',
+'[]',540,-420),
+
+-- ------------------------- OOP ------------------------------------
+('n_php_oop','Class, Object & Kế thừa','Backend',
+'PHP hỗ trợ OOP đầy đủ: class, đối tượng, kế thừa, đóng gói (visibility),
+abstract class.
+
+  class Animal {
+    public function __construct(
+      protected string $name          // PHP 8: khai báo + gán thẳng
+    ) {}
+    public function speak(): string { return "..."; }
+  }
+  class Dog extends Animal {
+    public function speak(): string { return "$this->name says Woof"; }
+  }
+  $d = new Dog("Rex");
+  echo $d->speak();                   // "Rex says Woof"
+
+VISIBILITY (đóng gói):
+  public    : truy cập mọi nơi
+  protected : trong class này + class con
+  private   : chỉ trong chính class này
+
+THÀNH PHẦN:
+  • $this  -> đối tượng hiện tại;  self:: / static:: -> chính class
+  • static : thuộc CLASS, không thuộc instance (Counter::$count)
+  • const  : hằng của class (self::MAX)
+  • abstract class: không tạo instance được, để làm khuôn kế thừa.
+  • __construct/__destruct, __get/__set (magic methods).
+
+MẸO: PHP 8 "constructor property promotion" (khai kiểu + visibility ngay ở
+tham số __construct) giúp bỏ bớt boilerplate. Dùng type + visibility rõ
+ràng; ưu tiên composition hơn kế thừa sâu.',
+'PHP has full OOP: classes, objects, inheritance, encapsulation (visibility),
+abstract classes.
+
+  class Animal {
+    public function __construct(
+      protected string $name          // PHP 8: declare + assign inline
+    ) {}
+    public function speak(): string { return "..."; }
+  }
+  class Dog extends Animal {
+    public function speak(): string { return "$this->name says Woof"; }
+  }
+  $d = new Dog("Rex");
+  echo $d->speak();                   // "Rex says Woof"
+
+VISIBILITY (encapsulation):
+  public    : accessible everywhere
+  protected : this class + subclasses
+  private   : only within this class
+
+MEMBERS:
+  • $this  -> the current object;  self:: / static:: -> the class itself
+  • static : belongs to the CLASS, not an instance (Counter::$count)
+  • const  : a class constant (self::MAX)
+  • abstract class: cannot be instantiated, serves as an inheritance template.
+  • __construct/__destruct, __get/__set (magic methods).
+
+TIP: PHP 8 "constructor property promotion" (declaring type + visibility
+right in the __construct parameters) removes boilerplate. Use clear types +
+visibility; prefer composition over deep inheritance.',
+'[]',640,-540),
+
+('n_php_traits','Interface, Abstract & Trait','Backend',
+'Ba công cụ tổ chức OOP trong PHP:
+
+INTERFACE — hợp đồng (chỉ chữ ký, không thân hàm); một class có thể
+implements NHIỀU interface:
+  interface Jsonable { public function toJson(): string; }
+  class User implements Jsonable {
+    public function toJson(): string { return json_encode($this); }
+  }
+
+ABSTRACT CLASS — khuôn có sẵn một phần cài đặt, KHÔNG tạo instance được;
+class con phải hiện thực các method abstract:
+  abstract class Shape {
+    abstract public function area(): float;   // con phải viết
+    public function describe(): string { return "Area = " . $this->area(); }
+  }
+
+TRAIT — tái dùng CODE ngang giữa nhiều class (PHP đơn kế thừa nên trait
+giải bài "muốn dùng chung method mà không kế thừa"):
+  trait Timestamps {
+    public function touch(): void { $this->updatedAt = time(); }
+  }
+  class Post { use Timestamps; }
+  class Comment { use Timestamps; }   // cả hai dùng chung touch()
+
+KHÁC NHAU:
+  • interface: "CÓ THỂ làm gì" (hợp đồng, đa hình) — không code.
+  • abstract : quan hệ "là một" + chia sẻ một phần code.
+  • trait    : nhồi code dùng chung vào nhiều class không liên quan.
+
+MẸO: lập trình HƯỚNG interface (type-hint theo interface) để dễ thay/mock.
+Trait tiện nhưng lạm dụng gây khó lần nguồn method — dùng có chừng mực.',
+'Three OOP organization tools in PHP:
+
+INTERFACE - a contract (signatures only, no bodies); a class can implement
+MANY interfaces:
+  interface Jsonable { public function toJson(): string; }
+  class User implements Jsonable {
+    public function toJson(): string { return json_encode($this); }
+  }
+
+ABSTRACT CLASS - a partially-implemented template that CANNOT be
+instantiated; subclasses must implement the abstract methods:
+  abstract class Shape {
+    abstract public function area(): float;   // subclass must write it
+    public function describe(): string { return "Area = " . $this->area(); }
+  }
+
+TRAIT - horizontal CODE reuse across classes (PHP has single inheritance, so
+traits solve "share methods without inheriting"):
+  trait Timestamps {
+    public function touch(): void { $this->updatedAt = time(); }
+  }
+  class Post { use Timestamps; }
+  class Comment { use Timestamps; }   // both share touch()
+
+DIFFERENCES:
+  • interface: "CAN do what" (contract, polymorphism) - no code.
+  • abstract : an "is-a" relation + some shared code.
+  • trait    : inject shared code into unrelated classes.
+
+TIP: program to INTERFACES (type-hint by interface) for easy swapping/mocking.
+Traits are handy but overuse makes methods hard to trace - use in moderation.',
+'[]',720,-500),
+
+('n_php_namespaces','Namespace, Autoload & Composer','Backend',
+'Namespace tránh trùng tên class giữa các thư viện; Composer là trình quản
+lý gói + tự nạp file (autoload) theo chuẩn PSR-4.
+
+NAMESPACE:
+  namespace App\\Service;          // khai báo ở đầu file
+  class Mailer { }
+
+  // file khác:
+  use App\\Service\\Mailer;        // import
+  $m = new Mailer();
+
+COMPOSER — quản lý phụ thuộc:
+  composer require guzzlehttp/guzzle    // cài gói + ghi vào composer.json
+  composer install                      // cài theo composer.lock
+  composer update                       // nâng cấp
+
+AUTOLOAD PSR-4 (composer.json): ánh xạ namespace -> thư mục:
+  "autoload": { "psr-4": { "App\\\\": "src/" } }
+  -> class App\\Service\\Mailer nằm ở file src/Service/Mailer.php
+  Nạp một dòng duy nhất: require "vendor/autoload.php";
+
+  -> KHÔNG cần require từng file class; Composer tự tìm theo tên class.
+
+MẸO: cấu trúc dự án PHP hiện đại = 1 namespace gốc (App\\) map vào src/,
+mọi phụ thuộc qua Composer. composer.lock phải commit để cài đúng phiên
+bản trên mọi máy/server (giống package-lock.json của Node).',
+'Namespaces avoid class-name clashes between libraries; Composer is the
+dependency manager + file autoloader following the PSR-4 standard.
+
+NAMESPACE:
+  namespace App\\Service;          // declared at the file top
+  class Mailer { }
+
+  // another file:
+  use App\\Service\\Mailer;        // import
+  $m = new Mailer();
+
+COMPOSER - dependency management:
+  composer require guzzlehttp/guzzle    // install a package + record in composer.json
+  composer install                      // install per composer.lock
+  composer update                       // upgrade
+
+PSR-4 AUTOLOAD (composer.json): maps a namespace -> a directory:
+  "autoload": { "psr-4": { "App\\\\": "src/" } }
+  -> class App\\Service\\Mailer lives in src/Service/Mailer.php
+  Load with a single line: require "vendor/autoload.php";
+
+  -> NO need to require each class file; Composer finds them by class name.
+
+TIP: a modern PHP project layout = one root namespace (App\\) mapped to src/,
+all dependencies via Composer. Commit composer.lock so every machine/server
+installs the exact versions (like Node package-lock.json).',
+'[]',740,-440)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_php_2 =====
+-- TOPIC PHP file 2: Web + Modern
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('n_php_request','Vòng đời request','Backend',
+'Khác Node (server thường trực), PHP truyền thống theo mô hình
+SHARED-NOTHING: MỖI request khởi tạo lại toàn bộ, chạy xong thì XÓA sạch
+-> không giữ state trong bộ nhớ giữa các request.
+
+SƠ ĐỒ (PHP-FPM):
+  Client -> Nginx -> PHP-FPM -> khởi tạo PHP -> chạy script -> trả HTML -> dọn sạch
+                                (mỗi request = một môi trường mới, sạch)
+
+Ý NGHĨA:
+  • Biến toàn cục KHÔNG sống qua request -> muốn giữ state phải dùng
+    session / DB / cache (Redis).
+  • Ít lo memory leak tích lũy như server thường trực (xong là giải phóng).
+  • Đánh đổi: chi phí khởi tạo MỖI request -> giảm bằng OPcache (cache bytecode).
+
+KHÁC NODE.JS: Node một tiến trình phục vụ nhiều request, giữ state trong RAM
+(phải cẩn thận leak); PHP mỗi request sạch — đơn giản, nhưng cần OPcache +
+FPM để nhanh.
+
+MẸO: hiểu shared-nothing giải thích vì sao PHP dùng $_SESSION/DB cho state,
+và vì sao PHP dễ SCALE NGANG (không có state trong tiến trình -> thêm máy
+thoải mái).',
+'Unlike Node (a long-running server), traditional PHP uses a SHARED-NOTHING
+model: EACH request re-initializes everything and wipes it all when done
+-> no in-memory state is kept between requests.
+
+DIAGRAM (PHP-FPM):
+  Client -> Nginx -> PHP-FPM -> init PHP -> run script -> return HTML -> clean up
+                                (each request = a fresh, clean environment)
+
+IMPLICATIONS:
+  • Global variables do NOT survive across requests -> to keep state use
+    sessions / DB / cache (Redis).
+  • Less worry about accumulating memory leaks than a long-running server
+    (everything is freed at the end).
+  • Trade-off: an init cost PER request -> reduced by OPcache (bytecode cache).
+
+VS NODE.JS: Node has one process serving many requests, holding state in RAM
+(watch for leaks); PHP starts each request clean - simpler, but needs OPcache
++ FPM to be fast.
+
+TIP: understanding shared-nothing explains why PHP uses $_SESSION/DB for
+state, and why PHP scales HORIZONTALLY easily (no in-process state -> add
+machines freely).',
+'[]',440,-340),
+
+('n_php_superglobals','Superglobals & Form','Backend',
+'Superglobals là các mảng toàn cục PHP tự tạo, truy cập được ở MỌI nơi,
+chứa dữ liệu của request.
+
+  $_GET     - tham số query string (?q=abc)
+  $_POST    - dữ liệu form gửi bằng POST
+  $_REQUEST - gộp GET+POST+COOKIE (nên TRÁNH, mơ hồ nguồn)
+  $_SERVER  - thông tin server/request ($_SERVER["REQUEST_METHOD"])
+  $_FILES   - file upload
+  $_SESSION - dữ liệu phiên;   $_COOKIE - cookie
+  $_ENV / getenv() - biến môi trường
+
+XỬ LÝ FORM:
+  if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $email = trim($_POST["email"] ?? "");     // ?? tránh lỗi undefined
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      // báo lỗi
+    }
+  }
+
+QUAN TRỌNG (bảo mật): dữ liệu từ $_GET/$_POST/$_FILES là INPUT NGƯỜI DÙNG
+-> KHÔNG tin. Luôn validate + escape trước khi dùng; đừng nhét thẳng vào
+SQL hay HTML.
+
+MẸO: dùng ?? (null coalescing) để đọc key có thể thiếu; validate bằng
+filter_var; ép kiểu ((int)$_GET["id"]) khi mong đợi số. Với API hiện đại,
+dữ liệu JSON đọc qua json_decode(file_get_contents("php://input")).',
+'Superglobals are global arrays PHP creates automatically, accessible
+EVERYWHERE, holding the request data.
+
+  $_GET     - query-string params (?q=abc)
+  $_POST    - form data sent via POST
+  $_REQUEST - GET+POST+COOKIE combined (AVOID, ambiguous source)
+  $_SERVER  - server/request info ($_SERVER["REQUEST_METHOD"])
+  $_FILES   - uploaded files
+  $_SESSION - session data;   $_COOKIE - cookies
+  $_ENV / getenv() - environment variables
+
+HANDLING A FORM:
+  if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $email = trim($_POST["email"] ?? "");     // ?? avoids undefined errors
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      // report an error
+    }
+  }
+
+IMPORTANT (security): data from $_GET/$_POST/$_FILES is USER INPUT -> do NOT
+trust it. Always validate + escape before use; never drop it straight into
+SQL or HTML.
+
+TIP: use ?? (null coalescing) to read possibly-missing keys; validate with
+filter_var; cast ((int)$_GET["id"]) when you expect a number. For modern
+APIs, read JSON via json_decode(file_get_contents("php://input")).',
+'[]',420,-280),
+
+('n_php_pdo','PDO & Database','Backend',
+'PDO (PHP Data Objects) là lớp truy cập DB thống nhất (MySQL, PostgreSQL...),
+hỗ trợ PREPARED STATEMENTS chống SQL injection.
+
+KẾT NỐI:
+  $pdo = new PDO("mysql:host=localhost;dbname=app;charset=utf8mb4", $u, $p, [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,       // lỗi -> ném exception
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,  // fetch ra mảng kết hợp
+  ]);
+
+TRUY VẤN có tham số (BẮT BUỘC khi có input người dùng):
+  $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+  $stmt->execute([$email]);          // tham số TÁCH khỏi câu SQL
+  $user = $stmt->fetch();            // 1 dòng
+  $all  = $stmt->fetchAll();         // tất cả
+  // named placeholder:
+  $pdo->prepare("... WHERE id = :id")->execute([":id" => $id]);
+
+GHI + transaction:
+  $stmt = $pdo->prepare("INSERT INTO users(name,email) VALUES(?,?)");
+  $stmt->execute([$name, $email]);
+  $id = $pdo->lastInsertId();
+
+  $pdo->beginTransaction();
+  try { /* nhiều lệnh */ $pdo->commit(); }
+  catch (Exception $e) { $pdo->rollBack(); throw $e; }
+
+MẸO: LUÔN dùng prepared statement, ĐỪNG nối chuỗi input vào SQL. Đặt
+ERRMODE_EXCEPTION để lỗi không bị nuốt. PDO là nền tảng bên dưới mọi ORM
+(Eloquent của Laravel, Doctrine của Symfony).',
+'PDO (PHP Data Objects) is a unified DB access layer (MySQL, PostgreSQL...)
+with PREPARED STATEMENTS to prevent SQL injection.
+
+CONNECT:
+  $pdo = new PDO("mysql:host=localhost;dbname=app;charset=utf8mb4", $u, $p, [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,       // errors -> throw exceptions
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,  // fetch as associative arrays
+  ]);
+
+PARAMETERIZED QUERY (MANDATORY with user input):
+  $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+  $stmt->execute([$email]);          // params SEPARATED from the SQL
+  $user = $stmt->fetch();            // one row
+  $all  = $stmt->fetchAll();         // all rows
+  // named placeholder:
+  $pdo->prepare("... WHERE id = :id")->execute([":id" => $id]);
+
+WRITE + transaction:
+  $stmt = $pdo->prepare("INSERT INTO users(name,email) VALUES(?,?)");
+  $stmt->execute([$name, $email]);
+  $id = $pdo->lastInsertId();
+
+  $pdo->beginTransaction();
+  try { /* several statements */ $pdo->commit(); }
+  catch (Exception $e) { $pdo->rollBack(); throw $e; }
+
+TIP: ALWAYS use prepared statements, NEVER concatenate input into SQL. Set
+ERRMODE_EXCEPTION so errors are not swallowed. PDO underlies every ORM
+(Laravel Eloquent, Symfony Doctrine).',
+'[]',480,-260),
+
+('n_php_security','Bảo mật Web (SQLi/XSS/CSRF)','Backend',
+'Các lỗ hổng web phổ biến và cách chặn trong PHP:
+
+SQL INJECTION — nối input vào câu SQL:
+  ✗ $pdo->query("SELECT * FROM users WHERE name = ''$name''"); // chèn SQL độc
+  ✓ prepared: prepare("... WHERE name = ?")->execute([$name]);
+
+XSS (Cross-Site Scripting) — in input người dùng ra HTML chưa escape:
+  ✗ echo $_GET["q"];                       // <script> của kẻ gian sẽ chạy
+  ✓ echo htmlspecialchars($_GET["q"], ENT_QUOTES, "UTF-8");
+
+CSRF — kẻ gian giả request thay người đã đăng nhập:
+  ✓ token CSRF ẩn trong form, kiểm tra khi POST (dùng hash_equals để so sánh).
+
+MẬT KHẨU — KHÔNG lưu dạng thô:
+  $hash = password_hash($pw, PASSWORD_DEFAULT);   // bcrypt/argon2 tự thêm salt
+  if (password_verify($input, $hash)) { /* đúng */ }
+
+KHÁC:
+  • Production: display_errors = 0 (đừng lộ lỗi/đường dẫn), ghi log riêng.
+  • Validate + ép kiểu MỌI input; giới hạn loại/kích thước file upload.
+  • HTTPS + cookie HttpOnly/Secure/SameSite cho session.
+
+MẸO: quy tắc vàng — KHÔNG tin dữ liệu người dùng. ESCAPE khi XUẤT
+(HTML/SQL/shell), VALIDATE khi NHẬP. Dùng password_hash (tuyệt đối đừng
+md5/sha1 cho mật khẩu). Framework lo sẵn phần lớn (CSRF token, auto-escape
+trong template).',
+'Common web vulnerabilities and how to block them in PHP:
+
+SQL INJECTION - concatenating input into SQL:
+  ✗ $pdo->query("SELECT * FROM users WHERE name = ''$name''"); // injects SQL
+  ✓ prepared: prepare("... WHERE name = ?")->execute([$name]);
+
+XSS (Cross-Site Scripting) - echoing user input into HTML unescaped:
+  ✗ echo $_GET["q"];                       // an attacker <script> would run
+  ✓ echo htmlspecialchars($_GET["q"], ENT_QUOTES, "UTF-8");
+
+CSRF - an attacker forges a request as a logged-in user:
+  ✓ a hidden CSRF token in the form, checked on POST (compare with hash_equals).
+
+PASSWORDS - do NOT store them raw:
+  $hash = password_hash($pw, PASSWORD_DEFAULT);   // bcrypt/argon2, auto-salted
+  if (password_verify($input, $hash)) { /* correct */ }
+
+OTHER:
+  • Production: display_errors = 0 (do not leak errors/paths), log separately.
+  • Validate + cast ALL input; limit uploaded file type/size.
+  • HTTPS + HttpOnly/Secure/SameSite cookies for sessions.
+
+TIP: the golden rule - do NOT trust user data. ESCAPE on OUTPUT
+(HTML/SQL/shell), VALIDATE on INPUT. Use password_hash (never md5/sha1 for
+passwords). Frameworks handle most of this (CSRF tokens, auto-escaping in
+templates).',
+'[]',520,-240),
+
+-- ------------------------- HIỆN ĐẠI -------------------------------
+('n_php_php8','Tính năng PHP 8.x','Backend',
+'PHP 8.x nhanh hơn (có JIT) và thêm nhiều cú pháp hiện đại đáng dùng:
+
+NULLSAFE (?->): tránh chuỗi if kiểm null lồng nhau:
+  $city = $user?->address?->city;   // null nếu bất kỳ khâu nào null
+
+MATCH (thay switch: so sánh CHẶT ===, TRẢ giá trị, không fall-through):
+  $label = match($code) {
+    200, 201 => "success",
+    404      => "not found",
+    default  => "unknown",
+  };
+
+CONSTRUCTOR PROPERTY PROMOTION:
+  class Point { public function __construct(public int $x, public int $y) {} }
+
+ENUM (PHP 8.1) — thay các hằng string rời rạc:
+  enum Status: string { case Active = "active"; case Banned = "banned"; }
+  Status::Active->value;            // "active"
+
+READONLY property (8.1): thuộc tính chỉ gán 1 lần -> DTO bất biến.
+NAMED ARGUMENTS: htmlspecialchars($s, double_encode: false);
+FIRST-CLASS CALLABLE (8.1): $fn = strlen(...);
+ATTRIBUTES (#[Route(...)]) — metadata thay annotation trong docblock.
+
+MẸO: match an toàn hơn switch (không quên break, so sánh ===). enum thay
+"magic string". readonly cho object bất biến. Nâng lên PHP 8.1+ để tận dụng
+và nhanh hơn hẳn PHP 7.',
+'PHP 8.x is faster (has a JIT) and adds many modern, worthwhile syntaxes:
+
+NULLSAFE (?->): avoid nested null-check if-chains:
+  $city = $user?->address?->city;   // null if any link is null
+
+MATCH (replaces switch: STRICT === comparison, RETURNS a value, no fall-through):
+  $label = match($code) {
+    200, 201 => "success",
+    404      => "not found",
+    default  => "unknown",
+  };
+
+CONSTRUCTOR PROPERTY PROMOTION:
+  class Point { public function __construct(public int $x, public int $y) {} }
+
+ENUM (PHP 8.1) - replaces scattered string constants:
+  enum Status: string { case Active = "active"; case Banned = "banned"; }
+  Status::Active->value;            // "active"
+
+READONLY property (8.1): assigned once -> immutable DTOs.
+NAMED ARGUMENTS: htmlspecialchars($s, double_encode: false);
+FIRST-CLASS CALLABLE (8.1): $fn = strlen(...);
+ATTRIBUTES (#[Route(...)]) - metadata replacing docblock annotations.
+
+TIP: match is safer than switch (no forgotten break, === comparison). enums
+replace "magic strings". readonly for immutable objects. Move to PHP 8.1+ to
+benefit and to be much faster than PHP 7.',
+'[]',640,-260),
+
+('n_php_psr','PSR & Công cụ chuẩn','Backend',
+'PSR (PHP Standards Recommendations) là các chuẩn chung do PHP-FIG đặt ra,
+giúp code và thư viện tương thích nhau:
+
+  • PSR-1 / PSR-12 : coding style (đặt tên, thụt lề, khoảng trắng).
+  • PSR-4          : autoload namespace -> thư mục (Composer dùng).
+  • PSR-3          : LoggerInterface -> đổi thư viện log không sửa code.
+  • PSR-7 / PSR-15 : HTTP message & middleware (Request/Response chuẩn).
+  • PSR-11         : Container interface (dependency injection).
+
+CÔNG CỤ HAY DÙNG:
+  • Composer      : quản lý gói + autoload.
+  • PHPUnit       : unit test.
+  • PHPStan/Psalm : phân tích TĨNH, bắt lỗi kiểu mà không cần chạy.
+  • PHP-CS-Fixer / phpcs : tự sửa / kiểm tra style theo PSR-12.
+
+Ý NGHĨA: nhờ PSR + Composer, các thư viện PHP hiện đại ghép nối rất dễ (một
+Logger PSR-3 thay cho cái khác mà KHÔNG phải sửa code phụ thuộc).
+
+MẸO: theo PSR-12 + chạy PHPStan ở mức cao trong CI -> code sạch, ít bug,
+đội đọc code của nhau dễ. Đây là chuẩn nghề của PHP hiện đại, khác hẳn kiểu
+PHP chắp vá ngày xưa.',
+'PSR (PHP Standards Recommendations) are shared standards from PHP-FIG that
+make code and libraries interoperable:
+
+  • PSR-1 / PSR-12 : coding style (naming, indentation, whitespace).
+  • PSR-4          : namespace -> directory autoloading (used by Composer).
+  • PSR-3          : LoggerInterface -> swap logging libraries without code changes.
+  • PSR-7 / PSR-15 : HTTP messages & middleware (standard Request/Response).
+  • PSR-11         : Container interface (dependency injection).
+
+COMMON TOOLS:
+  • Composer      : dependency manager + autoload.
+  • PHPUnit       : unit testing.
+  • PHPStan/Psalm : STATIC analysis, catching type bugs without running.
+  • PHP-CS-Fixer / phpcs : auto-fix / check style per PSR-12.
+
+WHY IT MATTERS: thanks to PSR + Composer, modern PHP libraries plug together
+easily (one PSR-3 Logger replaces another WITHOUT editing dependent code).
+
+TIP: follow PSR-12 + run PHPStan at a high level in CI -> clean code, fewer
+bugs, easier to read each other code. This is professional modern PHP,
+unlike the patchwork PHP of old.',
+'[]',720,-240),
+
+('n_php_frameworks','Framework & Runtime (FPM/OPcache)','Backend',
+'PHP hiếm khi viết thuần trong dự án thật; đa số dùng framework để có cấu
+trúc, bảo mật và ORM sẵn.
+
+LARAVEL — phổ biến nhất, "batteries included", cú pháp thanh lịch:
+  Route::get("/users/{id}", [UserController::class, "show"]);
+  // ORM Eloquent:
+  User::where("active", true)->get();
+  // sẵn có: routing, migration, queue, auth, Blade template, artisan CLI.
+
+SYMFONY — mô-đun, mạnh, nhiều component tái dùng (Laravel dùng lại nhiều
+component của Symfony). Hợp dự án lớn / enterprise.
+KHÁC: Slim (micro API), CodeIgniter (nhẹ), Laminas.
+
+RUNTIME — chạy PHP nhanh ở production:
+  • PHP-FPM  : quản lý một pool tiến trình PHP; Nginx đẩy request qua FPM.
+  • OPcache  : cache BYTECODE đã biên dịch -> KHÔNG parse lại .php mỗi
+    request (tăng tốc rất lớn; luôn bật ở production).
+  • Preloading (7.4+), JIT (8.0): tăng tốc thêm cho tải nặng.
+
+MẸO: mới học nên bắt đầu với Laravel (tài liệu tốt, cộng đồng lớn, dựng
+CRUD/API rất nhanh). Luôn bật OPcache trên production. Framework lo sẵn
+routing + bảo mật (CSRF, auto-escape) nên an toàn hơn tự viết thuần nhiều.',
+'PHP is rarely written raw in real projects; most use a framework for
+structure, security, and a ready ORM.
+
+LARAVEL - the most popular, "batteries included", elegant syntax:
+  Route::get("/users/{id}", [UserController::class, "show"]);
+  // Eloquent ORM:
+  User::where("active", true)->get();
+  // built in: routing, migrations, queues, auth, Blade templates, artisan CLI.
+
+SYMFONY - modular, powerful, many reusable components (Laravel reuses many
+Symfony components). Suits large / enterprise projects.
+OTHERS: Slim (micro APIs), CodeIgniter (lightweight), Laminas.
+
+RUNTIME - running PHP fast in production:
+  • PHP-FPM  : manages a pool of PHP processes; Nginx forwards requests to FPM.
+  • OPcache  : caches compiled BYTECODE -> does NOT re-parse .php each
+    request (a big speedup; always enable in production).
+  • Preloading (7.4+), JIT (8.0): extra speed for heavy loads.
+
+TIP: beginners should start with Laravel (great docs, big community, very
+fast CRUD/API scaffolding). Always enable OPcache in production. Frameworks
+handle routing + security (CSRF, auto-escaping), so they are much safer than
+hand-rolled raw PHP.',
+'[]',700,-180)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_php_edges =====
+-- TOPIC PHP: edges
+INSERT INTO kg_edges (id,source,target,type) VALUES
+('e_root_t_php','root','t_php','part-of'),
+('e_t_php_s_basics','t_php','s_php_basics','part-of'),
+('e_t_php_s_oop','t_php','s_php_oop','part-of'),
+('e_t_php_s_web','t_php','s_php_web','part-of'),
+('e_t_php_s_modern','t_php','s_php_modern','part-of'),
+-- basics
+('e_s_php_basics_syntax','s_php_basics','n_php_syntax','part-of'),
+('e_s_php_basics_types','s_php_basics','n_php_types','part-of'),
+('e_s_php_basics_arrays','s_php_basics','n_php_arrays','part-of'),
+('e_s_php_basics_functions','s_php_basics','n_php_functions','part-of'),
+-- oop
+('e_s_php_oop_oop','s_php_oop','n_php_oop','part-of'),
+('e_s_php_oop_traits','s_php_oop','n_php_traits','part-of'),
+('e_s_php_oop_namespaces','s_php_oop','n_php_namespaces','part-of'),
+-- web
+('e_s_php_web_request','s_php_web','n_php_request','part-of'),
+('e_s_php_web_superglobals','s_php_web','n_php_superglobals','part-of'),
+('e_s_php_web_pdo','s_php_web','n_php_pdo','part-of'),
+('e_s_php_web_security','s_php_web','n_php_security','part-of'),
+-- modern
+('e_s_php_modern_php8','s_php_modern','n_php_php8','part-of'),
+('e_s_php_modern_psr','s_php_modern','n_php_psr','part-of'),
+('e_s_php_modern_frameworks','s_php_modern','n_php_frameworks','part-of'),
+-- related
+('e_php_pdo_security','n_php_pdo','n_php_security','related'),
+('e_php_pdo_frameworks','n_php_pdo','n_php_frameworks','related'),
+('e_php_namespaces_psr','n_php_namespaces','n_php_psr','related'),
+('e_php_request_frameworks','n_php_request','n_php_frameworks','related'),
+('e_php_oop_traits','n_php_oop','n_php_traits','related'),
+('e_php_superglobals_security','n_php_superglobals','n_php_security','related'),
+('e_php_pdo_t_mysql','n_php_pdo','t_mysql','related')
+ON DUPLICATE KEY UPDATE
+  source=VALUES(source), target=VALUES(target), type=VALUES(type);
+
+-- ===== seed_docker_1 =====
+-- ===================================================================
+--  TOPIC: Docker (song ngữ VI + EN, ví dụ). File 1: cấu trúc + Core
+-- ===================================================================
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('t_docker','Docker','DevOps & Cloud',
+'Đóng gói ứng dụng + phụ thuộc vào container chạy giống nhau mọi nơi:
+image vs container, Dockerfile, layer & cache, registry, volume, network,
+Docker Compose, multi-stage build và best practices.',
+'Package an app + its dependencies into containers that run the same
+everywhere: images vs containers, Dockerfile, layers & cache, registries,
+volumes, networks, Docker Compose, multi-stage builds, and best practices.',
+'[]',0,-600),
+
+('s_dk_core','Docker Core','DevOps & Cloud',
+'Khái niệm image vs container, Dockerfile, layer & cache, và registry.',
+'Image vs container concepts, the Dockerfile, layers & cache, and registries.',
+'[]',-120,-660),
+('s_dk_run','Chạy & Kết nối','DevOps & Cloud',
+'Volume (lưu dữ liệu), network, cổng & biến môi trường, và Docker Compose.',
+'Volumes (data persistence), networks, ports & env vars, and Docker Compose.',
+'[]',120,-660),
+('s_dk_ops','Tối ưu & Vận hành','DevOps & Cloud',
+'Multi-stage build, giảm kích thước image & best practices, healthcheck/log/debug.',
+'Multi-stage builds, shrinking images & best practices, healthchecks/logs/debug.',
+'[]',0,-720),
+
+-- ------------------------- CORE -----------------------------------
+('n_dk_concept','Image vs Container (vs VM)','DevOps & Cloud',
+'Docker đóng gói ứng dụng + mọi phụ thuộc vào một CONTAINER chạy giống hệt
+ở mọi nơi -> hết cảnh "máy tôi chạy được mà".
+
+IMAGE vs CONTAINER:
+  • Image     : bản mẫu ĐÓNG BĂNG (chỉ đọc) gồm OS nền + code + thư viện.
+    Giống một "class".
+  • Container : một tiến trình ĐANG CHẠY từ image (có thêm lớp ghi tạm).
+    Giống một "object" (instance của image).
+  Một image -> tạo được NHIỀU container.
+
+KHÁC MÁY ẢO (VM):
+  VM        : ảo hóa cả phần cứng + OS đầy đủ -> nặng (GB), khởi động chậm.
+  Container : CHIA SẺ kernel của host, chỉ đóng gói tiến trình + deps
+              -> nhẹ (MB), khởi động mili-giây.
+
+  [Cont A][Cont B]            [VM A][VM B]
+   -- Docker Engine --         -- Guest OS mỗi VM --
+   --- Host OS / Kernel ---    ------ Hypervisor ------
+
+LỆNH CƠ BẢN:
+  docker run nginx         # tải image + tạo & chạy container
+  docker ps                # container đang chạy (ps -a: tất cả)
+  docker images            # danh sách image
+  docker stop/rm <id>      # dừng/xóa container (rmi: xóa image)
+  docker exec -it <id> sh  # vào shell bên trong container
+
+MẸO: image = khuôn (bất biến), container = instance đang chạy. Container
+"ephemeral" — dữ liệu mất khi xóa -> cần VOLUME để lưu bền.',
+'Docker packages an app + all its dependencies into a CONTAINER that runs
+identically everywhere -> no more "but it works on my machine".
+
+IMAGE vs CONTAINER:
+  • Image     : a FROZEN read-only template with a base OS + code + libraries.
+    Like a "class".
+  • Container : a RUNNING process created from an image (plus a temporary
+    writable layer). Like an "object" (an instance of the image).
+  One image -> creates MANY containers.
+
+VS A VIRTUAL MACHINE (VM):
+  VM        : virtualizes hardware + a full OS -> heavy (GB), slow to boot.
+  Container : SHARES the host kernel, packaging only the process + deps
+              -> light (MB), boots in milliseconds.
+
+  [Cont A][Cont B]            [VM A][VM B]
+   -- Docker Engine --         -- Guest OS per VM --
+   --- Host OS / Kernel ---    ------ Hypervisor ------
+
+BASIC COMMANDS:
+  docker run nginx         # pull image + create & run a container
+  docker ps                # running containers (ps -a: all)
+  docker images            # list images
+  docker stop/rm <id>      # stop/remove a container (rmi: remove an image)
+  docker exec -it <id> sh  # open a shell inside a container
+
+TIP: image = the mold (immutable), container = the running instance.
+Containers are "ephemeral" - data is lost on removal -> use a VOLUME to
+persist it.',
+'[]',-200,-700),
+
+('n_dk_dockerfile','Dockerfile','DevOps & Cloud',
+'Dockerfile là công thức dạng TEXT để build một image, gồm các chỉ thị
+xếp theo tầng.
+
+  FROM node:20-alpine        # image nền (bắt buộc, dòng đầu)
+  WORKDIR /app               # thư mục làm việc trong container
+  COPY package*.json ./      # copy trước để tận dụng cache
+  RUN npm ci                 # chạy lệnh lúc BUILD -> tạo một layer
+  COPY . .                   # copy toàn bộ source
+  EXPOSE 3000                # (tài liệu) cổng app lắng nghe
+  ENV NODE_ENV=production    # biến môi trường
+  CMD ["node", "server.js"]  # lệnh chạy khi container KHỞI ĐỘNG
+
+CHỈ THỊ QUAN TRỌNG:
+  • FROM      : image gốc.
+  • RUN       : chạy lệnh lúc build (cài gói, biên dịch) -> tạo layer.
+  • COPY/ADD  : đưa file vào image (COPY ưu tiên; ADD thêm giải nén/URL).
+  • CMD vs ENTRYPOINT: CMD = lệnh mặc định (ghi đè được); ENTRYPOINT = lệnh
+    cố định, CMD trở thành tham số cho nó.
+  • WORKDIR, ENV, EXPOSE, ARG (biến lúc build), USER (chạy non-root).
+
+BUILD & CHẠY:
+  docker build -t myapp:1.0 .
+  docker run -p 3000:3000 myapp:1.0
+
+MẸO: dùng .dockerignore (bỏ node_modules, .git) để build nhanh + image gọn.
+Gộp lệnh RUN bằng && để bớt layer. CMD dạng MẢNG (exec form) tốt hơn dạng
+chuỗi (nhận tín hiệu dừng đúng).',
+'A Dockerfile is a TEXT recipe to build an image, made of layered instructions.
+
+  FROM node:20-alpine        # base image (required, first line)
+  WORKDIR /app               # working directory inside the container
+  COPY package*.json ./      # copy first to leverage caching
+  RUN npm ci                 # runs at BUILD time -> creates a layer
+  COPY . .                   # copy the whole source
+  EXPOSE 3000                # (documentation) the port the app listens on
+  ENV NODE_ENV=production    # environment variable
+  CMD ["node", "server.js"]  # command run when the container STARTS
+
+KEY INSTRUCTIONS:
+  • FROM      : the base image.
+  • RUN       : run a command at build time (install, compile) -> a layer.
+  • COPY/ADD  : put files into the image (prefer COPY; ADD also untars/URLs).
+  • CMD vs ENTRYPOINT: CMD = default command (overridable); ENTRYPOINT = fixed
+    command, with CMD becoming its arguments.
+  • WORKDIR, ENV, EXPOSE, ARG (build-time var), USER (run non-root).
+
+BUILD & RUN:
+  docker build -t myapp:1.0 .
+  docker run -p 3000:3000 myapp:1.0
+
+TIP: use a .dockerignore (exclude node_modules, .git) for faster builds +
+smaller images. Combine RUN commands with && to reduce layers. Prefer the
+ARRAY (exec) form of CMD (it receives stop signals correctly).',
+'[]',-260,-640),
+
+('n_dk_layers','Layers & Build Cache','DevOps & Cloud',
+'Image gồm nhiều LAYER xếp chồng (mỗi RUN/COPY/ADD tạo một layer chỉ đọc).
+Docker CACHE từng layer để build lại nhanh.
+
+CƠ CHẾ CACHE:
+  • Mỗi lệnh -> một layer. Nếu lệnh + input KHÔNG đổi -> Docker DÙNG LẠI
+    layer cũ (cache hit), bỏ qua chạy lại.
+  • Khi một layer đổi -> layer đó VÀ MỌI layer sau nó phải build lại
+    (cache bị vô hiệu).
+
+THỨ TỰ QUAN TRỌNG:
+  ✗ COPY . .            # copy hết trước
+    RUN npm ci          # đổi 1 dòng code -> phải cài lại TOÀN BỘ deps!
+
+  ✓ COPY package*.json ./
+    RUN npm ci          # layer này chỉ build lại khi package.json đổi
+    COPY . .            # code đổi thường xuyên -> để CUỐI
+  -> đặt thứ ÍT ĐỔI (deps) TRƯỚC, thứ HAY ĐỔI (source) SAU.
+
+CHIA SẺ LAYER: nhiều image cùng "FROM node:20" dùng CHUNG layer nền
+-> tiết kiệm ổ đĩa + pull nhanh.
+
+XEM: docker history <image>   (liệt kê layer + kích thước)
+
+MẸO: sắp Dockerfile theo TẦN SUẤT THAY ĐỔI để tối đa cache -> build lại chỉ
+vài giây thay vì vài phút. Đây là kỹ năng tối ưu Dockerfile quan trọng nhất.',
+'An image is a stack of LAYERS (each RUN/COPY/ADD makes a read-only layer).
+Docker CACHES each layer to rebuild quickly.
+
+CACHING MECHANISM:
+  • Each instruction -> a layer. If the instruction + input are UNCHANGED ->
+    Docker REUSES the old layer (cache hit), skipping re-execution.
+  • When a layer changes -> that layer AND ALL layers after it must rebuild
+    (cache invalidation).
+
+ORDER MATTERS:
+  ✗ COPY . .            # copy everything first
+    RUN npm ci          # changing one code line -> reinstalls ALL deps!
+
+  ✓ COPY package*.json ./
+    RUN npm ci          # this layer rebuilds only when package.json changes
+    COPY . .            # source changes often -> put it LAST
+  -> put RARELY-CHANGING things (deps) FIRST, OFTEN-CHANGING (source) LAST.
+
+LAYER SHARING: many images with "FROM node:20" SHARE the base layer
+-> saves disk + faster pulls.
+
+INSPECT: docker history <image>   (lists layers + sizes)
+
+TIP: arrange the Dockerfile by CHANGE FREQUENCY to maximize caching ->
+rebuilds take seconds not minutes. This is the most important Dockerfile
+optimization skill.',
+'[]',-200,-620),
+
+('n_dk_registry','Registry & Tags','DevOps & Cloud',
+'Registry là kho chứa & phân phối image (ví như "npm/GitHub cho image").
+Docker Hub là registry công khai mặc định.
+
+LUỒNG:
+  build image -> tag -> push lên registry -> máy khác pull về -> run
+  docker tag myapp:1.0 myuser/myapp:1.0
+  docker push myuser/myapp:1.0
+  docker pull myuser/myapp:1.0
+
+TÊN IMAGE đầy đủ: [registry/]namespace/repository:tag
+  nginx:1.25              (Docker Hub, official)
+  ghcr.io/org/app:2.1     (GitHub Container Registry)
+  1234.dkr.ecr.us-east-1.amazonaws.com/app:prod   (AWS ECR)
+
+TAG (phiên bản):
+  • tag = version (1.0, 2.1). "latest" chỉ là tag MẶC ĐỊNH, KHÔNG tự nghĩa
+    là "mới nhất" -> ở production nên tag phiên bản rõ ràng.
+
+REGISTRY phổ biến: Docker Hub, GitHub GHCR, GitLab, AWS ECR, Google
+Artifact Registry.
+
+MẸO: production ĐỪNG dùng "latest" (khó biết đang chạy bản nào, khó
+rollback) -> tag theo version hoặc git SHA. Dùng registry riêng (ECR/GHCR)
++ docker login cho image nội bộ. CI/CD thường build -> push image tự động
+rồi server pull về triển khai.',
+'A registry stores & distributes images (think "npm/GitHub for images").
+Docker Hub is the default public registry.
+
+FLOW:
+  build image -> tag -> push to a registry -> another host pulls -> run
+  docker tag myapp:1.0 myuser/myapp:1.0
+  docker push myuser/myapp:1.0
+  docker pull myuser/myapp:1.0
+
+FULL IMAGE NAME: [registry/]namespace/repository:tag
+  nginx:1.25              (Docker Hub, official)
+  ghcr.io/org/app:2.1     (GitHub Container Registry)
+  1234.dkr.ecr.us-east-1.amazonaws.com/app:prod   (AWS ECR)
+
+TAGS (versions):
+  • a tag = a version (1.0, 2.1). "latest" is just the DEFAULT tag, it does
+    NOT automatically mean "newest" -> in production tag explicit versions.
+
+COMMON REGISTRIES: Docker Hub, GitHub GHCR, GitLab, AWS ECR, Google
+Artifact Registry.
+
+TIP: in production do NOT use "latest" (hard to know what is running, hard
+to roll back) -> tag by version or git SHA. Use a private registry (ECR/GHCR)
++ docker login for internal images. CI/CD usually builds -> pushes images
+automatically, then servers pull to deploy.',
+'[]',-140,-680)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_docker_2 =====
+-- TOPIC Docker file 2: Run & Ops
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('n_dk_volumes','Volumes (lưu dữ liệu)','DevOps & Cloud',
+'Container "ephemeral" — xóa là mất dữ liệu ghi bên trong. VOLUME giúp lưu
+dữ liệu BỀN, tồn tại ngoài vòng đời container.
+
+BA CÁCH GẮN DỮ LIỆU:
+  1. Named volume (Docker quản lý, khuyên cho DB):
+     docker volume create dbdata
+     docker run -v dbdata:/var/lib/mysql mysql
+  2. Bind mount (map thư mục HOST vào container, hợp DEV):
+     docker run -v "$(pwd)":/app node   # sửa code trên host -> thấy ngay trong container
+  3. tmpfs: chỉ nằm trong RAM, mất khi dừng.
+
+VÍ DỤ: DB lưu vào named volume -> xóa & tạo lại container DB, dữ liệu VẪN CÒN.
+
+XEM: docker volume ls / inspect / rm
+
+KHÁC BIỆT:
+  • named volume: Docker lưu ở vùng riêng, di động, tốt cho production (DB).
+  • bind mount  : gắn đường dẫn thật trên host, tốt cho dev (hot reload)
+    nhưng phụ thuộc cấu trúc máy.
+
+MẸO: dữ liệu cần bền (DB, file upload) -> luôn dùng volume. ĐỪNG lưu state
+quan trọng trong lớp ghi của container. Trong Compose, khai báo mục volumes:
+cho gọn và tự quản lý.',
+'Containers are "ephemeral" - removing one loses the data written inside. A
+VOLUME persists data beyond a container lifetime.
+
+THREE WAYS TO MOUNT DATA:
+  1. Named volume (Docker-managed, recommended for DBs):
+     docker volume create dbdata
+     docker run -v dbdata:/var/lib/mysql mysql
+  2. Bind mount (map a HOST directory into the container, good for DEV):
+     docker run -v "$(pwd)":/app node   # edit code on host -> seen instantly inside
+  3. tmpfs: lives only in RAM, lost on stop.
+
+EXAMPLE: store a DB in a named volume -> remove & recreate the DB container,
+the data REMAINS.
+
+INSPECT: docker volume ls / inspect / rm
+
+DIFFERENCES:
+  • named volume: Docker stores it in a managed area, portable, good for
+    production (DBs).
+  • bind mount  : mounts a real host path, good for dev (hot reload) but
+    depends on the machine layout.
+
+TIP: for data that must persist (DBs, uploads) always use a volume. Do NOT
+keep important state in the container writable layer. In Compose, declare a
+volumes: section for convenience and management.',
+'[]',180,-700),
+
+('n_dk_networks','Networks','DevOps & Cloud',
+'Docker tạo mạng ảo để các container GIAO TIẾP với nhau và ra ngoài. Mặc
+định mỗi container có một IP nội bộ.
+
+LOẠI NETWORK:
+  • bridge (mặc định): mạng riêng trên host.
+  • host: dùng thẳng mạng của host (không cách ly cổng).
+  • none: không có mạng.
+
+DNS NỘI BỘ (rất quan trọng): trong một user-defined bridge network, các
+container gọi nhau bằng TÊN (service/container) thay vì IP:
+  docker network create appnet
+  docker run --network appnet --name db  mysql
+  docker run --network appnet --name api myapi
+  # trong "api", kết nối tới host "db:3306" -> Docker tự phân giải tên "db"
+
+-> đây chính là lý do trong docker-compose bạn dùng "mysql" (tên service)
+   làm hostname của DB.
+
+XEM: docker network ls / inspect
+
+MẸO: đặt các service liên quan vào CÙNG một network để gọi nhau bằng TÊN
+(không hardcode IP — IP container thay đổi mỗi lần tạo lại). Compose tự tạo
+sẵn một network chung cho mọi service khai trong file.',
+'Docker creates virtual networks so containers can COMMUNICATE with each
+other and the outside. By default each container has an internal IP.
+
+NETWORK TYPES:
+  • bridge (default): a private network on the host.
+  • host: use the host network directly (no port isolation).
+  • none: no network.
+
+INTERNAL DNS (very important): in a user-defined bridge network, containers
+reach each other by NAME (service/container) instead of IP:
+  docker network create appnet
+  docker run --network appnet --name db  mysql
+  docker run --network appnet --name api myapi
+  # inside "api", connect to host "db:3306" -> Docker resolves the name "db"
+
+-> this is exactly why in docker-compose you use "mysql" (the service name)
+   as the DB hostname.
+
+INSPECT: docker network ls / inspect
+
+TIP: put related services on the SAME network to reach each other by NAME
+(do not hardcode IPs - container IPs change on recreation). Compose
+auto-creates a shared network for all services declared in the file.',
+'[]',220,-640),
+
+('n_dk_ports_env','Ports & Environment','DevOps & Cloud',
+'PORT MAPPING đưa cổng trong container ra ngoài host (mặc định cổng
+container bị cô lập):
+  docker run -p 8080:80 nginx     # host:8080 -> container:80
+  -> truy cập http://localhost:8080. Không map thì bên ngoài KHÔNG tới được.
+  cú pháp -p HOST:CONTAINER (nhớ thứ tự: host trước).
+
+ENVIRONMENT VARIABLES cấu hình app (không hardcode vào image):
+  docker run -e NODE_ENV=production -e DB_HOST=db myapi
+  docker run --env-file .env myapi         # nạp từ file
+  # trong Dockerfile: ENV KEY=value (giá trị mặc định)
+
+12-FACTOR: cấu hình qua ENV -> CÙNG một image chạy được dev/staging/prod
+chỉ bằng đổi biến, KHÔNG rebuild.
+
+BÍ MẬT (secrets): đừng nhét mật khẩu/key vào image hay Dockerfile (ai pull
+image cũng đọc được). Dùng ENV lúc chạy, Docker secrets, hoặc secret
+manager (Vault, AWS Secrets Manager).
+
+MẸO: image nên "không biết" mình chạy ở môi trường nào; mọi khác biệt (DB
+host, API key) truyền qua ENV lúc run. Dùng -p để lộ cổng ra ngoài; giao
+tiếp container-to-container nội bộ KHÔNG cần -p (dùng network + tên).',
+'PORT MAPPING exposes a container port to the host (container ports are
+isolated by default):
+  docker run -p 8080:80 nginx     # host:8080 -> container:80
+  -> visit http://localhost:8080. Without mapping, the outside CANNOT reach it.
+  syntax -p HOST:CONTAINER (order matters: host first).
+
+ENVIRONMENT VARIABLES configure the app (do not hardcode into the image):
+  docker run -e NODE_ENV=production -e DB_HOST=db myapi
+  docker run --env-file .env myapi         # load from a file
+  # in the Dockerfile: ENV KEY=value (a default value)
+
+12-FACTOR: configure via ENV -> the SAME image runs in dev/staging/prod just
+by changing variables, with NO rebuild.
+
+SECRETS: do not put passwords/keys into the image or Dockerfile (anyone who
+pulls the image can read them). Use runtime ENV, Docker secrets, or a secret
+manager (Vault, AWS Secrets Manager).
+
+TIP: an image should be "unaware" of its environment; pass all differences
+(DB host, API key) via ENV at run time. Use -p to expose ports outward;
+internal container-to-container traffic needs NO -p (use a network + names).',
+'[]',260,-680),
+
+('n_dk_compose','Docker Compose','DevOps & Cloud',
+'Docker Compose định nghĩa & chạy ứng dụng NHIỀU container bằng một file
+YAML (docker-compose.yml) -> một lệnh dựng cả hệ.
+
+  services:
+    api:
+      build: .                    # build từ Dockerfile trong thư mục
+      ports: ["3000:3000"]
+      environment:
+        DB_HOST: db               # gọi service "db" bằng tên
+      depends_on: [db]
+    db:
+      image: mysql:8.0
+      environment:
+        MYSQL_ROOT_PASSWORD: secret
+      volumes: ["dbdata:/var/lib/mysql"]   # lưu bền
+  volumes:
+    dbdata:
+
+LỆNH:
+  docker compose up -d          # dựng & chạy nền tất cả service
+  docker compose down           # dừng & xóa (down -v: xóa cả volume)
+  docker compose logs -f api    # xem log service api
+  docker compose ps / exec api sh
+
+ƯU ĐIỂM: các service cùng file tự nằm CHUNG network -> gọi nhau bằng tên
+(api tới "db:3306"). Khai báo volume, env, port, phụ thuộc ở MỘT chỗ.
+
+MẸO: Compose tuyệt cho DEV và app nhỏ/vừa (như chính app Knowledge Graph
+này). Quy mô lớn / HA -> Kubernetes. Lưu ý "depends_on" chỉ đợi container
+KHỞI ĐỘNG, không đợi DB SẴN SÀNG nhận kết nối -> cần healthcheck hoặc retry
+trong app.',
+'Docker Compose defines & runs a MULTI-container app from one YAML file
+(docker-compose.yml) -> one command brings up the whole stack.
+
+  services:
+    api:
+      build: .                    # build from the Dockerfile in this folder
+      ports: ["3000:3000"]
+      environment:
+        DB_HOST: db               # reach service "db" by name
+      depends_on: [db]
+    db:
+      image: mysql:8.0
+      environment:
+        MYSQL_ROOT_PASSWORD: secret
+      volumes: ["dbdata:/var/lib/mysql"]   # persist
+  volumes:
+    dbdata:
+
+COMMANDS:
+  docker compose up -d          # build & run all services in background
+  docker compose down           # stop & remove (down -v: also remove volumes)
+  docker compose logs -f api    # view the api service logs
+  docker compose ps / exec api sh
+
+BENEFITS: services in one file auto-share a network -> reach each other by
+name (api to "db:3306"). Declare volumes, env, ports, dependencies in ONE
+place.
+
+TIP: Compose is great for DEV and small/medium apps (like this Knowledge
+Graph app itself). Large scale / HA -> Kubernetes. Note "depends_on" only
+waits for the container to START, not for the DB to be READY for connections
+-> use a healthcheck or retry in the app.',
+'[]',160,-620),
+
+-- ------------------------- OPS ------------------------------------
+('n_dk_multistage','Multi-stage Build','DevOps & Cloud',
+'Multi-stage build dùng NHIỀU FROM trong một Dockerfile: một stage để BUILD
+(đầy đủ công cụ), rồi copy CHỈ kết quả sang stage RUN gọn nhẹ -> image cuối
+nhỏ, không chứa toolchain.
+
+  # ---- stage build ----
+  FROM node:20 AS build
+  WORKDIR /app
+  COPY package*.json ./
+  RUN npm ci
+  COPY . .
+  RUN npm run build              # tạo /app/dist
+
+  # ---- stage runtime ----
+  FROM nginx:alpine
+  COPY --from=build /app/dist /usr/share/nginx/html
+  # image cuối CHỈ có nginx + dist, KHÔNG có node_modules/toolchain
+
+LỢI ÍCH:
+  • Image nhỏ hơn nhiều (bỏ devDependencies, compiler, source code).
+  • An toàn hơn (ít thứ thừa -> ít bề mặt tấn công).
+  • Vẫn một Dockerfile, một lệnh build duy nhất.
+
+VÍ DỤ Go/Java: stage build biên dịch ra binary/jar -> stage runtime chỉ
+copy binary vào một image tối giản (alpine/distroless).
+
+MẸO: dùng multi-stage cho MỌI app cần bước build (JS bundling, biên dịch
+Go/Java/Rust). Kết hợp base image nhỏ (alpine, distroless) -> image từ hàng
+trăm MB có thể xuống còn vài chục MB.',
+'A multi-stage build uses MULTIPLE FROM lines in one Dockerfile: a BUILD
+stage (full tooling), then copies ONLY the output into a lean RUN stage ->
+the final image is small and contains no toolchain.
+
+  # ---- build stage ----
+  FROM node:20 AS build
+  WORKDIR /app
+  COPY package*.json ./
+  RUN npm ci
+  COPY . .
+  RUN npm run build              # produces /app/dist
+
+  # ---- runtime stage ----
+  FROM nginx:alpine
+  COPY --from=build /app/dist /usr/share/nginx/html
+  # the final image has ONLY nginx + dist, NO node_modules/toolchain
+
+BENEFITS:
+  • Much smaller image (drops devDependencies, compiler, source code).
+  • Safer (less cruft -> smaller attack surface).
+  • Still one Dockerfile, one build command.
+
+Go/Java EXAMPLE: the build stage compiles a binary/jar -> the runtime stage
+just copies the binary into a minimal image (alpine/distroless).
+
+TIP: use multi-stage for EVERY app with a build step (JS bundling, Go/Java/
+Rust compilation). Combined with a small base image (alpine, distroless), an
+image can shrink from hundreds of MB to tens of MB.',
+'[]',-60,-760),
+
+('n_dk_bestpractice','Best Practices (nhỏ, an toàn)','DevOps & Cloud',
+'Thực hành tốt để image NHỎ, NHANH, AN TOÀN:
+
+KÍCH THƯỚC:
+  • Base nhỏ: alpine / slim / distroless thay cho image full-OS.
+  • Multi-stage build (bỏ toolchain khỏi image cuối).
+  • .dockerignore (bỏ node_modules, .git, file test).
+  • Gộp RUN + dọn cache trong CÙNG layer:
+    RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+CACHE / TỐC ĐỘ:
+  • Copy file phụ thuộc TRƯỚC, source SAU (tận dụng cache).
+  • Pin phiên bản base (node:20.11 thay vì node:latest) -> build ổn định,
+    lặp lại được.
+
+BẢO MẬT:
+  • Chạy non-root: thêm USER node (đừng để tiến trình chạy bằng root).
+  • Đừng nhồi secret vào image.
+  • Quét lỗ hổng: docker scout, trivy.
+
+VẬN HÀNH:
+  • MỘT tiến trình chính mỗi container (đừng nhồi nhiều service vào một).
+  • Ghi log ra stdout/stderr (Docker tự thu thập).
+
+MẸO: mục tiêu = "image nhỏ + cache tốt + non-root + không secret". Ba đòn
+bẩy giảm size lớn nhất: base image nhỏ, multi-stage, và .dockerignore.',
+'Best practices for SMALL, FAST, SAFE images:
+
+SIZE:
+  • Small base: alpine / slim / distroless instead of a full-OS image.
+  • Multi-stage build (keep toolchain out of the final image).
+  • .dockerignore (exclude node_modules, .git, test files).
+  • Combine RUN + cache cleanup in the SAME layer:
+    RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+CACHE / SPEED:
+  • Copy dependency files FIRST, source LAST (leverage the cache).
+  • Pin the base version (node:20.11 not node:latest) -> stable, reproducible
+    builds.
+
+SECURITY:
+  • Run non-root: add a USER node (do not run the process as root).
+  • Do not bake secrets into the image.
+  • Scan for vulnerabilities: docker scout, trivy.
+
+OPERATIONS:
+  • ONE main process per container (do not cram many services into one).
+  • Log to stdout/stderr (Docker collects it).
+
+TIP: the goal = "small image + good cache + non-root + no secrets". The three
+biggest size levers: a small base image, multi-stage builds, and
+.dockerignore.',
+'[]',60,-760),
+
+('n_dk_ops','Vận hành & Gỡ lỗi','DevOps & Cloud',
+'Vận hành & gỡ lỗi container:
+
+XEM & GỠ LỖI:
+  docker logs -f <id>          # log (app nên ghi ra stdout/stderr)
+  docker exec -it <id> sh      # vào shell điều tra bên trong
+  docker inspect <id>          # cấu hình chi tiết (mount, network, env)
+  docker stats                 # CPU/RAM realtime
+
+HEALTHCHECK — Docker tự kiểm tra container còn "khỏe":
+  HEALTHCHECK --interval=30s --timeout=3s \
+    CMD curl -f http://localhost:3000/healthz || exit 1
+  -> trạng thái healthy/unhealthy; orchestrator dựa vào đó để restart/định tuyến.
+
+RESTART POLICY:
+  docker run --restart unless-stopped ...   # tự chạy lại khi crash/reboot
+
+GIỚI HẠN TÀI NGUYÊN:
+  docker run --memory=512m --cpus=1 ...     # tránh 1 container ăn hết máy
+
+DỌN DẸP:
+  docker system prune -a       # xóa image/container/network không dùng
+                               # (giải phóng ổ đĩa)
+
+MẸO: log ra stdout (đừng ghi file trong container). Đặt healthcheck để hệ
+thống tự phát hiện & thay container hỏng. Giới hạn RAM/CPU ở production.
+"docker system prune" cứu ổ đĩa bị đầy vì image/layer cũ.',
+'Operating & debugging containers:
+
+VIEW & DEBUG:
+  docker logs -f <id>          # logs (apps should write to stdout/stderr)
+  docker exec -it <id> sh      # open a shell to investigate inside
+  docker inspect <id>          # detailed config (mounts, network, env)
+  docker stats                 # realtime CPU/RAM
+
+HEALTHCHECK - Docker checks whether a container is "healthy":
+  HEALTHCHECK --interval=30s --timeout=3s \
+    CMD curl -f http://localhost:3000/healthz || exit 1
+  -> a healthy/unhealthy status; orchestrators use it to restart/route.
+
+RESTART POLICY:
+  docker run --restart unless-stopped ...   # auto-restart on crash/reboot
+
+RESOURCE LIMITS:
+  docker run --memory=512m --cpus=1 ...     # stop one container eating the host
+
+CLEANUP:
+  docker system prune -a       # remove unused images/containers/networks
+                               # (free disk space)
+
+TIP: log to stdout (do not write files in the container). Add a healthcheck
+so the system auto-detects & replaces broken containers. Limit RAM/CPU in
+production. "docker system prune" rescues a disk filled by old images/layers.',
+'[]',0,-800)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_docker_edges =====
+-- TOPIC Docker: edges
+INSERT INTO kg_edges (id,source,target,type) VALUES
+('e_root_t_docker','root','t_docker','part-of'),
+('e_t_docker_s_core','t_docker','s_dk_core','part-of'),
+('e_t_docker_s_run','t_docker','s_dk_run','part-of'),
+('e_t_docker_s_ops','t_docker','s_dk_ops','part-of'),
+-- core
+('e_s_dk_core_concept','s_dk_core','n_dk_concept','part-of'),
+('e_s_dk_core_dockerfile','s_dk_core','n_dk_dockerfile','part-of'),
+('e_s_dk_core_layers','s_dk_core','n_dk_layers','part-of'),
+('e_s_dk_core_registry','s_dk_core','n_dk_registry','part-of'),
+-- run
+('e_s_dk_run_volumes','s_dk_run','n_dk_volumes','part-of'),
+('e_s_dk_run_networks','s_dk_run','n_dk_networks','part-of'),
+('e_s_dk_run_ports_env','s_dk_run','n_dk_ports_env','part-of'),
+('e_s_dk_run_compose','s_dk_run','n_dk_compose','part-of'),
+-- ops
+('e_s_dk_ops_multistage','s_dk_ops','n_dk_multistage','part-of'),
+('e_s_dk_ops_bestpractice','s_dk_ops','n_dk_bestpractice','part-of'),
+('e_s_dk_ops_ops','s_dk_ops','n_dk_ops','part-of'),
+-- related
+('e_dk_dockerfile_layers','n_dk_dockerfile','n_dk_layers','related'),
+('e_dk_layers_multistage','n_dk_layers','n_dk_multistage','related'),
+('e_dk_multistage_bestpractice','n_dk_multistage','n_dk_bestpractice','related'),
+('e_dk_compose_networks','n_dk_compose','n_dk_networks','related'),
+('e_dk_compose_volumes','n_dk_compose','n_dk_volumes','related'),
+('e_dk_dockerfile_registry','n_dk_dockerfile','n_dk_registry','related'),
+('e_t_docker_t_ms','t_docker','t_ms','related')
+ON DUPLICATE KEY UPDATE
+  source=VALUES(source), target=VALUES(target), type=VALUES(type);
+
+-- ===== seed_net_1 =====
+-- ===================================================================
+--  TOPIC: Network (song ngữ VI + EN, sơ đồ). File 1: cấu trúc + Model + App
+-- ===================================================================
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('t_net','Mạng máy tính (Network)','System Design',
+'Kiến thức mạng cho lập trình web: mô hình OSI/TCP-IP, IP & subnet, TCP vs
+UDP, cổng, DNS, HTTP/HTTPS & TLS, REST, cùng hạ tầng NAT/firewall, load
+balancer, proxy và CDN.',
+'Networking for web developers: the OSI/TCP-IP models, IP & subnets, TCP vs
+UDP, ports, DNS, HTTP/HTTPS & TLS, REST, plus infrastructure - NAT/firewall,
+load balancers, proxies, and CDNs.',
+'[]',480,360),
+
+('s_net_model','Mô hình & Giao thức nền','System Design',
+'Mô hình OSI/TCP-IP, địa chỉ IP & subnet, TCP vs UDP, và cổng (ports).',
+'The OSI/TCP-IP models, IP addressing & subnets, TCP vs UDP, and ports.',
+'[]',380,300),
+('s_net_app','Tầng ứng dụng (Web)','System Design',
+'DNS, HTTP/HTTPS, TLS/SSL và thiết kế REST API.',
+'DNS, HTTP/HTTPS, TLS/SSL, and REST API design.',
+'[]',580,300),
+('s_net_infra','Hạ tầng mạng','System Design',
+'NAT & firewall, load balancer, forward/reverse proxy, và CDN.',
+'NAT & firewall, load balancers, forward/reverse proxies, and CDNs.',
+'[]',480,240),
+
+-- ------------------------- MODEL ----------------------------------
+('n_net_model','Mô hình OSI & TCP/IP','System Design',
+'Mô hình phân tầng mô tả dữ liệu đi qua mạng theo các lớp, mỗi lớp một
+nhiệm vụ riêng.
+
+TCP/IP (4 tầng — thực dụng, dùng thật):
+  4. Application : HTTP, DNS, SMTP, SSH (dữ liệu ứng dụng)
+  3. Transport   : TCP / UDP (cổng, độ tin cậy)
+  2. Internet    : IP (định tuyến gói giữa các mạng, địa chỉ IP)
+  1. Link        : Ethernet / WiFi (khung, địa chỉ MAC, vật lý)
+
+OSI (7 tầng — lý thuyết, hay hỏi phỏng vấn):
+  7 Application | 6 Presentation | 5 Session | 4 Transport
+  3 Network | 2 Data Link | 1 Physical
+
+ĐÓNG GÓI (encapsulation): mỗi tầng thêm header của nó khi gửi XUỐNG, gỡ ra
+khi nhận LÊN:
+  [App data] -> +TCP header -> +IP header -> +Ethernet header -> bit lên dây
+
+DÒNG CHẢY: dữ liệu app -> chia segment (TCP) -> đóng gói (IP, thêm địa chỉ
+đích) -> khung (MAC) -> tín hiệu; bên nhận gỡ ngược lại từng tầng.
+
+MẸO: nhớ 4 tầng TCP/IP là đủ dùng thực tế. HTTP ở tầng App, chạy TRÊN TCP
+(Transport), TCP chạy trên IP (Internet). Biết tầng nào lo gì giúp debug
+đúng chỗ: mất gói -> Transport; sai route -> Internet; phân giải tên -> App.',
+'A layered model describes data crossing a network in layers, each with one
+job.
+
+TCP/IP (4 layers - practical, used in reality):
+  4. Application : HTTP, DNS, SMTP, SSH (application data)
+  3. Transport   : TCP / UDP (ports, reliability)
+  2. Internet    : IP (routing packets between networks, IP addresses)
+  1. Link        : Ethernet / WiFi (frames, MAC addresses, physical)
+
+OSI (7 layers - theoretical, common in interviews):
+  7 Application | 6 Presentation | 5 Session | 4 Transport
+  3 Network | 2 Data Link | 1 Physical
+
+ENCAPSULATION: each layer adds its header going DOWN and strips it going UP:
+  [App data] -> +TCP header -> +IP header -> +Ethernet header -> bits on the wire
+
+FLOW: app data -> split into segments (TCP) -> packets (IP, adds the
+destination address) -> frames (MAC) -> signals; the receiver unwraps each
+layer in reverse.
+
+TIP: knowing the 4 TCP/IP layers is enough in practice. HTTP is at the App
+layer, runs OVER TCP (Transport), which runs over IP (Internet). Knowing
+which layer does what helps debug: packet loss -> Transport; bad route ->
+Internet; name resolution -> App.',
+'[]',320,340),
+
+('n_net_ip','Địa chỉ IP & Subnet','System Design',
+'Địa chỉ IP định danh một thiết bị trên mạng để gói tin tìm đường tới.
+IPv4: 4 số 0-255 (32-bit), vd 192.168.1.10. IPv6: 128-bit (vô số địa chỉ),
+vd 2001:db8::1.
+
+PUBLIC vs PRIVATE:
+  • Private (mạng nội bộ, không ra Internet trực tiếp):
+    10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
+  • Public: cấp phát toàn cầu, định tuyến được trên Internet.
+  • Loopback: 127.0.0.1 (localhost).
+
+SUBNET & CIDR: /n = số bit của phần MẠNG; phần còn lại là HOST.
+  192.168.1.0/24  -> 24 bit mạng, 8 bit host -> 256 địa chỉ (254 dùng được)
+  10.0.0.0/16     -> 65,536 địa chỉ
+  -> số sau "/" càng LỚN thì mạng càng NHỎ (ít host hơn).
+  subnet mask của /24 = 255.255.255.0
+
+Ý NGHĨA: chia subnet để tách mạng, kiểm soát định tuyến & bảo mật (vd VPC
+trên AWS chia subnet public/private).
+GATEWAY: cổng ra (router) để gói rời mạng nội bộ; DHCP tự cấp IP cho thiết bị.
+
+MẸO: nhớ 3 dải private + 127.0.0.1. CIDR /24 (256 IP) rất hay gặp trong
+LAN/VPC. Càng nhiều bit mạng (/n lớn) -> càng ít địa chỉ host khả dụng.',
+'An IP address identifies a device on a network so packets can find their
+way. IPv4: four 0-255 numbers (32-bit), e.g. 192.168.1.10. IPv6: 128-bit
+(vast address space), e.g. 2001:db8::1.
+
+PUBLIC vs PRIVATE:
+  • Private (internal, not directly on the Internet):
+    10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
+  • Public: globally allocated, routable on the Internet.
+  • Loopback: 127.0.0.1 (localhost).
+
+SUBNET & CIDR: /n = the number of NETWORK bits; the rest is HOST.
+  192.168.1.0/24  -> 24 network bits, 8 host bits -> 256 addresses (254 usable)
+  10.0.0.0/16     -> 65,536 addresses
+  -> a LARGER number after "/" means a SMALLER network (fewer hosts).
+  the /24 subnet mask = 255.255.255.0
+
+MEANING: subnetting separates networks and controls routing & security
+(e.g. an AWS VPC splits public/private subnets).
+GATEWAY: the exit (router) for packets leaving the local network; DHCP
+auto-assigns IPs to devices.
+
+TIP: memorize the 3 private ranges + 127.0.0.1. CIDR /24 (256 IPs) is very
+common in LANs/VPCs. More network bits (larger /n) -> fewer usable host
+addresses.',
+'[]',300,300),
+
+('n_net_tcp_udp','TCP vs UDP','System Design',
+'Tầng Transport có hai giao thức chính, đánh đổi TIN CẬY vs TỐC ĐỘ.
+
+TCP (Transmission Control Protocol) — tin cậy, CÓ kết nối:
+  • Bắt tay 3 bước trước khi truyền: SYN -> SYN-ACK -> ACK
+  • Đảm bảo đến ĐỦ, ĐÚNG THỨ TỰ, không trùng; tự truyền lại gói mất; kiểm
+    soát tắc nghẽn.
+  • Dùng cho: HTTP/HTTPS, SSH, email, DB — nơi cần chính xác.
+
+UDP (User Datagram Protocol) — nhanh, KHÔNG kết nối:
+  • Gửi luôn, KHÔNG bắt tay, KHÔNG đảm bảo đến/thứ tự.
+  • Nhẹ, độ trễ thấp.
+  • Dùng cho: video/voice call, game realtime, DNS, streaming — nơi tốc độ
+    quan trọng hơn việc mất vài gói.
+
+SO SÁNH nhanh:
+  TCP: chậm hơn, nặng hơn, ĐÁNG TIN   -> như "gọi điện xác nhận từng câu"
+  UDP: nhanh, nhẹ, CÓ THỂ MẤT gói     -> như "phát loa, ai nghe kịp thì nghe"
+
+HTTP/3 (QUIC) chạy trên UDP nhưng tự thêm độ tin cậy ở tầng trên.
+
+MẸO: cần dữ liệu nguyên vẹn -> TCP; cần realtime chấp nhận mất mát -> UDP.
+Câu phỏng vấn kinh điển: mô tả 3-way handshake và khác biệt TCP/UDP.',
+'The Transport layer has two main protocols, trading RELIABILITY vs SPEED.
+
+TCP (Transmission Control Protocol) - reliable, CONNECTION-oriented:
+  • A 3-way handshake before sending: SYN -> SYN-ACK -> ACK
+  • Guarantees COMPLETE, IN-ORDER, non-duplicated delivery; retransmits lost
+    packets; congestion control.
+  • Used for: HTTP/HTTPS, SSH, email, DBs - where accuracy matters.
+
+UDP (User Datagram Protocol) - fast, CONNECTIONLESS:
+  • Just sends, NO handshake, NO delivery/order guarantee.
+  • Lightweight, low latency.
+  • Used for: video/voice calls, realtime games, DNS, streaming - where speed
+    beats losing a few packets.
+
+QUICK COMPARISON:
+  TCP: slower, heavier, RELIABLE   -> like "a phone call confirming each line"
+  UDP: fast, light, MAY LOSE packets -> like "a loudspeaker - catch it if you can"
+
+HTTP/3 (QUIC) runs over UDP but adds its own reliability on top.
+
+TIP: need intact data -> TCP; need realtime tolerating loss -> UDP. A classic
+interview question: describe the 3-way handshake and the TCP/UDP difference.',
+'[]',360,260),
+
+('n_net_ports','Cổng (Ports)','System Design',
+'Cổng (port) là số 0-65535 giúp một máy (một IP) phân biệt NHIỀU dịch vụ /
+kết nối cùng lúc. IP tìm đúng MÁY, port tìm đúng ỨNG DỤNG.
+  Một kết nối được xác định bởi bộ 4: (IP nguồn, port nguồn, IP đích, port đích).
+
+CỔNG PHỔ BIẾN (well-known, 0-1023):
+  80   HTTP         443  HTTPS        22   SSH
+  53   DNS          25   SMTP         3306 MySQL
+  5432 PostgreSQL   6379 Redis        27017 MongoDB
+  3000 / 8080 thường dùng cho app khi dev
+
+PHÂN LOẠI:
+  0-1023      well-known (dịch vụ hệ thống)
+  1024-49151  registered
+  49152-65535 ephemeral (client tự cấp tạm cho kết nối ra)
+
+VÍ DỤ: trình duyệt mở kết nối từ một port ngẫu nhiên (vd 51000) tới server
+port 443; server trả về đúng kết nối đó nhờ bộ 4 nói trên.
+LIÊN HỆ DOCKER: "-p 8080:80" map port 8080 của host -> port 80 của container.
+
+MẸO: thuộc vài port hay gặp (80/443/22/3306/5432/6379). "IP:cổng" giống
+"tòa nhà:số phòng". Firewall thường lọc theo port (mở 443, chặn phần còn lại).',
+'A port is a number 0-65535 that lets one machine (one IP) distinguish MANY
+services / connections at once. IP finds the right MACHINE, the port finds
+the right APPLICATION.
+  A connection is identified by a 4-tuple: (src IP, src port, dst IP, dst port).
+
+COMMON PORTS (well-known, 0-1023):
+  80   HTTP         443  HTTPS        22   SSH
+  53   DNS          25   SMTP         3306 MySQL
+  5432 PostgreSQL   6379 Redis        27017 MongoDB
+  3000 / 8080 often used for apps during development
+
+RANGES:
+  0-1023      well-known (system services)
+  1024-49151  registered
+  49152-65535 ephemeral (client-assigned temporarily for outbound connections)
+
+EXAMPLE: a browser opens a connection from a random port (e.g. 51000) to the
+server port 443; the server replies to that exact connection via the 4-tuple.
+DOCKER LINK: "-p 8080:80" maps host port 8080 -> container port 80.
+
+TIP: memorize a few common ports (80/443/22/3306/5432/6379). "IP:port" is
+like "building:room number". Firewalls often filter by port (open 443, block
+the rest).',
+'[]',420,300),
+
+-- ------------------------- APP ------------------------------------
+('n_net_dns','DNS','System Design',
+'DNS (Domain Name System) là "danh bạ" của Internet: dịch tên miền
+(google.com) sang địa chỉ IP mà máy dùng để kết nối. Người nhớ tên, máy
+cần IP.
+
+PHÂN GIẢI (khi gõ example.com):
+  1. Trình duyệt/OS xem CACHE cục bộ -> có thì dùng luôn.
+  2. Hỏi RESOLVER (thường của ISP, hoặc 8.8.8.8 / 1.1.1.1).
+  3. Resolver hỏi ROOT -> TLD (.com) -> NAMESERVER của domain.
+  4. Nhận IP -> trả về -> trình duyệt kết nối tới IP đó.
+  (kết quả được cache theo TTL để lần sau nhanh hơn)
+
+CÁC BẢN GHI (records):
+  A     tên -> IPv4          AAAA  tên -> IPv6
+  CNAME bí danh -> tên khác  MX    máy chủ mail
+  TXT   văn bản (SPF, xác minh)   NS   nameserver
+  -> A/AAAA và CNAME là hay gặp nhất.
+
+TTL: thời gian cache một bản ghi (giây). TTL thấp -> đổi IP lan nhanh nhưng
+nhiều truy vấn hơn.
+
+MẸO: đổi DNS cần thời gian "lan" (propagation) do cache/TTL. Công cụ:
+nslookup, dig. DNS chạy chủ yếu trên UDP cổng 53. CDN/load balancer thường
+dùng CNAME + DNS để định tuyến người dùng.',
+'DNS (Domain Name System) is the Internet "phone book": it translates a
+domain name (google.com) into the IP address a machine uses to connect.
+People remember names, machines need IPs.
+
+RESOLUTION (when you type example.com):
+  1. The browser/OS checks its local CACHE -> use it if present.
+  2. Ask a RESOLVER (usually the ISP, or 8.8.8.8 / 1.1.1.1).
+  3. The resolver asks ROOT -> TLD (.com) -> the domain NAMESERVER.
+  4. Gets the IP -> returns it -> the browser connects to that IP.
+  (the result is cached per TTL to be faster next time)
+
+RECORDS:
+  A     name -> IPv4         AAAA  name -> IPv6
+  CNAME alias -> another name MX   mail server
+  TXT   text (SPF, verification)   NS   nameserver
+  -> A/AAAA and CNAME are the most common.
+
+TTL: how long a record is cached (seconds). A low TTL -> IP changes propagate
+fast but cause more queries.
+
+TIP: DNS changes need "propagation" time due to caching/TTL. Tools: nslookup,
+dig. DNS runs mostly over UDP port 53. CDNs/load balancers often use CNAME +
+DNS to route users.',
+'[]',560,340),
+
+('n_net_http','HTTP & Status Codes','System Design',
+'HTTP là giao thức tầng ứng dụng cho web: client gửi REQUEST, server trả
+RESPONSE (mô hình request/response, PHI TRẠNG THÁI - stateless).
+
+CẤU TRÚC REQUEST:
+  GET /users/42 HTTP/1.1          <- method + path + version
+  Host: api.example.com           <- headers
+  Authorization: Bearer <token>
+  (body — với POST/PUT)
+
+METHODS: GET (đọc), POST (tạo), PUT (thay toàn bộ), PATCH (sửa một phần),
+DELETE (xóa), HEAD, OPTIONS.
+
+RESPONSE:
+  HTTP/1.1 200 OK                 <- status code
+  Content-Type: application/json
+  {"id":42, ...}                  <- body
+
+STATUS CODES (theo nhóm):
+  2xx thành công : 200 OK, 201 Created, 204 No Content
+  3xx chuyển hướng: 301 (vĩnh viễn), 302 (tạm), 304 Not Modified
+  4xx lỗi CLIENT : 400 Bad Request, 401 Unauthorized, 403 Forbidden,
+                   404 Not Found, 429 Too Many Requests
+  5xx lỗi SERVER : 500 Internal, 502 Bad Gateway, 503 Unavailable
+
+STATELESS: mỗi request độc lập -> giữ phiên bằng cookie/token.
+PHIÊN BẢN: HTTP/1.1 (text), HTTP/2 (nhị phân, đa luồng trên 1 kết nối),
+HTTP/3 (trên QUIC/UDP).
+
+MẸO: nhớ ý nghĩa nhóm status (4xx tại CLIENT, 5xx tại SERVER) để debug
+nhanh. Dùng method đúng ngữ nghĩa (GET không được làm đổi dữ liệu).',
+'HTTP is the web application-layer protocol: the client sends a REQUEST, the
+server returns a RESPONSE (request/response model, STATELESS).
+
+REQUEST STRUCTURE:
+  GET /users/42 HTTP/1.1          <- method + path + version
+  Host: api.example.com           <- headers
+  Authorization: Bearer <token>
+  (body — with POST/PUT)
+
+METHODS: GET (read), POST (create), PUT (replace whole), PATCH (partial
+update), DELETE (remove), HEAD, OPTIONS.
+
+RESPONSE:
+  HTTP/1.1 200 OK                 <- status code
+  Content-Type: application/json
+  {"id":42, ...}                  <- body
+
+STATUS CODES (by class):
+  2xx success  : 200 OK, 201 Created, 204 No Content
+  3xx redirect : 301 (permanent), 302 (temporary), 304 Not Modified
+  4xx CLIENT error: 400 Bad Request, 401 Unauthorized, 403 Forbidden,
+                    404 Not Found, 429 Too Many Requests
+  5xx SERVER error: 500 Internal, 502 Bad Gateway, 503 Unavailable
+
+STATELESS: each request is independent -> keep sessions via cookies/tokens.
+VERSIONS: HTTP/1.1 (text), HTTP/2 (binary, multiplexed on one connection),
+HTTP/3 (over QUIC/UDP).
+
+TIP: remember the status classes (4xx is CLIENT, 5xx is SERVER) to debug
+fast. Use methods per their semantics (GET must not change data).',
+'[]',620,300),
+
+('n_net_tls','TLS / HTTPS','System Design',
+'TLS/SSL mã hóa kết nối -> HTTPS = HTTP chạy TRÊN TLS. Bảo vệ 3 điều: BÍ MẬT
+(mã hóa), TOÀN VẸN (không bị sửa), XÁC THỰC (đúng server nhờ certificate).
+
+TLS HANDSHAKE (rút gọn):
+  1. Client Hello: gửi phiên bản TLS + danh sách cipher hỗ trợ.
+  2. Server gửi CERTIFICATE (chứa public key, do CA ký).
+  3. Client kiểm tra cert: CA có tin cậy? đúng domain? còn hạn?
+  4. Hai bên thống nhất KHÓA PHIÊN (session key) qua mã hóa bất đối xứng.
+  5. Truyền dữ liệu bằng mã hóa ĐỐI XỨNG (nhanh) với session key.
+
+CHỨNG CHỈ: CA (Certificate Authority) ký xác nhận domain. "Let''s Encrypt"
+cấp miễn phí (Certbot tự gia hạn — như trong phần deploy của app này).
+
+MÃ HÓA:
+  • Bất đối xứng (public/private key): dùng lúc handshake để trao khóa.
+  • Đối xứng (một khóa chung): dùng cho dữ liệu (nhanh hơn nhiều).
+
+MẸO: HTTPS (ổ khóa) nghĩa là kết nối được mã hóa + server đã được xác thực
+(KHÔNG bảo đảm website "tốt/an toàn về nội dung"). Luôn dùng HTTPS. Cert hết
+hạn -> trình duyệt cảnh báo -> nhớ auto-renew (Certbot).',
+'TLS/SSL encrypts the connection -> HTTPS = HTTP OVER TLS. It protects three
+things: CONFIDENTIALITY (encryption), INTEGRITY (not tampered), AUTHENTICITY
+(the right server, via a certificate).
+
+TLS HANDSHAKE (simplified):
+  1. Client Hello: sends the TLS version + supported cipher list.
+  2. The server sends its CERTIFICATE (contains a public key, signed by a CA).
+  3. The client verifies the cert: trusted CA? right domain? not expired?
+  4. Both agree on a SESSION KEY via asymmetric encryption.
+  5. Data is transferred with SYMMETRIC encryption (much faster) using that key.
+
+CERTIFICATES: a CA (Certificate Authority) signs to vouch for a domain.
+"Let''s Encrypt" issues them free (Certbot auto-renews - as in this app deploy).
+
+ENCRYPTION:
+  • Asymmetric (public/private key): used during the handshake to exchange a key.
+  • Symmetric (one shared key): used for the data (much faster).
+
+TIP: HTTPS (the padlock) means the connection is encrypted + the server is
+authenticated (it does NOT guarantee the site content is "safe/good").
+Always use HTTPS. An expired cert -> browser warning -> remember auto-renew
+(Certbot).',
+'[]',640,260),
+
+('n_net_rest','Thiết kế REST API','System Design',
+'REST là kiểu thiết kế API dựa trên HTTP: coi mọi thứ là TÀI NGUYÊN
+(resource) có URL, thao tác bằng HTTP method.
+
+NGUYÊN TẮC:
+  • Resource là DANH TỪ, số nhiều: /users, /users/42, /users/42/orders
+  • Method mang ngữ nghĩa hành động (ĐỪNG nhét động từ vào URL):
+      GET    /users        lấy danh sách
+      GET    /users/42     lấy một user
+      POST   /users        tạo mới
+      PUT    /users/42     thay toàn bộ
+      PATCH  /users/42     sửa một phần
+      DELETE /users/42     xóa
+  ✗ /getUser?id=42 hay /createUser    ✓ GET /users/42, POST /users
+  • Stateless: request tự chứa đủ thông tin (token); server không giữ phiên.
+  • Trả status code đúng (201 khi tạo, 404 khi không thấy...).
+  • Dữ liệu thường ở dạng JSON.
+
+KHÁC: GraphQL (một endpoint, client chọn field cần), gRPC (nhị phân, hợp
+giao tiếp nội bộ service).
+
+MẸO: URL theo tài nguyên + đúng method + đúng status code = 80% của một
+REST API tốt. Thêm versioning (/v1/) và phân trang (?page=&limit=) cho API
+công khai. Quan trọng nhất là NHẤT QUÁN toàn API.',
+'REST is an HTTP-based API design style: treat everything as a RESOURCE with
+a URL, acted on via HTTP methods.
+
+PRINCIPLES:
+  • Resources are NOUNS, plural: /users, /users/42, /users/42/orders
+  • Methods carry the action meaning (do NOT put verbs in the URL):
+      GET    /users        list
+      GET    /users/42     get one user
+      POST   /users        create
+      PUT    /users/42     replace whole
+      PATCH  /users/42     partial update
+      DELETE /users/42     remove
+  ✗ /getUser?id=42 or /createUser    ✓ GET /users/42, POST /users
+  • Stateless: the request carries all it needs (token); the server keeps no session.
+  • Return correct status codes (201 on create, 404 when not found...).
+  • Data is usually JSON.
+
+OTHERS: GraphQL (one endpoint, the client picks fields), gRPC (binary, good
+for internal service-to-service).
+
+TIP: resource-based URLs + correct methods + correct status codes = 80% of a
+good REST API. Add versioning (/v1/) and pagination (?page=&limit=) for public
+APIs. Most important: be CONSISTENT across the whole API.',
+'[]',680,320)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_net_2 =====
+-- TOPIC Network file 2: Infra
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('n_net_nat_fw','NAT & Firewall','System Design',
+'NAT và Firewall là hai cơ chế nền tảng ở BIÊN mạng.
+
+NAT (Network Address Translation): dịch IP private <-> public, cho NHIỀU
+thiết bị nội bộ (192.168.x) chia sẻ MỘT IP public ra Internet.
+  Máy nội bộ 192.168.1.5 -> router NAT -> ra Internet bằng IP public của router
+  -> router nhớ ánh xạ để trả gói về đúng máy nội bộ.
+  Đây là lý do IPv4 chưa cạn dù ít địa chỉ, và máy nhà bạn không có IP public riêng.
+
+FIREWALL: lọc lưu lượng theo LUẬT (cho phép/chặn) dựa trên IP, port, protocol.
+  • Nguyên tắc: mặc định CHẶN, chỉ MỞ cổng thật sự cần (vd chỉ 443 vào web).
+  • Stateful firewall: nhớ kết nối đang mở -> tự cho gói TRẢ VỀ của kết nối
+    do bên trong khởi tạo.
+  • Security Group (AWS) là firewall ảo ở mức instance.
+
+VÍ DỤ luật: "inbound: cho phép TCP 443 từ mọi nơi; cho SSH 22 chỉ từ IP văn
+phòng; chặn phần còn lại".
+
+MẸO: theo "least privilege" — mặc định chặn, chỉ mở cổng/nguồn cần thiết.
+NAT + firewall ở gateway là lớp bảo vệ cơ bản của mọi mạng nội bộ / VPC.',
+'NAT and Firewall are two foundational mechanisms at the network EDGE.
+
+NAT (Network Address Translation): translates private <-> public IPs so MANY
+internal devices (192.168.x) share ONE public IP to the Internet.
+  Internal host 192.168.1.5 -> NAT router -> reaches the Internet as the router public IP
+  -> the router remembers the mapping to return packets to the right host.
+  This is why IPv4 has not run out despite few addresses, and why your home
+  machine has no public IP of its own.
+
+FIREWALL: filters traffic by RULES (allow/deny) based on IP, port, protocol.
+  • Principle: deny by default, only OPEN ports truly needed (e.g. only 443 to web).
+  • Stateful firewall: remembers open connections -> automatically allows the
+    RETURN packets of connections initiated from inside.
+  • A Security Group (AWS) is a virtual instance-level firewall.
+
+EXAMPLE RULES: "inbound: allow TCP 443 from anywhere; allow SSH 22 only from
+the office IP; deny the rest".
+
+TIP: follow "least privilege" - deny by default, open only necessary
+ports/sources. NAT + firewall at the gateway is the basic protection layer of
+any internal network / VPC.',
+'[]',400,220),
+
+('n_net_lb','Load Balancer','System Design',
+'Load Balancer (cân bằng tải) phân phối request tới NHIỀU server backend
+-> chịu tải cao + sẵn sàng cao (một server chết vẫn còn server khác).
+
+  Client -> [ Load Balancer ] -> Server 1 / Server 2 / Server 3
+
+THUẬT TOÁN phân phối:
+  • Round-robin      : lần lượt từng server.
+  • Least connections: chọn server ít kết nối nhất.
+  • IP hash          : theo IP client (giữ "dính" một client vào một server).
+
+TẦNG:
+  • L4 (transport)  : cân bằng theo IP/port, nhanh, không nhìn nội dung.
+  • L7 (application): hiểu HTTP -> định tuyến theo path/host/header
+    (vd /api -> nhóm A, /img -> nhóm B).
+
+HEALTH CHECK: LB tự kiểm tra server, NGỪNG gửi request tới server hỏng.
+STICKY SESSION: giữ user vào cùng một server (khi state nằm ở server) —
+nhưng tốt hơn là làm server STATELESS.
+
+MẸO: LB là nền của SCALE NGANG + HA. Trên AWS: ALB (L7), NLB (L4). Kết hợp
+auto-scaling (thêm/bớt server theo tải). Muốn scale mượt -> server nên
+STATELESS (đẩy state sang DB/Redis) để gửi request tới server nào cũng được.',
+'A load balancer distributes requests across MANY backend servers -> handles
+high load + high availability (one server dies, others remain).
+
+  Client -> [ Load Balancer ] -> Server 1 / Server 2 / Server 3
+
+DISTRIBUTION ALGORITHMS:
+  • Round-robin      : each server in turn.
+  • Least connections: pick the server with the fewest connections.
+  • IP hash          : by client IP (keeps a client "stuck" to one server).
+
+LAYERS:
+  • L4 (transport)  : balances by IP/port, fast, does not inspect content.
+  • L7 (application): understands HTTP -> routes by path/host/header
+    (e.g. /api -> group A, /img -> group B).
+
+HEALTH CHECKS: the LB probes servers and STOPS sending to unhealthy ones.
+STICKY SESSIONS: pin a user to one server (when state lives on the server) -
+but making servers STATELESS is better.
+
+TIP: the LB underpins HORIZONTAL scaling + HA. On AWS: ALB (L7), NLB (L4).
+Combine with auto-scaling (add/remove servers by load). For smooth scaling,
+make servers STATELESS (push state to DB/Redis) so any server can handle any
+request.',
+'[]',560,220),
+
+('n_net_proxy','Forward vs Reverse Proxy','System Design',
+'Proxy là máy trung gian giữa client và server, chuyển tiếp request. Có hai
+loại NGƯỢC nhau:
+
+FORWARD PROXY (đại diện cho CLIENT):
+  Client -> [Forward Proxy] -> Internet
+  • Ẩn/gom client, lọc nội dung, cache, vượt chặn (VPN / corporate proxy).
+
+REVERSE PROXY (đại diện cho SERVER):
+  Client -> [Reverse Proxy] -> Server nội bộ
+  • Đứng TRƯỚC server: định tuyến, TLS termination (giải mã HTTPS), cache,
+    nén, rate limit, ẩn cấu trúc backend.
+  • Nginx, Caddy, HAProxy hay dùng làm reverse proxy (như Nginx/Caddy trong
+    phần deploy của app này).
+
+KHÁC LOAD BALANCER: reverse proxy CÓ THỂ kiêm cân bằng tải; LB tập trung vào
+phân phối. Nhiều công cụ (Nginx) làm cả hai vai.
+
+VÍ DỤ: Nginx nhận cổng 443 (HTTPS), giải mã TLS, rồi chuyển tiếp HTTP nội bộ
+tới app ở 127.0.0.1:3000.
+
+MẸO: "forward = cho client, reverse = cho server". Reverse proxy là nơi đặt
+TLS, cache, rate limit và định tuyến tới nhiều service — cực phổ biến trong
+kiến trúc web/microservices.',
+'A proxy is an intermediary between client and server that forwards requests.
+There are two OPPOSITE kinds:
+
+FORWARD PROXY (acts on behalf of the CLIENT):
+  Client -> [Forward Proxy] -> Internet
+  • Hides/aggregates clients, filters content, caches, bypasses blocks
+    (VPN / corporate proxy).
+
+REVERSE PROXY (acts on behalf of the SERVER):
+  Client -> [Reverse Proxy] -> internal servers
+  • Sits IN FRONT of servers: routing, TLS termination (decrypts HTTPS),
+    caching, compression, rate limiting, hiding the backend layout.
+  • Nginx, Caddy, HAProxy are common reverse proxies (like Nginx/Caddy in this
+    app deploy).
+
+VS A LOAD BALANCER: a reverse proxy CAN also load-balance; an LB focuses on
+distribution. Many tools (Nginx) do both.
+
+EXAMPLE: Nginx accepts port 443 (HTTPS), terminates TLS, then forwards plain
+HTTP internally to an app at 127.0.0.1:3000.
+
+TIP: "forward = for the client, reverse = for the server". A reverse proxy is
+where you place TLS, caching, rate limiting, and routing to many services -
+extremely common in web/microservice architectures.',
+'[]',600,180),
+
+('n_net_cdn','CDN','System Design',
+'CDN (Content Delivery Network) là mạng lưới server đặt ở NHIỀU nơi trên
+thế giới (edge / PoP), cache nội dung GẦN người dùng -> tải nhanh, giảm tải
+server gốc.
+
+CÁCH HOẠT ĐỘNG:
+  User ở VN -> CDN edge tại VN (có cache?) -> trả ngay nếu có
+                     | (cache miss)
+                     -> lấy từ ORIGIN (server gốc, vd ở Mỹ) rồi cache lại
+  -> user VN tiếp theo lấy từ edge VN, không phải "bay" sang Mỹ.
+
+CACHE GÌ: chủ yếu STATIC (ảnh, CSS, JS, video, file). Nội dung động thường
+không cache hoặc cache rất ngắn.
+
+LỢI ÍCH:
+  • Độ trễ thấp (gần người dùng về địa lý).
+  • Giảm tải + băng thông cho origin.
+  • Chịu tải đột biến, chống DDoS một phần.
+
+CACHE CONTROL: header Cache-Control / ETag quyết định cache bao lâu; cần
+"invalidate" hoặc đổi tên file (thêm hash) khi cập nhật.
+
+VÍ DỤ: CloudFront (AWS), Cloudflare, Fastly, Akamai.
+
+MẸO: đưa asset tĩnh lên CDN là cách tăng tốc web đơn giản mà hiệu quả nhất.
+Dùng "cache busting" (thêm hash vào tên file: app.3f9a.js) để user luôn nhận
+bản mới sau khi deploy.',
+'A CDN (Content Delivery Network) is a network of servers in MANY locations
+worldwide (edge / PoP) caching content CLOSE to users -> faster loads, less
+load on the origin server.
+
+HOW IT WORKS:
+  User in VN -> CDN edge in VN (cached?) -> serve immediately if present
+                     | (cache miss)
+                     -> fetch from ORIGIN (e.g. in the US) then cache it
+  -> the next VN user is served from the VN edge, no round-trip to the US.
+
+WHAT IS CACHED: mostly STATIC assets (images, CSS, JS, video, files). Dynamic
+content is usually not cached or cached very briefly.
+
+BENEFITS:
+  • Low latency (geographically near users).
+  • Less load + bandwidth on the origin.
+  • Absorbs traffic spikes, partial DDoS protection.
+
+CACHE CONTROL: Cache-Control / ETag headers decide how long to cache; you must
+"invalidate" or rename files (add a hash) on updates.
+
+EXAMPLES: CloudFront (AWS), Cloudflare, Fastly, Akamai.
+
+TIP: putting static assets on a CDN is the simplest, most effective web
+speedup. Use "cache busting" (a hash in the filename: app.3f9a.js) so users
+always get the new build after a deploy.',
+'[]',540,160)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_net_edges =====
+-- TOPIC Network: edges
+INSERT INTO kg_edges (id,source,target,type) VALUES
+('e_root_t_net','root','t_net','part-of'),
+('e_t_net_s_model','t_net','s_net_model','part-of'),
+('e_t_net_s_app','t_net','s_net_app','part-of'),
+('e_t_net_s_infra','t_net','s_net_infra','part-of'),
+-- model
+('e_s_net_model_model','s_net_model','n_net_model','part-of'),
+('e_s_net_model_ip','s_net_model','n_net_ip','part-of'),
+('e_s_net_model_tcpudp','s_net_model','n_net_tcp_udp','part-of'),
+('e_s_net_model_ports','s_net_model','n_net_ports','part-of'),
+-- app
+('e_s_net_app_dns','s_net_app','n_net_dns','part-of'),
+('e_s_net_app_http','s_net_app','n_net_http','part-of'),
+('e_s_net_app_tls','s_net_app','n_net_tls','part-of'),
+('e_s_net_app_rest','s_net_app','n_net_rest','part-of'),
+-- infra
+('e_s_net_infra_natfw','s_net_infra','n_net_nat_fw','part-of'),
+('e_s_net_infra_lb','s_net_infra','n_net_lb','part-of'),
+('e_s_net_infra_proxy','s_net_infra','n_net_proxy','part-of'),
+('e_s_net_infra_cdn','s_net_infra','n_net_cdn','part-of'),
+-- related (nội bộ)
+('e_net_model_tcpudp','n_net_model','n_net_tcp_udp','related'),
+('e_net_tcpudp_ports','n_net_tcp_udp','n_net_ports','related'),
+('e_net_http_tls','n_net_http','n_net_tls','related'),
+('e_net_http_rest','n_net_http','n_net_rest','related'),
+('e_net_dns_cdn','n_net_dns','n_net_cdn','related'),
+('e_net_lb_proxy','n_net_lb','n_net_proxy','related'),
+('e_net_natfw_ports','n_net_nat_fw','n_net_ports','related'),
+-- related (liên topic)
+('e_net_lb_ms_gateway','n_net_lb','n_ms_gateway','related'),
+('e_net_proxy_docker','n_net_proxy','t_docker','related'),
+('e_net_rest_ms','n_net_rest','n_ms_sync','related')
+ON DUPLICATE KEY UPDATE
+  source=VALUES(source), target=VALUES(target), type=VALUES(type);
+
+-- ===== seed_aws_1 =====
+-- ===================================================================
+--  TOPIC: AWS (song ngữ VI + EN, sơ đồ). File 1: cấu trúc + Core + Compute
+-- ===================================================================
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('t_aws','AWS','DevOps & Cloud',
+'Nền tảng đám mây Amazon: hạ tầng toàn cầu (Region/AZ), IAM, VPC; compute
+(EC2, Lambda, container, ELB/ASG); dữ liệu (S3, RDS, DynamoDB, ElastiCache);
+và vận hành (CloudFront, Route 53, CloudWatch, SQS/SNS).',
+'Amazon cloud platform: global infrastructure (Region/AZ), IAM, VPC; compute
+(EC2, Lambda, containers, ELB/ASG); data (S3, RDS, DynamoDB, ElastiCache);
+and operations (CloudFront, Route 53, CloudWatch, SQS/SNS).',
+'[]',860,0),
+
+('s_aws_core','Nền tảng & Bảo mật','DevOps & Cloud',
+'Hạ tầng toàn cầu (Region/AZ), IAM (định danh & quyền), và VPC (mạng riêng).',
+'Global infrastructure (Region/AZ), IAM (identity & permissions), and VPC
+(private networking).',
+'[]',760,-70),
+('s_aws_compute','Compute','DevOps & Cloud',
+'EC2 (máy ảo), Lambda (serverless), container (ECS/EKS/Fargate), và ELB/ASG
+(cân bằng tải + auto scaling).',
+'EC2 (VMs), Lambda (serverless), containers (ECS/EKS/Fargate), and ELB/ASG
+(load balancing + auto scaling).',
+'[]',960,-70),
+('s_aws_data','Lưu trữ & Dữ liệu','DevOps & Cloud',
+'S3 (object storage), RDS (SQL quản lý), DynamoDB (NoSQL), ElastiCache (cache).',
+'S3 (object storage), RDS (managed SQL), DynamoDB (NoSQL), ElastiCache (cache).',
+'[]',760,70),
+('s_aws_ops','Phân phối & Vận hành','DevOps & Cloud',
+'CloudFront (CDN), Route 53 (DNS), CloudWatch (giám sát), SQS/SNS (nhắn tin).',
+'CloudFront (CDN), Route 53 (DNS), CloudWatch (monitoring), SQS/SNS (messaging).',
+'[]',960,70),
+
+-- ------------------------- CORE -----------------------------------
+('n_aws_global','Region, AZ & Edge','DevOps & Cloud',
+'AWS chia hạ tầng toàn cầu thành REGION và AVAILABILITY ZONE (AZ) để chịu
+lỗi và đặt gần người dùng.
+
+  • Region: một vùng địa lý (us-east-1, ap-southeast-1 = Singapore). Mỗi
+    region ĐỘC LẬP; chọn theo: gần user (latency), giá, dịch vụ sẵn có,
+    tuân thủ dữ liệu.
+  • Availability Zone (AZ): một hoặc nhiều trung tâm dữ liệu TÁCH BIỆT trong
+    một region (điện/mạng riêng). Mỗi region có 2-6 AZ (us-east-1a, 1b, 1c).
+  • Edge Location: điểm CDN (CloudFront) ở rất nhiều nơi, gần user hơn cả region.
+
+THIẾT KẾ HA (high availability):
+  Triển khai qua NHIỀU AZ -> một AZ sập vẫn còn AZ khác.
+  [Region ap-southeast-1]
+    AZ-a: server + DB primary
+    AZ-b: server + DB standby     <- Load Balancer trải request qua cả hai
+
+MẸO: chọn region gần người dùng nhất (VN -> Singapore ap-southeast-1). LUÔN
+chạy production trên >= 2 AZ để chịu lỗi. Region ảnh hưởng giá + dịch vụ
+(dịch vụ mới thường ra us-east-1 trước). Dữ liệu KHÔNG tự nhân bản giữa các
+region (phải tự cấu hình).',
+'AWS divides its global infrastructure into REGIONS and AVAILABILITY ZONES
+(AZs) for fault tolerance and proximity to users.
+
+  • Region: a geographic area (us-east-1, ap-southeast-1 = Singapore). Each
+    region is INDEPENDENT; choose by: nearness to users (latency), price,
+    available services, data compliance.
+  • Availability Zone (AZ): one or more ISOLATED data centers within a region
+    (separate power/network). Each region has 2-6 AZs (us-east-1a, 1b, 1c).
+  • Edge Location: CDN points (CloudFront) in many places, closer than a region.
+
+HA DESIGN (high availability):
+  Deploy across MULTIPLE AZs -> one AZ fails, others remain.
+  [Region ap-southeast-1]
+    AZ-a: server + DB primary
+    AZ-b: server + DB standby     <- a Load Balancer spreads requests across both
+
+TIP: pick the region nearest your users (VN -> Singapore ap-southeast-1).
+ALWAYS run production across >= 2 AZs for fault tolerance. Region affects
+price + services (new services often launch in us-east-1 first). Data does
+NOT auto-replicate across regions (you must configure it).',
+'[]',700,-110),
+
+('n_aws_iam','IAM (Identity & Access)','DevOps & Cloud',
+'IAM (Identity and Access Management) quản lý AI được làm GÌ trên tài nguyên
+AWS. Nền tảng bảo mật của mọi thứ trên AWS.
+
+THÀNH PHẦN:
+  • User   : danh tính con người/ứng dụng (có credentials).
+  • Group  : nhóm user chia sẻ quyền.
+  • Role   : danh tính TẠM cấp quyền, không mật khẩu cố định — dịch vụ/EC2/
+    Lambda "nhận vai" để lấy quyền tạm thời.
+  • Policy : tài liệu JSON định nghĩa quyền (Allow/Deny action trên resource).
+
+POLICY (ví dụ — cho đọc một bucket S3):
+  { "Effect": "Allow",
+    "Action": ["s3:GetObject"],
+    "Resource": "arn:aws:s3:::my-bucket/*" }
+
+NGUYÊN TẮC:
+  • Least privilege: cấp quyền TỐI THIỂU cần thiết, đừng dùng "*" bừa bãi.
+  • Dùng ROLE cho ứng dụng/dịch vụ (vd EC2 role) thay vì nhét access key vào code.
+  • Bật MFA cho user; KHÔNG dùng tài khoản root hằng ngày.
+
+MẸO: EC2/Lambda gắn ROLE -> tự có quyền gọi AWS API mà không cần lưu key
+(an toàn nhất). IAM cấu hình sai là nguyên nhân rò rỉ dữ liệu hàng đầu ->
+luôn least privilege. ARN là "địa chỉ" định danh mọi tài nguyên AWS.',
+'IAM (Identity and Access Management) governs WHO can do WHAT on AWS
+resources. The security foundation of everything on AWS.
+
+COMPONENTS:
+  • User   : a human/app identity (has credentials).
+  • Group  : a set of users sharing permissions.
+  • Role   : a TEMPORARY identity granting permissions, no fixed password -
+    services/EC2/Lambda "assume the role" to get temporary permissions.
+  • Policy : a JSON document defining permissions (Allow/Deny actions on resources).
+
+POLICY (example - read one S3 bucket):
+  { "Effect": "Allow",
+    "Action": ["s3:GetObject"],
+    "Resource": "arn:aws:s3:::my-bucket/*" }
+
+PRINCIPLES:
+  • Least privilege: grant the MINIMUM needed, do not use "*" carelessly.
+  • Use ROLES for apps/services (e.g. an EC2 role) instead of baking access
+    keys into code.
+  • Enable MFA for users; do NOT use the root account for daily work.
+
+TIP: attach a ROLE to EC2/Lambda -> it can call AWS APIs without stored keys
+(the safest way). Misconfigured IAM is a top cause of data leaks -> always
+least privilege. An ARN is the "address" identifying every AWS resource.',
+'[]',740,-30),
+
+('n_aws_vpc','VPC (Mạng riêng)','DevOps & Cloud',
+'VPC (Virtual Private Cloud) là mạng ảo RIÊNG của bạn trên AWS — bạn kiểm
+soát dải IP, subnet, định tuyến, firewall. Mọi tài nguyên (EC2, RDS) nằm
+trong một VPC.
+
+CẤU TRÚC:
+  VPC 10.0.0.0/16
+    ├─ Public subnet  10.0.1.0/24  -> có route ra Internet (qua Internet Gateway)
+    │     (web server, load balancer, bastion)
+    └─ Private subnet 10.0.2.0/24  -> KHÔNG ra Internet trực tiếp
+          (DB, app nội bộ) — ra ngoài qua NAT Gateway
+
+THÀNH PHẦN:
+  • Subnet: chia VPC theo AZ; public (ra Internet) vs private (kín).
+  • Internet Gateway (IGW): cổng cho public subnet ra Internet.
+  • NAT Gateway: cho private subnet GỌI RA ngoài (update, API) mà không bị
+    gọi vào.
+  • Route table: định tuyến giữa subnet/gateway.
+  • Security Group: firewall mức instance (stateful).
+  • NACL: firewall mức subnet (stateless).
+
+MẪU KINH ĐIỂN: web ở PUBLIC subnet, DB ở PRIVATE subnet (chỉ web mới gọi
+được DB) -> DB không lộ ra Internet.
+
+MẸO: đặt DB/backend ở PRIVATE subnet, chỉ để public những gì cần (LB/web).
+Security Group là hàng rào chính (mở port tối thiểu). VPC + subnet là kiến
+thức nền cho mọi kiến trúc AWS an toàn.',
+'A VPC (Virtual Private Cloud) is your own PRIVATE virtual network on AWS -
+you control the IP range, subnets, routing, firewalls. Every resource (EC2,
+RDS) lives inside a VPC.
+
+STRUCTURE:
+  VPC 10.0.0.0/16
+    ├─ Public subnet  10.0.1.0/24  -> has a route to the Internet (via an Internet Gateway)
+    │     (web servers, load balancer, bastion)
+    └─ Private subnet 10.0.2.0/24  -> NO direct Internet access
+          (DBs, internal apps) — outbound via a NAT Gateway
+
+COMPONENTS:
+  • Subnet: split the VPC per AZ; public (Internet-facing) vs private (closed).
+  • Internet Gateway (IGW): the gate for a public subnet to reach the Internet.
+  • NAT Gateway: lets a private subnet call OUT (updates, APIs) without being
+    reachable IN.
+  • Route table: routing between subnets/gateways.
+  • Security Group: instance-level firewall (stateful).
+  • NACL: subnet-level firewall (stateless).
+
+CLASSIC PATTERN: web in a PUBLIC subnet, DB in a PRIVATE subnet (only the web
+can reach the DB) -> the DB is not exposed to the Internet.
+
+TIP: put DBs/backends in PRIVATE subnets, expose only what is needed (LB/web).
+Security Groups are the main barrier (open minimal ports). VPC + subnets are
+foundational for every secure AWS architecture.',
+'[]',780,-30),
+
+-- ------------------------- COMPUTE --------------------------------
+('n_aws_ec2','EC2 (Máy ảo)','DevOps & Cloud',
+'EC2 (Elastic Compute Cloud) là MÁY CHỦ ẢO thuê theo nhu cầu — nền tảng
+compute cổ điển của AWS (như một VM bạn toàn quyền quản).
+
+KHÁI NIỆM:
+  • Instance : một máy ảo đang chạy; chọn INSTANCE TYPE (t3.micro, m5.large)
+    = CPU/RAM/mạng.
+  • AMI      : ảnh OS + phần mềm để khởi tạo instance.
+  • EBS      : ổ đĩa mạng bền gắn vào instance (dữ liệu còn khi stop).
+  • Key pair : SSH vào instance;  Security Group: firewall.
+
+GIÁ (pricing):
+  • On-Demand : trả theo giờ/giây, linh hoạt, đắt nhất.
+  • Reserved / Savings Plan: cam kết 1-3 năm -> rẻ hơn nhiều (tải ổn định).
+  • Spot: dùng dung lượng thừa, rẻ tới 90% nhưng có thể bị thu hồi (tải
+    chịu gián đoạn được).
+
+KHI NÀO DÙNG: cần toàn quyền OS, phần mềm đặc thù, hoặc app chạy thường trực.
+Không muốn quản server -> Lambda/container.
+
+MẸO: chọn instance type vừa đủ rồi giám sát & chỉnh (right-sizing). Tải ổn
+định -> Reserved/Savings để tiết kiệm; job chịu gián đoạn -> Spot. Gắn IAM
+Role thay vì lưu access key. Đặt sau load balancer + auto-scaling cho HA.',
+'EC2 (Elastic Compute Cloud) is an on-demand VIRTUAL SERVER - AWS classic
+compute (like a VM you fully control).
+
+CONCEPTS:
+  • Instance : a running VM; pick an INSTANCE TYPE (t3.micro, m5.large) =
+    CPU/RAM/network.
+  • AMI      : an OS + software image to launch instances from.
+  • EBS      : durable network disk attached to an instance (data survives stop).
+  • Key pair : SSH into an instance;  Security Group: firewall.
+
+PRICING:
+  • On-Demand : per hour/second, flexible, most expensive.
+  • Reserved / Savings Plan: 1-3 year commitment -> much cheaper (steady load).
+  • Spot: uses spare capacity, up to 90% cheaper but can be reclaimed
+    (for interruption-tolerant work).
+
+WHEN TO USE: you need full OS control, special software, or a long-running
+app. Do not want to manage servers -> Lambda/containers.
+
+TIP: pick a just-enough instance type, then monitor & adjust (right-sizing).
+Steady load -> Reserved/Savings to save; interruptible jobs -> Spot. Attach
+an IAM Role instead of storing access keys. Place behind a load balancer +
+auto-scaling for HA.',
+'[]',920,-110),
+
+('n_aws_lambda','Lambda (Serverless)','DevOps & Cloud',
+'Lambda là SERVERLESS compute: bạn chỉ tải lên HÀM, AWS lo chạy + scale,
+KHÔNG quản server. Trả tiền theo số lần gọi + thời gian chạy (mili-giây).
+
+MÔ HÌNH:
+  Sự kiện (HTTP qua API Gateway, file lên S3, message SQS, cron...) ->
+  Lambda chạy hàm -> trả kết quả -> tắt.
+  event -> [Lambda] -> result   (tự scale: 1 hay 10.000 request đồng thời)
+
+ĐẶC ĐIỂM:
+  • Không có server để quản/patch; tự scale về 0 khi rảnh (không gọi ->
+    không tốn tiền).
+  • Giới hạn: thời gian chạy tối đa 15 phút, dung lượng; COLD START (lần gọi
+    đầu chậm hơn do khởi tạo môi trường).
+  • Stateless: không giữ state giữa các lần gọi -> để state ở DB/S3.
+
+KHI NÀO DÙNG: API nhẹ, xử lý sự kiện (resize ảnh khi upload S3), cron job,
+"glue" giữa các dịch vụ, tải BIẾN ĐỘNG mạnh (lúc nhiều lúc không).
+KHÔNG HỢP: chạy lâu/liên tục, tải nặng ổn định (EC2/container rẻ hơn), cần
+độ trễ cực thấp ổn định (vướng cold start).
+
+MẸO: serverless = trả theo dùng thật + hết lo scale/server. Hợp workload
+rời rạc/biến động. Giảm cold start bằng provisioned concurrency. API Gateway
++ Lambda + DynamoDB là kiến trúc serverless kinh điển.',
+'Lambda is SERVERLESS compute: you upload only a FUNCTION, AWS runs & scales
+it, with NO servers to manage. Pay per invocation + run time (milliseconds).
+
+MODEL:
+  An event (HTTP via API Gateway, an S3 upload, an SQS message, cron...) ->
+  Lambda runs the function -> returns a result -> shuts down.
+  event -> [Lambda] -> result   (auto-scales: 1 or 10,000 concurrent requests)
+
+CHARACTERISTICS:
+  • No servers to manage/patch; scales to zero when idle (no calls -> no cost).
+  • Limits: max 15-minute runtime, size limits; COLD START (the first call is
+    slower due to environment init).
+  • Stateless: keeps no state between calls -> put state in a DB/S3.
+
+WHEN TO USE: light APIs, event processing (resize an image on S3 upload),
+cron jobs, "glue" between services, highly VARIABLE load (bursty).
+NOT SUITED: long/continuous runs, steady heavy load (EC2/containers are
+cheaper), needing consistently ultra-low latency (cold starts).
+
+TIP: serverless = pay for actual use + no scaling/server worries. Good for
+sporadic/variable workloads. Reduce cold starts with provisioned concurrency.
+API Gateway + Lambda + DynamoDB is the classic serverless architecture.',
+'[]',1000,-30),
+
+('n_aws_containers','Container (ECS/EKS/Fargate)','DevOps & Cloud',
+'Chạy container (Docker) trên AWS có nhiều lựa chọn, khác nhau ở mức "phải
+quản bao nhiêu":
+  • ECS (Elastic Container Service): orchestrator container riêng của AWS,
+    đơn giản, tích hợp sâu với AWS.
+  • EKS (Elastic Kubernetes Service): Kubernetes được quản lý — hợp nếu đã
+    dùng/muốn chuẩn K8s (đa cloud).
+  • Fargate: chế độ SERVERLESS cho ECS/EKS — KHÔNG quản EC2 nền, chỉ khai
+    báo CPU/RAM cho task, AWS lo hạ tầng.
+  • ECR (Elastic Container Registry): kho image Docker riêng (push/pull).
+
+SO SÁNH lựa chọn:
+  ECS + EC2     : bạn quản cụm EC2 nền (rẻ hơn khi tải lớn, nhiều việc hơn).
+  ECS + Fargate : không quản server, trả theo task (đơn giản nhất).
+  EKS           : cần Kubernetes (phức tạp hơn, chuẩn mở, đa cloud).
+
+LUỒNG: build image -> push lên ECR -> ECS/EKS kéo về chạy task -> đặt sau ALB.
+
+MẸO: mới/nhỏ và ở trong AWS -> ECS + Fargate (ít việc vận hành nhất). Đã
+theo Kubernetes / cần đa cloud -> EKS. Cần kiểm soát & tối ưu chi phí ở tải
+lớn -> ECS/EKS trên EC2. Luôn dùng ECR cho image nội bộ. Liên hệ topic Docker.',
+'Running containers (Docker) on AWS has several options, differing in "how
+much you manage":
+  • ECS (Elastic Container Service): AWS own container orchestrator, simple,
+    deeply integrated with AWS.
+  • EKS (Elastic Kubernetes Service): managed Kubernetes - good if you already
+    use/want the K8s standard (multi-cloud).
+  • Fargate: a SERVERLESS mode for ECS/EKS - NO underlying EC2 to manage, you
+    just declare CPU/RAM per task, AWS handles infrastructure.
+  • ECR (Elastic Container Registry): a private Docker image registry (push/pull).
+
+COMPARISON:
+  ECS + EC2     : you manage the underlying EC2 cluster (cheaper at scale, more work).
+  ECS + Fargate : no servers to manage, pay per task (simplest).
+  EKS           : requires Kubernetes (more complex, open standard, multi-cloud).
+
+FLOW: build image -> push to ECR -> ECS/EKS pulls & runs tasks -> place behind an ALB.
+
+TIP: new/small and inside AWS -> ECS + Fargate (least ops). Already on
+Kubernetes / need multi-cloud -> EKS. Need control & cost optimization at
+scale -> ECS/EKS on EC2. Always use ECR for internal images. See the Docker topic.',
+'[]',1040,-10),
+
+('n_aws_scaling','ELB & Auto Scaling','DevOps & Cloud',
+'Hai dịch vụ giúp app CHỊU TẢI và TỰ CO GIÃN:
+
+ELB (Elastic Load Balancing) — phân phối request tới nhiều instance:
+  • ALB (Application LB, L7): định tuyến HTTP theo path/host, hợp web/API/
+    microservice.
+  • NLB (Network LB, L4): cực nhanh, theo TCP/UDP, tải rất lớn.
+  ELB + health check -> ngừng gửi tới instance hỏng.
+
+ASG (Auto Scaling Group) — tự thêm/bớt EC2 theo tải:
+  • Đặt min / desired / max số instance.
+  • Scaling policy: theo CPU (>70% -> thêm máy), theo lịch, hoặc theo metric.
+  • Tự thay instance chết (self-healing).
+
+KẾT HỢP KINH ĐIỂN:
+  Users -> ALB -> [ ASG: 2..10 EC2 qua nhiều AZ ] -> DB
+  tải tăng -> ASG thêm EC2, ALB trải đều; tải giảm -> bớt EC2 (tiết kiệm tiền).
+
+MẸO: ALB + ASG qua nhiều AZ = mẫu HA + scale ngang chuẩn của AWS. Muốn
+scale mượt, instance phải STATELESS (đẩy state sang RDS/DynamoDB/ElastiCache).
+Scale theo metric phù hợp (CPU, số request) thay vì đoán mò.',
+'Two services that let an app HANDLE LOAD and AUTO-SCALE:
+
+ELB (Elastic Load Balancing) - distributes requests across instances:
+  • ALB (Application LB, L7): HTTP routing by path/host, good for web/API/
+    microservices.
+  • NLB (Network LB, L4): very fast, by TCP/UDP, huge throughput.
+  ELB + health checks -> stop sending to unhealthy instances.
+
+ASG (Auto Scaling Group) - automatically adds/removes EC2 by load:
+  • Set min / desired / max instance counts.
+  • Scaling policy: by CPU (>70% -> add), by schedule, or by a metric.
+  • Auto-replaces dead instances (self-healing).
+
+CLASSIC COMBO:
+  Users -> ALB -> [ ASG: 2..10 EC2 across AZs ] -> DB
+  load rises -> ASG adds EC2, ALB spreads it; load falls -> remove EC2 (save money).
+
+TIP: ALB + ASG across multiple AZs = the standard AWS HA + horizontal-scaling
+pattern. For smooth scaling, instances must be STATELESS (push state to
+RDS/DynamoDB/ElastiCache). Scale by a suitable metric (CPU, request count)
+instead of guessing.',
+'[]',980,-110)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_aws_2 =====
+-- TOPIC AWS file 2: Data + Ops
+INSERT INTO kg_nodes (id,label,category,description,description_en,links,pos_x,pos_y) VALUES
+('n_aws_s3','S3 (Object Storage)','DevOps & Cloud',
+'S3 (Simple Storage Service) là kho lưu trữ OBJECT (file) gần như vô hạn,
+độ bền cực cao. Dùng cho ảnh, video, backup, file tĩnh, data lake.
+
+KHÁI NIỆM:
+  • Bucket: "thùng" chứa object, tên DUY NHẤT toàn cầu.
+  • Object: file + metadata, định danh bằng KEY (đường dẫn ảo: photos/2025/a.jpg).
+  • KHÔNG phải hệ thống file thật (không có thư mục thật, "thư mục" chỉ là
+    tiền tố của key).
+
+TÍNH NĂNG:
+  • Storage class: Standard (nóng), Intelligent-Tiering, Glacier (lưu trữ
+    lạnh, rẻ, lấy chậm) -> tiết kiệm theo tần suất truy cập.
+  • Versioning; lifecycle (tự chuyển sang lớp rẻ / xóa sau N ngày).
+  • Static website hosting; tích hợp CloudFront (CDN) để phân phối nhanh.
+  • Bảo mật: mặc định PRIVATE; quản quyền bằng bucket policy/IAM; mã hóa at-rest.
+
+DÙNG CHO: chứa asset/upload của web (thay vì lưu trên server), backup, log,
+data lake, phân phối file tĩnh.
+
+MẸO: đưa file tĩnh/upload lên S3 + CloudFront thay vì giữ trên EC2 -> rẻ,
+bền, scale sẵn. CẨN THẬN cấu hình public — bucket mở gây rò rỉ dữ liệu là
+sự cố kinh điển; mặc định để PRIVATE, mở có chủ đích.',
+'S3 (Simple Storage Service) is near-infinite OBJECT (file) storage with
+extremely high durability. Used for images, video, backups, static files,
+data lakes.
+
+CONCEPTS:
+  • Bucket: a "container" for objects, with a globally UNIQUE name.
+  • Object: a file + metadata, identified by a KEY (a virtual path: photos/2025/a.jpg).
+  • NOT a real filesystem (no real folders; "folders" are just key prefixes).
+
+FEATURES:
+  • Storage classes: Standard (hot), Intelligent-Tiering, Glacier (cold, cheap,
+    slow retrieval) -> save cost by access frequency.
+  • Versioning; lifecycle (auto-move to cheaper class / delete after N days).
+  • Static website hosting; integrates with CloudFront (CDN) for fast delivery.
+  • Security: PRIVATE by default; permissions via bucket policy/IAM; at-rest encryption.
+
+USED FOR: hosting web assets/uploads (instead of on a server), backups, logs,
+data lakes, static file delivery.
+
+TIP: put static files/uploads on S3 + CloudFront instead of keeping them on
+EC2 -> cheap, durable, already scalable. BE CAREFUL with public config - an
+open bucket leaking data is a classic incident; keep PRIVATE by default,
+open deliberately.',
+'[]',700,50),
+
+('n_aws_rds','RDS (SQL quản lý)','DevOps & Cloud',
+'RDS (Relational Database Service) là CSDL QUAN HỆ được QUẢN LÝ (MySQL,
+PostgreSQL, MariaDB, SQL Server, Oracle, Aurora). AWS lo cài đặt, backup,
+patch, nhân bản.
+
+AWS LO GIÙM:
+  • Cài đặt, vá lỗi, nâng cấp phiên bản.
+  • Backup tự động + snapshot; point-in-time recovery.
+  • Multi-AZ: bản standby ở AZ khác, tự chuyển đổi (failover) khi primary sập
+    -> HA.
+  • Read replica: bản sao CHỈ ĐỌC để chia tải đọc (scale read).
+
+AURORA: DB tương thích MySQL/PostgreSQL do AWS xây, nhanh hơn & tự co giãn
+lưu trữ; có Aurora Serverless (tự scale theo tải).
+
+BẠN VẪN LO: thiết kế schema, index, tối ưu query, chọn instance size.
+
+DÙNG CHO: dữ liệu quan hệ cần ACID, giao dịch (đơn hàng, người dùng, tài chính).
+
+MẸO: production nên bật Multi-AZ (HA) + backup. Tải đọc lớn -> thêm read
+replica. Không muốn tự quản MySQL trên EC2 -> dùng RDS. Đây là "DB trong
+private subnet" điển hình. So với DynamoDB: RDS cho quan hệ/giao dịch phức
+tạp; Dynamo cho quy mô key-value cực lớn.',
+'RDS (Relational Database Service) is a MANAGED relational database (MySQL,
+PostgreSQL, MariaDB, SQL Server, Oracle, Aurora). AWS handles setup, backups,
+patching, replication.
+
+AWS HANDLES:
+  • Setup, patching, version upgrades.
+  • Automated backups + snapshots; point-in-time recovery.
+  • Multi-AZ: a standby in another AZ, auto-failover when the primary dies -> HA.
+  • Read replicas: READ-only copies to spread read load (scale reads).
+
+AURORA: an AWS-built MySQL/PostgreSQL-compatible DB, faster & auto-scaling
+storage; Aurora Serverless auto-scales with load.
+
+YOU STILL HANDLE: schema design, indexes, query tuning, instance sizing.
+
+USED FOR: relational data needing ACID and transactions (orders, users, finance).
+
+TIP: enable Multi-AZ (HA) + backups in production. Heavy read load -> add read
+replicas. Do not want to self-manage MySQL on EC2 -> use RDS. This is the
+typical "DB in a private subnet". Vs DynamoDB: RDS for complex
+relations/transactions; Dynamo for very large key-value scale.',
+'[]',740,90),
+
+('n_aws_dynamodb','DynamoDB (NoSQL)','DevOps & Cloud',
+'DynamoDB là CSDL NoSQL (key-value / document) được quản lý HOÀN TOÀN, độ
+trễ mili-giây ở MỌI quy mô, tự scale. Serverless (không quản server DB).
+
+MÔ HÌNH:
+  • Table -> item (dòng) -> attribute; mỗi item định danh bằng PRIMARY KEY:
+    - Partition key (băm để phân tán dữ liệu), tùy chọn thêm Sort key.
+  • Không schema cứng (mỗi item có thể có thuộc tính khác nhau).
+  • Truy vấn hiệu quả theo KEY; muốn query linh hoạt hơn cần index phụ (GSI).
+
+ĐẶC ĐIỂM:
+  • Hiệu năng ổn định ở quy mô cực lớn (triệu request/giây).
+  • On-demand (trả theo request) hoặc provisioned capacity.
+  • Tích hợp tốt với serverless (Lambda + DynamoDB).
+
+KHÁC RDS:
+  Dynamo (NoSQL): scale khủng, truy vấn theo key, KHÔNG JOIN phức tạp ->
+    phải thiết kế mô hình dữ liệu theo TRUY VẤN (access pattern).
+  RDS (SQL): quan hệ, JOIN, giao dịch phức tạp, truy vấn linh hoạt.
+
+DÙNG CHO: session, giỏ hàng, IoT, bảng xếp hạng, dữ liệu quy mô lớn truy
+cập theo key.
+
+MẸO: chọn Dynamo khi cần scale cực lớn + mẫu truy vấn rõ theo key; chọn RDS
+khi cần quan hệ/JOIN/giao dịch. Thiết kế Dynamo xuất phát từ ACCESS PATTERN
+(khác hẳn tư duy chuẩn hóa của SQL).',
+'DynamoDB is a FULLY managed NoSQL database (key-value / document) with
+millisecond latency at ANY scale, auto-scaling. Serverless (no DB servers to
+manage).
+
+MODEL:
+  • Table -> item (row) -> attribute; each item identified by a PRIMARY KEY:
+    - a Partition key (hashed to distribute data), optionally a Sort key.
+  • No rigid schema (items can have different attributes).
+  • Efficient queries BY KEY; for more flexible queries you need secondary
+    indexes (GSI).
+
+CHARACTERISTICS:
+  • Stable performance at enormous scale (millions of requests/second).
+  • On-demand (pay per request) or provisioned capacity.
+  • Integrates well with serverless (Lambda + DynamoDB).
+
+VS RDS:
+  Dynamo (NoSQL): massive scale, key-based queries, NO complex JOINs -> you
+    must model data around the QUERIES (access patterns).
+  RDS (SQL): relational, JOINs, complex transactions, flexible queries.
+
+USED FOR: sessions, shopping carts, IoT, leaderboards, large-scale data
+accessed by key.
+
+TIP: choose Dynamo for very large scale + clear key-based access; choose RDS
+for relations/JOINs/transactions. Dynamo design starts from ACCESS PATTERNS
+(quite unlike SQL normalization thinking).',
+'[]',700,110),
+
+('n_aws_cache','ElastiCache (Redis)','DevOps & Cloud',
+'ElastiCache là dịch vụ CACHE trong bộ nhớ được quản lý (Redis hoặc
+Memcached) -> tăng tốc đọc, giảm tải DB.
+
+VÌ SAO CACHE:
+  Đọc DB tốn kém/lặp lại -> lưu kết quả trong RAM (Redis) -> lần sau trả
+  trong micro/mili-giây.
+  App -> (kiểm tra cache) -> hit? trả ngay : miss? query DB rồi lưu vào cache
+
+REDIS vs MEMCACHED:
+  • Redis: giàu tính năng (cấu trúc dữ liệu, pub/sub, persistence,
+    replication, sorted set) -> phổ biến hơn.
+  • Memcached: đơn giản, đa luồng, chỉ cache key-value thuần.
+
+MẪU DÙNG:
+  • Cache-aside: app tự kiểm tra cache trước, miss thì nạp từ DB rồi ghi cache.
+  • Session store, rate limiting, leaderboard (Redis sorted set), hàng đợi nhẹ.
+
+LƯU Ý: cache có thể CŨ (stale) -> đặt TTL + chiến lược vô hiệu hóa
+(invalidation) khi dữ liệu đổi. Có câu đùa: "hai việc khó nhất là vô hiệu
+cache và đặt tên biến".
+
+MẸO: cache những thứ đọc-nhiều-ghi-ít (config, hồ sơ, kết quả tính nặng),
+đặt TTL hợp lý. Redis là lựa chọn mặc định. Đây là cách rẻ & hiệu quả để
+giảm tải RDS/DynamoDB và tăng tốc app.',
+'ElastiCache is a managed in-memory CACHE service (Redis or Memcached) ->
+faster reads, less DB load.
+
+WHY CACHE:
+  Expensive/repeated DB reads -> store the result in RAM (Redis) -> next time
+  served in micro/milliseconds.
+  App -> (check cache) -> hit? return now : miss? query DB then store in cache
+
+REDIS vs MEMCACHED:
+  • Redis: feature-rich (data structures, pub/sub, persistence, replication,
+    sorted sets) -> more popular.
+  • Memcached: simple, multi-threaded, plain key-value cache only.
+
+USAGE PATTERNS:
+  • Cache-aside: the app checks cache first, on a miss loads from DB and writes cache.
+  • Session store, rate limiting, leaderboards (Redis sorted sets), light queues.
+
+NOTE: caches can be STALE -> set a TTL + an invalidation strategy when data
+changes. As the joke goes: "the two hardest things are cache invalidation and
+naming things".
+
+TIP: cache read-heavy, write-light things (config, profiles, heavy computed
+results), with a sensible TTL. Redis is the default choice. This is a cheap,
+effective way to offload RDS/DynamoDB and speed up the app.',
+'[]',740,130),
+
+-- ------------------------- OPS ------------------------------------
+('n_aws_cloudfront','CloudFront (CDN)','DevOps & Cloud',
+'CloudFront là CDN của AWS: phân phối nội dung từ edge location gần người
+dùng (xem thêm node CDN chung ở topic Network). Tích hợp chặt với S3, ALB,
+EC2 làm origin.
+
+CÁCH DÙNG:
+  Origin (S3 / ALB / EC2) -> CloudFront (cache ở hàng trăm edge) -> User
+  • Cache asset tĩnh (ảnh, JS, CSS, video) gần user -> nhanh, giảm tải origin.
+  • Hỗ trợ HTTPS (cert qua ACM miễn phí), HTTP/2, HTTP/3.
+  • Cache behavior theo path (vd /static/* cache lâu, /api/* không cache).
+
+TÍNH NĂNG:
+  • Chống DDoS (kèm AWS Shield), WAF (lọc tấn công tầng 7).
+  • Lambda@Edge / CloudFront Functions: chạy code ngay ở edge (rewrite, auth nhẹ).
+  • Signed URL/cookie: giới hạn truy cập nội dung riêng tư.
+
+MẪU KINH ĐIỂN: web tĩnh (React build) trên S3 + CloudFront -> nhanh, rẻ,
+HTTPS, scale sẵn.
+
+MẸO: đặt CloudFront trước S3 cho asset tĩnh và trước ALB cho web động ->
+tăng tốc toàn cầu + giảm tải origin + thêm lớp bảo mật (Shield/WAF). Dùng
+ACM để có chứng chỉ HTTPS miễn phí.',
+'CloudFront is the AWS CDN: it delivers content from edge locations near users
+(see the general CDN node in the Network topic). Integrates tightly with S3,
+ALB, EC2 as origins.
+
+HOW TO USE:
+  Origin (S3 / ALB / EC2) -> CloudFront (cached at hundreds of edges) -> User
+  • Cache static assets (images, JS, CSS, video) near users -> fast, offloads origin.
+  • Supports HTTPS (free cert via ACM), HTTP/2, HTTP/3.
+  • Cache behavior per path (e.g. /static/* cached long, /api/* not cached).
+
+FEATURES:
+  • DDoS protection (with AWS Shield), WAF (layer-7 attack filtering).
+  • Lambda@Edge / CloudFront Functions: run code at the edge (rewrites, light auth).
+  • Signed URLs/cookies: restrict access to private content.
+
+CLASSIC PATTERN: a static site (React build) on S3 + CloudFront -> fast,
+cheap, HTTPS, already scalable.
+
+TIP: put CloudFront in front of S3 for static assets and in front of an ALB
+for dynamic web -> global speedup + origin offload + a security layer
+(Shield/WAF). Use ACM for a free HTTPS certificate.',
+'[]',940,50),
+
+('n_aws_route53','Route 53 (DNS)','DevOps & Cloud',
+'Route 53 là dịch vụ DNS được quản lý của AWS (xem node DNS chung ở topic
+Network), cộng thêm đăng ký domain và định tuyến thông minh + health check.
+
+CHỨC NĂNG:
+  • Hosted zone: quản lý bản ghi DNS cho domain (A, AAAA, CNAME, MX, TXT...).
+  • Đăng ký / chuyển domain.
+  • Alias record: trỏ domain gốc (example.com) tới tài nguyên AWS (ALB,
+    CloudFront, S3) — miễn phí, tự cập nhật IP (khác CNAME thường, dùng được
+    ở apex domain).
+
+ROUTING POLICY (định tuyến thông minh):
+  • Simple        : một bản ghi.
+  • Weighted      : chia % lưu lượng (A/B testing, canary).
+  • Latency-based : gửi user tới region GẦN nhất -> nhanh.
+  • Failover      : kèm health check, tự chuyển sang site dự phòng khi site
+    chính chết.
+  • Geolocation   : theo vị trí địa lý của user.
+
+MẸO: dùng Alias record (KHÔNG phải CNAME) để trỏ apex domain vào ALB/
+CloudFront. Latency-based + health check + failover = định tuyến toàn cầu
+HA. Route 53 + CloudFront + ALB là bộ khung phân phối chuẩn trên AWS.',
+'Route 53 is the AWS managed DNS service (see the general DNS node in the
+Network topic), plus domain registration and smart routing + health checks.
+
+FEATURES:
+  • Hosted zone: manages DNS records for a domain (A, AAAA, CNAME, MX, TXT...).
+  • Domain registration / transfer.
+  • Alias record: points an apex domain (example.com) to an AWS resource (ALB,
+    CloudFront, S3) — free, auto-updates IPs (unlike a plain CNAME, and works
+    at the apex domain).
+
+ROUTING POLICIES (smart routing):
+  • Simple        : a single record.
+  • Weighted      : split traffic by % (A/B testing, canary).
+  • Latency-based : send users to the NEAREST region -> faster.
+  • Failover      : with health checks, auto-switch to a backup site when the
+    primary dies.
+  • Geolocation   : by the user geographic location.
+
+TIP: use an Alias record (NOT a CNAME) to point an apex domain to an ALB/
+CloudFront. Latency-based + health checks + failover = global HA routing.
+Route 53 + CloudFront + ALB is the standard AWS delivery stack.',
+'[]',980,90),
+
+('n_aws_cloudwatch','CloudWatch (Giám sát)','DevOps & Cloud',
+'CloudWatch là hệ GIÁM SÁT & QUAN SÁT (observability) của AWS: thu thập
+metric, log, và cảnh báo cho hầu hết mọi dịch vụ.
+
+BA PHẦN:
+  • Metrics: số đo theo thời gian (CPU của EC2, số invocation Lambda, độ trễ
+    ALB, kết nối RDS). Có sẵn cho hầu hết dịch vụ.
+  • Logs   : gom log tập trung (CloudWatch Logs); app/Lambda đẩy log vào để
+    tìm kiếm.
+  • Alarms : đặt ngưỡng -> vượt thì báo (qua SNS -> email/Slack) hoặc kích
+    hoạt auto-scaling.
+
+CÔNG CỤ LIÊN QUAN:
+  • Dashboards: bảng biểu đồ tổng hợp.
+  • Alarm + ASG: CPU > 70% -> tự thêm EC2.
+  • X-Ray: distributed tracing (lần theo request qua nhiều dịch vụ).
+  • CloudTrail (KHÁC): ghi lại AI GỌI API gì (audit/bảo mật), không phải metric.
+
+MẸO: đặt alarm cho các chỉ số sống còn (CPU, tỉ lệ lỗi 5xx, độ trễ, độ dài
+hàng đợi) -> phát hiện sự cố sớm + tự động scale. Đẩy log ứng dụng vào
+CloudWatch Logs để tra cứu. Phân biệt: CloudWatch = hiệu năng/log; CloudTrail
+= nhật ký hành động API (audit).',
+'CloudWatch is the AWS MONITORING & observability system: it collects metrics,
+logs, and alerts for almost every service.
+
+THREE PARTS:
+  • Metrics: time-series measurements (EC2 CPU, Lambda invocations, ALB
+    latency, RDS connections). Built in for most services.
+  • Logs   : centralized log collection (CloudWatch Logs); apps/Lambda push
+    logs in for searching.
+  • Alarms : set a threshold -> alert on breach (via SNS -> email/Slack) or
+    trigger auto-scaling.
+
+RELATED TOOLS:
+  • Dashboards: aggregated charts.
+  • Alarm + ASG: CPU > 70% -> auto-add EC2.
+  • X-Ray: distributed tracing (follow a request across services).
+  • CloudTrail (DIFFERENT): records WHO CALLED which API (audit/security),
+    not metrics.
+
+TIP: set alarms on vital signals (CPU, 5xx error rate, latency, queue depth)
+-> detect issues early + auto-scale. Push app logs into CloudWatch Logs for
+lookups. Distinguish: CloudWatch = performance/logs; CloudTrail = an API
+action audit log.',
+'[]',1020,110),
+
+('n_aws_messaging','SQS & SNS (Nhắn tin)','DevOps & Cloud',
+'SQS và SNS là dịch vụ NHẮN TIN được quản lý, giúp TÁCH RỜI (decouple) các
+thành phần -> chịu lỗi & co giãn tốt (nền của kiến trúc hướng sự kiện).
+
+SQS (Simple Queue Service) — HÀNG ĐỢI (điểm-điểm):
+  Producer -> [SQS queue] -> Consumer (kéo message về xử lý)
+  • Message được GIỮ tới khi xử lý xong (at-least-once); consumer chậm/chết
+    không làm mất việc.
+  • Đệm tải đột biến (buffer): nhét vào queue, consumer xử lý theo nhịp của nó.
+  • FIFO queue nếu cần đúng thứ tự + không trùng.
+
+SNS (Simple Notification Service) — PUB/SUB (phát tán):
+  Publisher -> [SNS topic] -> NHIỀU subscriber (SQS, Lambda, email, HTTP)
+  • Một message -> nhiều nơi nhận cùng lúc (fan-out).
+
+MẪU FAN-OUT KINH ĐIỂN: SNS topic -> nhiều SQS queue -> mỗi service xử lý độc lập.
+KHÁC: EventBridge (bus sự kiện định tuyến theo luật), Kinesis (luồng dữ liệu
+lớn/streaming).
+
+MẸO: dùng SQS để đệm & xử lý NỀN (gửi email, xử lý ảnh) -> API trả nhanh,
+worker xử lý sau. Dùng SNS khi một sự kiện cần nhiều nơi phản ứng. Đây là
+cách "decouple" service giống message broker trong microservices.',
+'SQS and SNS are managed MESSAGING services that DECOUPLE components -> better
+fault tolerance & elasticity (the basis of event-driven architecture).
+
+SQS (Simple Queue Service) - a QUEUE (point-to-point):
+  Producer -> [SQS queue] -> Consumer (pulls messages to process)
+  • Messages are KEPT until processed (at-least-once); a slow/dead consumer
+    does not lose work.
+  • Buffers load spikes: push into the queue, the consumer processes at its pace.
+  • FIFO queue if you need strict order + no duplicates.
+
+SNS (Simple Notification Service) - PUB/SUB (fan-out):
+  Publisher -> [SNS topic] -> MANY subscribers (SQS, Lambda, email, HTTP)
+  • One message -> received by many places at once (fan-out).
+
+CLASSIC FAN-OUT PATTERN: an SNS topic -> multiple SQS queues -> each service
+processes independently.
+OTHERS: EventBridge (an event bus routing by rules), Kinesis (large-scale data
+streaming).
+
+TIP: use SQS to buffer & process in the BACKGROUND (send email, process
+images) -> the API responds fast, workers handle it later. Use SNS when one
+event needs many reactions. This "decouples" services like a message broker
+in microservices.',
+'[]',1060,90)
+
+ON DUPLICATE KEY UPDATE
+  label=VALUES(label), category=VALUES(category),
+  description=VALUES(description), description_en=VALUES(description_en);
+
+-- ===== seed_aws_edges =====
+-- TOPIC AWS: edges
+INSERT INTO kg_edges (id,source,target,type) VALUES
+('e_root_t_aws','root','t_aws','part-of'),
+('e_t_aws_s_core','t_aws','s_aws_core','part-of'),
+('e_t_aws_s_compute','t_aws','s_aws_compute','part-of'),
+('e_t_aws_s_data','t_aws','s_aws_data','part-of'),
+('e_t_aws_s_ops','t_aws','s_aws_ops','part-of'),
+-- core
+('e_s_aws_core_global','s_aws_core','n_aws_global','part-of'),
+('e_s_aws_core_iam','s_aws_core','n_aws_iam','part-of'),
+('e_s_aws_core_vpc','s_aws_core','n_aws_vpc','part-of'),
+-- compute
+('e_s_aws_compute_ec2','s_aws_compute','n_aws_ec2','part-of'),
+('e_s_aws_compute_lambda','s_aws_compute','n_aws_lambda','part-of'),
+('e_s_aws_compute_containers','s_aws_compute','n_aws_containers','part-of'),
+('e_s_aws_compute_scaling','s_aws_compute','n_aws_scaling','part-of'),
+-- data
+('e_s_aws_data_s3','s_aws_data','n_aws_s3','part-of'),
+('e_s_aws_data_rds','s_aws_data','n_aws_rds','part-of'),
+('e_s_aws_data_dynamodb','s_aws_data','n_aws_dynamodb','part-of'),
+('e_s_aws_data_cache','s_aws_data','n_aws_cache','part-of'),
+-- ops
+('e_s_aws_ops_cloudfront','s_aws_ops','n_aws_cloudfront','part-of'),
+('e_s_aws_ops_route53','s_aws_ops','n_aws_route53','part-of'),
+('e_s_aws_ops_cloudwatch','s_aws_ops','n_aws_cloudwatch','part-of'),
+('e_s_aws_ops_messaging','s_aws_ops','n_aws_messaging','part-of'),
+-- related (nội bộ AWS)
+('e_aws_ec2_scaling','n_aws_ec2','n_aws_scaling','related'),
+('e_aws_ec2_containers','n_aws_ec2','n_aws_containers','related'),
+('e_aws_lambda_dynamodb','n_aws_lambda','n_aws_dynamodb','related'),
+('e_aws_s3_cloudfront','n_aws_s3','n_aws_cloudfront','related'),
+('e_aws_rds_dynamodb','n_aws_rds','n_aws_dynamodb','related'),
+('e_aws_vpc_scaling','n_aws_vpc','n_aws_scaling','related'),
+('e_aws_cloudwatch_scaling','n_aws_cloudwatch','n_aws_scaling','related'),
+('e_aws_route53_cloudfront','n_aws_route53','n_aws_cloudfront','related'),
+('e_aws_iam_ec2','n_aws_iam','n_aws_ec2','related'),
+-- related (liên topic)
+('e_aws_containers_docker','n_aws_containers','t_docker','related'),
+('e_aws_cloudfront_cdn','n_aws_cloudfront','n_net_cdn','related'),
+('e_aws_route53_dns','n_aws_route53','n_net_dns','related'),
+('e_aws_vpc_natfw','n_aws_vpc','n_net_nat_fw','related'),
+('e_aws_scaling_lb','n_aws_scaling','n_net_lb','related'),
+('e_aws_rds_mysql','n_aws_rds','t_mysql','related'),
+('e_aws_messaging_ms','n_aws_messaging','n_ms_async','related')
+ON DUPLICATE KEY UPDATE
+  source=VALUES(source), target=VALUES(target), type=VALUES(type);
