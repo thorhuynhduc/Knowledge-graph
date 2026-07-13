@@ -10,15 +10,16 @@ App đồ thị kiến thức (ôn thi Senior Full-Stack). Stack: **Node.js (Exp
 | `config.js` | Đọc env có default: `DB_*`, `PORT`(3000), `API_TOKEN`(rỗng=tắt) |
 | `schema.sql` | 2 bảng `kg_nodes`, `kg_edges` (FK CASCADE: xóa node → xóa edge) |
 | `seed.sql` | ~93 node + 121 edge seed sẵn (~38KB) |
-| `public/index.html` | **Toàn bộ frontend trong 1 file** (~940 dòng): HTML + Tailwind CDN + JS module 3d-force-graph |
+| `public/index.html` | **Toàn bộ frontend trong 1 file** (~1000 dòng): HTML + Tailwind CDN + JS module 3d-force-graph |
 | `public/login.html` | Trang đăng nhập (Tailwind CDN, không module). POST `/api/login`, thành công → redirect `/` |
+| `public/manifest.webmanifest` + `public/icons/` + `public/sw.js` | PWA: manifest, bộ icon (tạo bằng PIL), service worker cache CDN |
 
 Không có framework frontend, không bundler, không test. Sửa `public/index.html` → F5 là thấy (Docker mount read-only).
 
 ## Xác thực đăng nhập (server.js)
 - Bắt buộc đăng nhập mới vào được app. Creds trong `.env`: `AUTH_USER` / `AUTH_PASS`.
 - Cơ chế: **session cookie ký HMAC-SHA256** bằng `crypto` (không thư viện ngoài). Cookie `kg_session` (httpOnly, SameSite=Lax), giá trị `user|exp` + chữ ký. Khóa ký = `SESSION_SECRET` (env; trống → sinh ngẫu nhiên mỗi lần khởi động). Hạn = `SESSION_TTL_HOURS` (default 168h). `COOKIE_SECURE=true` khi sau HTTPS.
-- Route công khai (trước cổng chặn): `GET /login`, `POST /api/login`, `POST /api/logout`, `GET /healthz` (healthcheck Docker). Mọi route khác qua middleware gate: chưa đăng nhập → `/api*` trả 401 JSON, còn lại redirect `/login`.
+- Route công khai (trước cổng chặn): `GET /login`, `POST /api/login`, `POST /api/logout`, `GET /healthz` (healthcheck Docker), và tài nguyên PWA (`/manifest.webmanifest`, `/sw.js`, `/icons/*` — hàm `isPublicAsset`). Mọi route khác qua middleware gate: chưa đăng nhập → `/api*` trả 401 JSON, còn lại redirect `/login`.
 - Chống brute-force: sai 5 lần/10 phút theo IP → khóa 5 phút (in-memory, reset khi restart). `trust proxy` bật khi `COOKIE_SECURE=true` (sau Caddy) để lấy IP thật.
 - `.env` KHÔNG commit (đã gitignore); dùng `.env.example` làm mẫu.
 - Frontend: `api()` trong index.html gặp 401 → tự chuyển `/login`; nút `#logoutBtn` POST `/api/logout` rồi về `/login`.
@@ -46,6 +47,11 @@ Response thống nhất: `{ok:true,...}` hoặc `{ok:false,error}`. POST cần h
 - < 768px: sidebar biến thành **drawer trượt** (CSS `@media` + class `body.sidebar-open`). Mở bằng nút `#menuToggle` (hamburger nổi góc trên-trái), đóng bằng `#sidebarClose` (X trong header), click `#sidebarBackdrop`, hoặc phím Esc. Resize ≥768px tự bỏ trạng thái mở.
 - Drawer/backdrop z-index 50/45, modal chi tiết `#nodeModal` z-`[60]` (luôn trên cùng); trên mobile modal bám đáy màn hình. Mở chi tiết node sẽ tự đóng drawer.
 - Graph (`#cy`) luôn full-screen (drawer phủ lên, không co main) nên không cần resize lại canvas khi mở menu.
+
+## PWA + hiệu năng mobile (index.html)
+- **PWA**: `manifest.webmanifest` (standalone, theme `#05070d`) + meta iOS (`apple-mobile-web-app-*`, `apple-touch-icon`, `viewport-fit=cover` + CSS `env(safe-area-inset-*)` cho notch). iPhone: Safari → Share → "Thêm vào MH chính" → mở full-screen như app. Icon tạo lại bằng `python3` + PIL nếu cần đổi.
+- **Service worker** (`sw.js`): cache-first CHỈ cho CDN (esm.sh, tailwind, cdnjs) + `/icons/`; HTML và `/api` luôn ra mạng (tránh vấn đề auth/dữ liệu cũ). Đổi nội dung cache → tăng version tên `CACHE` (`kg-static-v1`).
+- **Tối ưu mobile** (`IS_MOBILE` = pointer coarse hoặc màn < 768px): cap `setPixelRatio` 1.5 (desktop 2) — thủ phạm lag chính trên iPhone (dpr=3 → 9× pixel); tắt antialias; `nodeResolution` 8 (desktop 14); particles mặc định TẮT; `cooldownTime` 8s; `pauseAnimation()` khi tab ẩn (mọi thiết bị).
 
 ## Điều hướng / Focus (index.html)
 - "Bay tới" (`focusNeighborhood`) → highlight node + hàng xóm, chỉ hiện label nhóm đó (`focusLabels`), rồi `flyTo` canh khung theo FOV ngang (node biên cách mép trái/phải ~10px, `margin` chỉnh được).

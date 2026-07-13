@@ -118,9 +118,16 @@ app.post('/api/logout', (req, res) => {
 // Healthcheck cho Docker (công khai, không cần đăng nhập).
 app.get('/healthz', (req, res) => res.json({ ok: true, status: 'up' }));
 
+// Tài nguyên PWA công khai (manifest/icon/service worker) — không chứa dữ liệu
+// nhạy cảm; phải truy cập được khi CHƯA đăng nhập, nếu không trình duyệt sẽ
+// nhận về trang login thay vì manifest và tính năng "Thêm vào MH chính" hỏng.
+function isPublicAsset(p) {
+  return p === '/manifest.webmanifest' || p === '/sw.js' || p.startsWith('/icons/');
+}
+
 // ---- CỔNG CHẶN: mọi route phía dưới yêu cầu đã đăng nhập ----
 app.use((req, res, next) => {
-  if (isAuthed(req)) return next();
+  if (isAuthed(req) || isPublicAsset(req.path)) return next();
   if (req.path.startsWith('/api')) return fail(res, 'Chưa đăng nhập', 401);
   return res.redirect('/login');
 });

@@ -2,8 +2,18 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Knowledge Graph 3D — Senior Full-Stack Interview Prep</title>
+
+<!-- ===== PWA: thêm vào màn hình chính (iOS/Android) mở như app thật ===== -->
+<link rel="manifest" href="/manifest.webmanifest" />
+<meta name="theme-color" content="#05070d" />
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="KGraph 3D" />
 
 <!-- ===== CDN ===== -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -40,6 +50,8 @@
     background: #05070d; color: #e2e8f0;
     font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     overflow: hidden;
+    overscroll-behavior: none;              /* PWA: chặn kéo-nảy trang trên iOS */
+    -webkit-tap-highlight-color: transparent;
   }
   #cy { width: 100%; height: 100%; cursor: grab; }
   #cy:active { cursor: grabbing; }
@@ -98,10 +110,13 @@
 
   /* ===== Responsive < 768px: sidebar trở thành drawer trượt ra ===== */
   @media (max-width: 767px) {
-    /* Nút hamburger nổi góc trên-trái để mở menu */
+    /* Nút hamburger nổi góc trên-trái để mở menu.
+       max(12px, env(safe-area-inset-*)): tránh tai thỏ/notch khi chạy PWA full-screen. */
     #menuToggle {
       display: inline-flex; align-items: center; justify-content: center;
-      position: fixed; top: 12px; left: 12px; z-index: 30;
+      position: fixed; z-index: 30;
+      top: max(12px, env(safe-area-inset-top));
+      left: max(12px, env(safe-area-inset-left));
       width: 42px; height: 42px; border-radius: 10px;
       background: rgba(17,28,48,0.92); border: 1px solid #1f2a3d;
       color: #e2e8f0; font-size: 18px; cursor: pointer;
@@ -119,6 +134,9 @@
       z-index: 50;
     }
     body.sidebar-open #sidebar { transform: translateX(0); }
+    /* PWA full-screen: nội dung drawer/modal không bị notch & thanh home che */
+    #sidebar { padding-top: max(1rem, env(safe-area-inset-top)); }
+    #nodeModal > div { padding-bottom: env(safe-area-inset-bottom) !important; }
 
     /* Lớp phủ tối phía sau drawer */
     #sidebarBackdrop {
@@ -315,6 +333,10 @@ import SpriteText from "three-spritetext";
 const API = "/api";
 const API_TOKEN = "";
 
+// Thiết bị cảm ứng / màn hình nhỏ (điện thoại, tablet): giảm chi tiết render
+// để đồ thị mượt hơn — GPU mobile yếu hơn desktop nhiều.
+const IS_MOBILE = matchMedia("(pointer: coarse)").matches || Math.min(screen.width, screen.height) < 768;
+
 const CATEGORIES = {
   "Frontend": "#38bdf8", "Backend": "#34d399", "Database": "#fbbf24",
   "System Design": "#f472b6", "DevOps & Cloud": "#a78bfa",
@@ -335,7 +357,7 @@ let highlightLinks = new Set();
 let currentModalNodeId = null;
 let descLang = localStorage.getItem("kg_descLang") || "vi";  // "vi" | "en"
 let autoRotate = false;
-let particlesOn = true;
+let particlesOn = !IS_MOBILE;    // particle chạy liên tục rất tốn GPU -> mobile tắt mặc định
 let labelMode = "main";          // main | all | off
 let focusLabels = false;         // true khi "bay tới": chỉ hiện label các node liên quan
 let focusHistory = [];           // ngăn xếp các node đã focus (cho nút Quay lại)
@@ -431,11 +453,15 @@ function initGraph() {
   const el = document.getElementById("cy");
   if (!webglOK()) { showWebglError(); return; }
   try {
-  Graph = ForceGraph3D({ controlType: "orbit" })(el)
+  // Mobile: tắt antialias (đắt trên GPU điện thoại), ưu tiên GPU hiệu năng cao
+  Graph = ForceGraph3D({
+    controlType: "orbit",
+    rendererConfig: { antialias: !IS_MOBILE, powerPreference: "high-performance" },
+  })(el)
     .backgroundColor("#05070d")
     .showNavInfo(false)
     .nodeRelSize(4)
-    .nodeResolution(14)
+    .nodeResolution(IS_MOBILE ? 8 : 14)    // sphere ít polygon hơn trên mobile
     .nodeOpacity(0.95)
     .nodeVal(nodeValFor)
     .nodeColor(nodeColorFn)
@@ -455,6 +481,19 @@ function initGraph() {
 
   // Lực đẩy mạnh hơn chút cho cụm "phồng" như não
   Graph.d3Force("charge").strength(-120);
+
+  // ==== Tối ưu mobile: thủ phạm lag chính là pixel ratio ====
+  // iPhone retina có devicePixelRatio = 3 -> render gấp 9 lần số pixel màn hình.
+  // Giới hạn còn 1.5 (mobile) / 2 (desktop): giảm 3/4 khối lượng GPU, mắt thường khó phân biệt.
+  Graph.renderer().setPixelRatio(Math.min(window.devicePixelRatio || 1, IS_MOBILE ? 1.5 : 2));
+  // Rút ngắn thời gian chạy mô phỏng lực trên mobile (đỡ giật lúc mới mở)
+  if (IS_MOBILE) Graph.cooldownTime(8000);
+
+  // App chuyển nền (đổi tab / thu nhỏ) -> dừng vòng render, tiết kiệm pin
+  document.addEventListener("visibilitychange", () => {
+    if (!Graph) return;
+    if (document.hidden) Graph.pauseAnimation(); else Graph.resumeAnimation();
+  });
 
   window.addEventListener("resize", () => Graph.width(el.clientWidth).height(el.clientHeight));
   } catch (e) {
@@ -1220,9 +1259,11 @@ async function loadGraph(fresh) {
   buildLegend();
   initGraph();
   bindEvents();
-  document.getElementById("particlesBtn").classList.add("btn-on");
+  document.getElementById("particlesBtn").classList.toggle("btn-on", particlesOn);
   document.getElementById("labelBtn").classList.add("btn-on");
   loadGraph(true);
+  // PWA: đăng ký service worker cache CDN (three.js, tailwind...) cho lần mở sau nhanh hơn
+  if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
 })();
 </script>
 </body>
